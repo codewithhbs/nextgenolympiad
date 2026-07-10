@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+html { scroll-behavior: smooth; }
+body { @apply bg-ivory text-ink antialiased font-sans; }
+
+/* Fix: ensure route changes land at true top (no phantom offset under sticky header) */
+main { scroll-margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Heraldic crest divider — small gold diamond flanked by rules (brand motif) */
+.crest-divider { @apply flex items-center justify-center gap-3 text-gold; }
+.crest-divider::before,
+.crest-divider::after { content: ""; @apply h-px w-12 bg-gold/50; }
+
+.blob { border-radius: 42% 58% 63% 37% / 42% 41% 59% 58%; }
+
+/* CMS prose */
+.prose-cms h2 { @apply font-display text-2xl font-bold text-navy mt-8 mb-3; }
+.prose-cms h3 { @apply font-display text-xl font-bold text-navy mt-6 mb-2; }
+.prose-cms p { @apply text-slate leading-relaxed mb-4; }
+.prose-cms ul { @apply list-disc pl-6 text-slate space-y-1 mb-4; }
+.prose-cms a { @apply text-gold-dark underline; }
+
+::selection { background: #F4E9CC; color: #0B2C63; }
+
+@media print {
+  body * { visibility: hidden; }
+  #scorecard, #scorecard * { visibility: visible; }
+  #scorecard { position: absolute; left: 0; top: 0; width: 100%; }
+}
