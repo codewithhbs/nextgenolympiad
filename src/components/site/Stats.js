@@ -58,7 +58,7 @@ function StatCard({ icon: Icon, label, rawValue, delay }) {
       className="group relative flex flex-col items-center gap-2 bg-white px-4 py-8 text-center transition-colors duration-300 hover:bg-navy/[0.03] sm:px-6 sm:py-10"
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <span className="mb-1 flex h-11 w-11 items-center justify-center rounded-2xl bg-navy text-gold shadow-sm transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12">
+      <span className="mb-1 flex h-11 w-11 items-center justify-center rounded-2xl bg-brand text-white shadow-sm transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12">
         <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
       </span>
       <p className="font-display text-2xl font-extrabold tabular-nums text-navy sm:text-3xl md:text-4xl">

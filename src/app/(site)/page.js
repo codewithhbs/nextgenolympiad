@@ -16,6 +16,7 @@ import Features from "@/components/site/Features";
 import QuizAndResult from "@/components/site/QuizAndResult";
 import TestimonialAndFaq from "@/components/site/Testinomial&Faq";
 import Cta from "@/components/site/Cta";
+import GuidesResources from "@/components/site/Guidesresources";
 
 // Strips BSON types (ObjectId, Date) down to plain JSON-safe values.
 // Required before passing Mongoose `.lean()` docs into a Client Component —
@@ -30,7 +31,7 @@ async function getData() {
     const [faqs, testimonials, gallery, schools, results] = await Promise.all([
       Faq.find({ isActive: true }).sort({ order: 1 }).limit(6).lean(),
       Testimonial.find({ isActive: true }).sort({ order: 1 }).limit(6).lean(),
-      Gallery.find({ isActive: true }).sort({ order: 1 }).limit(8).lean(),
+      Gallery.find({ isActive: true }).sort({ order: 1 }).limit(10).lean(),
       School.countDocuments({ status: "approved" }),
       Result.countDocuments(),
     ]);
@@ -58,10 +59,22 @@ export default async function Home() {
   return (
     <>
       <HeroSlider slides={settings?.heroSlides} mode={settings?.heroMode} />
-        <About />
+      <About />
       <Stats schools={schools} results={results} />
- 
+
       <Features />
+      <GuidesResources
+        slides={[
+          {
+            tag: "Guide",
+            title: "How to Fill OMR Sheet",
+            description: "Learn the correct way to fill OMR Sheet and avoid common mistakes.",
+            image: "https://res.cloudinary.com/dkl7kgcbb/image/upload/v1784008279/nextgen/media/ubfb8rygewykbgztoyuy.jpg",
+            videoUrl: "https://www.youtube.com/watch?v=REAL_ID",
+            thumbnail: "https://res.cloudinary.com/dkl7kgcbb/image/upload/.../thumb.jpg",
+          },
+        ]}
+      />
       <QuizAndResult />
 
       {/* GALLERY */}

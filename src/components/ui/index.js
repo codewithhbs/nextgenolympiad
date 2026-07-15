@@ -5,10 +5,10 @@ import { Loader2 } from "lucide-react";
 export function Button({ variant = "primary", size = "md", loading, className, children, ...props }) {
   const base = "inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 disabled:opacity-60 disabled:cursor-not-allowed";
   const variants = {
-    primary: "bg-navy text-white hover:bg-navy-deep shadow-soft hover:-translate-y-0.5",
-    gold: "bg-gold text-navy-deep hover:bg-gold-dark hover:text-white shadow-gold hover:-translate-y-0.5",
-    ink: "bg-navy text-white hover:bg-navy-deep",
-    outline: "border-2 border-navy/15 text-navy hover:border-gold hover:text-gold-dark bg-white",
+    primary: "bg-brand text-white hover:bg-brand-hover shadow-soft hover:-translate-y-0.5",
+    gold: "bg-gold text-ink hover:bg-gold-dark hover:text-white shadow-gold hover:-translate-y-0.5",
+    ink: "bg-brand-deep text-white hover:bg-black",
+    outline: "border-2 border-brand/25 text-brand hover:border-brand hover:bg-brand-soft bg-white",
     ghost: "text-navy hover:bg-mist",
     danger: "bg-crimson text-white hover:bg-crimson/90",
   };
@@ -61,13 +61,31 @@ export function Card({ className, children }) {
   return <div className={clsx("rounded-2xl bg-white p-6 shadow-card ring-1 ring-line", className)}>{children}</div>;
 }
 
-export function Badge({ tone = "navy", children }) {
+export function Badge({
+  tone = "navy",
+  className,
+  children,
+}) {
   const tones = {
-    navy: "bg-mist text-navy", gold: "bg-gold-soft text-gold-ink",
-    green: "bg-navy/5 text-navy", orange: "bg-gold-soft text-gold-ink",
-    red: "bg-crimson-soft text-crimson", grey: "bg-navy/5 text-slate",
+    navy: "bg-mist text-navy",
+    gold: "bg-gold-soft text-gold-ink",
+    green: "bg-navy/5 text-navy",
+    orange: "bg-gold-soft text-gold-ink",
+    red: "bg-crimson-soft text-crimson",
+    grey: "bg-navy/5 text-slate",
   };
-  return <span className={clsx("inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide", tones[tone] || tones.navy)}>{children}</span>;
+
+  return (
+    <span
+      className={clsx(
+        "inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide",
+        tones[tone] || tones.navy,
+        className
+      )}
+    >
+      {children}
+    </span>
+  );
 }
 
 export function CrestDivider({ className }) {

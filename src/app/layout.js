@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
 import { getSettings, buildMetadata, organizationSchema } from "@/lib/seo";
+import { buildThemeCss, fontHref } from "@/lib/theme";
 
 export async function generateMetadata() {
   let s = {};
@@ -16,15 +17,16 @@ export async function generateMetadata() {
 export default async function RootLayout({ children }) {
   let settings = {};
   try { settings = await getSettings(); } catch {}
+  const theme = settings?.theme || {};
+
   return (
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
+        <link href={fontHref(theme)} rel="stylesheet" />
+        {/* Admin-controlled colors + type scale */}
+        <style dangerouslySetInnerHTML={{ __html: buildThemeCss(theme) }} />
       </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema(settings)) }} />

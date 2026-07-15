@@ -8,7 +8,7 @@ const PROGRAMS = [
     icon: GraduationCap,
     title: "NextGen Olympiad\nI to X",
     text: "English, Computational Thinking, Mathematics, STEM/EVS. Conducted offline on multiple dates.",
-    href: "/quiz",
+    href: "/olympiad/nextgen",
     card: "from-ink to-ink-soft",
     image: "/brand/books.png",
     btn: "bg-saffron text-white hover:bg-saffron/90",
@@ -18,7 +18,7 @@ const PROGRAMS = [
     icon: Palette,
     title: "Wonder Kids\nBal Vatika I–III",
     text: "English, Mathematics, EVS, Hindi & Drawing — joyful, age-appropriate assessments for early learners.",
-    href: "/quiz",
+    href: "/olympiad/wonder-kids",
     btn: "bg-ink text-white hover:bg-ink/90",
     line: "bg-white/70",
     image: "/brand/grilstudent.png",
@@ -69,7 +69,7 @@ const QuizAndResult = () => {
       </div>
 
       {/* RESULT BAND */}
-      <div className="mt-8 overflow-hidden bg-cream px-4 py-12 md:px-6 lg:py-16">
+      {/* <div className="mt-8 overflow-hidden bg-cream px-4 py-12 md:px-6 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
             <span className="inline-block rounded-full bg-leaf/10 px-4 py-1.5 text-sm font-bold text-leaf">Results</span>
@@ -95,7 +95,7 @@ const QuizAndResult = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

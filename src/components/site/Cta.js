@@ -23,7 +23,7 @@ export default function Cta() {
             <Link href="/apply">
               <Button variant="gold" size="lg" className="gap-2"><School2 className="h-4 w-4" /> Register School</Button>
             </Link>
-            <Link href="/brochure.pdf" target="_blank">
+            <Link href="/brand/brochure.pdf" target="_blank">
               <Button size="lg"  variant="gold" size="lg" className="gap-2">
                 <FileText className="h-4 w-4" /> Download Brochure
               </Button>

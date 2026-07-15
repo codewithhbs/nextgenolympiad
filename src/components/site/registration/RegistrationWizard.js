@@ -88,7 +88,7 @@ export default function RegistrationWizard({ form, onRestart }) {
   return (
     <div className="mx-auto max-w-3xl">
       {/* Progress stepper */}
-      <div className="mb-8 flex items-center">
+      {/* <div className="mb-8 flex items-center">
         {steps.map((s, i) => {
           const state = i < current || isReview ? "done" : i === current ? "active" : "todo";
           return (
@@ -104,9 +104,9 @@ export default function RegistrationWizard({ form, onRestart }) {
             </div>
           );
         })}
-      </div>
+      </div> */}
 
-      <div className="rounded-3xl border border-line bg-white p-6 shadow-card md:p-8">
+      <div className="rounded-3xl  border border-line bg-white p-6 shadow-card md:p-8">
         {!isReview ? (
           <>
             <div className="mb-6">

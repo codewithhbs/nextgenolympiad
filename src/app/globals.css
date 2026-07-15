@@ -2,33 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light; }
+/* Fallback tokens — overridden at runtime by admin theme (src/lib/theme.js) */
+:root {
+  color-scheme: light;
+  --brand: #C8102E; --brand-hover: #A60D26; --brand-deep: #151922; --brand-soft: #FDEEF0;
+  --gold: #D4A537; --gold-dark: #9A6F16; --gold-soft: #FCF3DF; --gold-ink: #5F4710;
+  --accent: #2F6FE0; --accent-soft: #E9F1FF;
+  --ink: #16181D; --muted: #454B57; --bg: #FFFFFF; --surface: #F7F8FA;
+  --line: #E6E8EC; --crimson: #B00020;
+  --c-brand: 200 16 46; --c-brand-hover: 166 13 38; --c-brand-deep: 21 25 34; --c-brand-soft: 253 238 240;
+  --c-gold: 212 165 55; --c-gold-dark: 154 111 22; --c-gold-soft: 252 243 223; --c-gold-ink: 95 71 16;
+  --c-accent: 47 111 224; --c-accent-soft: 233 241 255;
+  --c-ink: 22 24 29; --c-muted: 69 75 87; --c-bg: 255 255 255; --c-surface: 247 248 250;
+  --c-line: 230 232 236; --c-crimson: 176 0 32;
+  --fs-base: 17px; --fs-nav: 16px; --logo-h: 56px; --fw-body: 500; --fw-heading: 800;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Mulish", system-ui, sans-serif;
+}
 
-html { scroll-behavior: smooth; }
-body { @apply bg-ivory text-ink antialiased font-sans; }
+/* One lever: admin font size scales every rem in the site */
+html { font-size: var(--fs-base); scroll-behavior: smooth; }
+body {
+  @apply bg-ivory text-ink antialiased font-sans;
+  font-weight: var(--fw-body);
+  line-height: 1.7;
+}
+h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-heading); letter-spacing: -0.01em; }
 
-/* Fix: ensure route changes land at true top (no phantom offset under sticky header) */
+/* Readability floor — nothing on the site renders smaller than 0.8125rem */
+.text-xs { font-size: 0.8125rem; line-height: 1.5; }
+.text-sm { font-size: 0.9375rem; line-height: 1.6; }
+.text-base { font-size: 1.0625rem; }
+
+/* Contrast guards: muted text never washes out, links stay visible on dark red */
+.text-slate, .text-muted, .text-ink-soft { color: rgb(var(--c-muted)); }
+.bg-brand-deep a:hover, .bg-navy-deep a:hover { color: #fff; }
+
 main { scroll-margin-top: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* Heraldic crest divider — small gold diamond flanked by rules (brand motif) */
+/* Crest divider — gold diamond flanked by rules */
 .crest-divider { @apply flex items-center justify-center gap-3 text-gold; }
 .crest-divider::before,
-.crest-divider::after { content: ""; @apply h-px w-12 bg-gold/50; }
+.crest-divider::after { content: ""; @apply h-px w-12 bg-gold/60; }
 
 .blob { border-radius: 42% 58% 63% 37% / 42% 41% 59% 58%; }
 
 /* CMS prose */
-.prose-cms h2 { @apply font-display text-2xl font-bold text-navy mt-8 mb-3; }
-.prose-cms h3 { @apply font-display text-xl font-bold text-navy mt-6 mb-2; }
-.prose-cms p { @apply text-slate leading-relaxed mb-4; }
-.prose-cms ul { @apply list-disc pl-6 text-slate space-y-1 mb-4; }
-.prose-cms a { @apply text-gold-dark underline; }
+.prose-cms h2 { @apply font-display text-2xl font-extrabold text-ink mt-8 mb-3; }
+.prose-cms h3 { @apply font-display text-xl font-extrabold text-ink mt-6 mb-2; }
+.prose-cms p { @apply text-ink leading-relaxed mb-4; }
+.prose-cms ul { @apply list-disc pl-6 text-ink space-y-1 mb-4; }
+.prose-cms a { @apply text-brand font-semibold underline; }
 
-::selection { background: #F4E9CC; color: #0B2C63; }
+::selection { background: var(--gold-soft); color: var(--brand-deep); }
 
 @media print {
   body * { visibility: hidden; }

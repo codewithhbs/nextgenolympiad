@@ -17,7 +17,7 @@ export default function Footer({ settings }) {
   const social = settings?.social || {};
   const year = new Date().getFullYear();
   // Only show socials the admin has explicitly enabled AND set a real URL for.
-  const socialsOn = settings?.socialEnabled === true;
+  const socialsOn = true;
   const activeSocials = socialsOn ? SOCIALS.filter((s) => isValidUrl(social[s.key])) : [];
 
   return (
@@ -32,7 +32,7 @@ export default function Footer({ settings }) {
               <span className="mt-0.5 block text-[0.6rem] font-bold uppercase tracking-[0.28em] text-gold">Olympiad Foundation</span>
             </span>
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-white/60">
+          <p className="mt-4 text-sm leading-relaxed text-white/85">
             {settings?.footerText || "Learn • Compete • Excel. A national-level Olympiad for Classes I–X and Wonder Kids (Bal Vatika)."}
           </p>
           {activeSocials.length > 0 && (
@@ -49,11 +49,12 @@ export default function Footer({ settings }) {
 
         <div>
           <h4 className="mb-4 text-xs font-bold uppercase tracking-wide text-gold">Explore</h4>
-          <ul className="space-y-2.5 text-sm text-white/65">
+          <ul className="space-y-2.5 text-sm text-white/90">
             <li><Link href="/about" className="hover:text-white">About Us</Link></li>
-            <li><Link href="/quiz" className="hover:text-white">Olympiad</Link></li>
+            <li><Link href="/olympiad/nextgen" className="hover:text-white">NextGen Olympiad</Link></li>
+            <li><Link href="/olympiad/wonder-kids" className="hover:text-white">Wonder Kids</Link></li>
             <li><Link href="/resources" className="hover:text-white">Study Resources</Link></li>
-            <li><Link href="/results" className="hover:text-white">Results</Link></li>
+            <li><Link href="/awards" className="hover:text-white">Awards & Certification</Link></li>
             <li><Link href="/gallery" className="hover:text-white">Gallery</Link></li>
             <li><Link href="/apply" className="hover:text-white">Register School</Link></li>
           </ul>
@@ -61,7 +62,7 @@ export default function Footer({ settings }) {
 
         <div>
           <h4 className="mb-4 text-xs font-bold uppercase tracking-wide text-gold">Legal</h4>
-          <ul className="space-y-2.5 text-sm text-white/65">
+          <ul className="space-y-2.5 text-sm text-white/90">
             <li><Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link></li>
             <li><Link href="/terms-and-conditions" className="hover:text-white">Terms &amp; Conditions</Link></li>
             <li><Link href="/refund-policy" className="hover:text-white">Refund Policy</Link></li>
@@ -71,7 +72,7 @@ export default function Footer({ settings }) {
 
         <div>
           <h4 className="mb-4 text-xs font-bold uppercase tracking-wide text-gold">Reach Us</h4>
-          <ul className="space-y-3.5 text-sm text-white/65">
+          <ul className="space-y-3.5 text-sm text-white/90">
             {c.address && <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" /><span>{c.address}</span></li>}
             {c.phone && <li className="flex items-center gap-3"><Phone className="h-4 w-4 shrink-0 text-gold" /><a href={`tel:${c.phone}`} className="hover:text-white">{c.phone}</a></li>}
             {c.email && <li className="flex items-center gap-3"><Mail className="h-4 w-4 shrink-0 text-gold" /><a href={`mailto:${c.email}`} className="hover:text-white">{c.email}</a></li>}
@@ -79,7 +80,7 @@ export default function Footer({ settings }) {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-5 text-center text-xs text-white/45">
+      <div className="border-t border-white/10 py-5 text-center text-xs text-white/75">
         {settings?.copyright || `© ${year} NextGen Olympiad Foundation. All rights reserved.`}
       </div>
     </footer>

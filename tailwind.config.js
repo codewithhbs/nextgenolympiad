@@ -1,51 +1,66 @@
 /** @type {import('tailwindcss').Config} */
+const c = (v) => ({ opacityValue }) =>
+  opacityValue === undefined ? `rgb(var(--c-${v}))` : `rgb(var(--c-${v}) / ${opacityValue})`;
+
 export default {
   content: ["./src/**/*.{js,jsx}"],
   safelist: [
     "bg-navy", "text-navy", "bg-gold", "text-gold",
     "bg-crimson", "text-crimson", "bg-gold-soft", "text-gold-ink",
-    "bg-navy-soft", "text-navy-soft",
+    "bg-navy-soft", "text-navy-soft", "bg-brand", "text-brand",
+    "bg-accent", "text-accent", "bg-accent-soft",
   ],
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', "Georgia", "serif"],
-        sans: ["Mulish", "system-ui", "sans-serif"],
+        display: ["var(--font-display)"],
+        sans: ["var(--font-sans)"],
       },
       colors: {
-        // Heraldic brand — navy + gold + crimson on ivory
-        navy: "#0B2C63",          // primary (crest shield)
-        "navy-deep": "#071E45",
-        "navy-soft": "#3A5385",
-        gold: "#C79A3B",          // heraldic gold accent
-        "gold-dark": "#A87C24",
-        "gold-soft": "#F4E9CC",
-        "gold-ink": "#6E5416",
-        crimson: "#8E1B2E",       // banner maroon (use sparingly)
-        "crimson-soft": "#F6DEE2",
-        ink: "#12233F",           // body text
-        slate: "#4A5B78",         // muted text
-        ivory: "#FBF8F1",         // page background
-        parchment: "#F4EEE0",
-        mist: "#EEF2F8",
-        line: "#E7E1D3",
-        // legacy aliases kept so any un-migrated class still resolves
-        "ink-soft": "#4A5B78",
-        saffron: "#C79A3B",
-        "saffron-soft": "#F4E9CC",
-        leaf: "#0B2C63",
-        grape: "#8E1B2E",
-        "grape-soft": "#F6DEE2",
-        cherry: "#8E1B2E",
-        cream: "#F4EEE0",
-        sky: "#EEF2F8",
-        cloud: "#FBF8F1",
+        // China red + white + gold, with a light (never dark) blue accent.
+        brand: c("brand"),
+        "brand-hover": c("brand-hover"),
+        "brand-deep": c("brand-deep"),
+        "brand-soft": c("brand-soft"),
+        gold: c("gold"),
+        "gold-dark": c("gold-dark"),
+        "gold-soft": c("gold-soft"),
+        "gold-ink": c("gold-ink"),
+        accent: c("accent"),
+        "accent-soft": c("accent-soft"),
+        ink: c("ink"),
+        slate: c("muted"),
+        muted: c("muted"),
+        ivory: c("bg"),
+        white: c("bg"),
+        surface: c("surface"),
+        mist: c("surface"),
+        parchment: c("surface"),
+        line: c("line"),
+        crimson: c("crimson"),
+        "crimson-soft": c("brand-soft"),
+
+        // legacy aliases → remapped so old classes keep working.
+        // Headings/chips go dark charcoal (modern), red is reserved for CTAs + accents.
+        navy: c("ink"),
+        "navy-deep": c("brand-deep"),
+        "navy-soft": c("muted"),
+        "ink-soft": c("muted"),
+        saffron: c("gold"),
+        "saffron-soft": c("gold-soft"),
+        leaf: c("brand"),
+        grape: c("ink"),
+        "grape-soft": c("brand-soft"),
+        cherry: c("crimson"),
+        cream: c("surface"),
+        sky: c("surface"),
+        cloud: c("bg"),
       },
       borderRadius: { xl: "0.9rem", "2xl": "1.25rem", "3xl": "1.75rem" },
       boxShadow: {
-        soft: "0 12px 40px rgba(11,44,99,0.10)",
-        card: "0 6px 24px rgba(11,44,99,0.07)",
-        gold: "0 8px 30px rgba(199,154,59,0.25)",
+        soft: "0 12px 40px rgba(140,10,32,0.12)",
+        card: "0 6px 24px rgba(140,10,32,0.08)",
+        gold: "0 8px 30px rgba(212,165,55,0.28)",
       },
       keyframes: {
         "fade-up": {

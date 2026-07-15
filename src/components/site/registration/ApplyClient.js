@@ -22,12 +22,16 @@ export default function ApplyClient() {
   const choose = async (slug) => {
     setLoadingForm(true); setError("");
     try {
-      const r = await api.get(`/api/registration-form?slug=${slug}`);
+    
+      const r = await api.get(`/api/registration-form?slug=olympiad`);
       setActive(r.data.form);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (e) { setError(e.message || "Could not load this form"); }
     finally { setLoadingForm(false); }
   };
+  useEffect(()=>{
+    choose("olympiad")
+  },[])
 
   if (active) return <RegistrationWizard form={active} onRestart={() => setActive(null)} />;
 

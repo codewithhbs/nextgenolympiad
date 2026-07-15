@@ -6,7 +6,7 @@ import {
 
 const PILLARS = [
     { icon: Lightbulb, ring: "bg-leaf", title: "Curiosity", sub: "Explored" },
-    { icon: Brain, ring: "bg-[#2f6bff]", title: "Thinking", sub: "Strengthened" },
+    { icon: Brain, ring: "bg-[var(--brand)]", title: "Thinking", sub: "Strengthened" },
     { icon: Trophy, ring: "bg-saffron", title: "Excellence", sub: "Achieved" },
     { icon: Heart, ring: "bg-grape", title: "Learning", sub: "Enjoyed" },
 ];
@@ -31,7 +31,7 @@ export default function Hero() {
 
                     <h1 className="mt-6 text-3xl font-black leading-snug text-ink md:text-[2.6rem] md:leading-[1.2]">
                         National-Level Olympiad for{" "}
-                        <span className="text-[#2f6bff]">Classes I–X</span>{" "}
+                        <span className="text-[var(--brand)]">Classes I–X</span>{" "}
 
                         &{" "}
                         <span className="text-leaf">Wonder Kids</span>{" "}
@@ -44,12 +44,12 @@ export default function Hero() {
 
                     <div className="mt-8 flex flex-wrap items-center gap-3">
                         <Link href="/register"
-                            className="inline-flex items-center gap-3 rounded-full bg-[#2f6bff] py-3 pl-6 pr-2 font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-[#245ae0]">
+                            className="inline-flex items-center gap-3 rounded-full bg-[var(--brand)] py-3 pl-6 pr-2 font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-[var(--brand-deep)]">
                             Register Now
                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/20"><ArrowRight className="h-4 w-4" /></span>
                         </Link>
                         <Link href="/about"
-                            className="inline-flex items-center rounded-full border-2 border-[#2f6bff]/40 px-7 py-3 font-bold text-[#2f6bff] transition hover:bg-[#2f6bff]/5">
+                            className="inline-flex items-center rounded-full border-2 border-[var(--brand)]/40 px-7 py-3 font-bold text-[var(--brand)] transition hover:bg-[var(--brand)]/5">
                             Know More
                         </Link>
                     </div>

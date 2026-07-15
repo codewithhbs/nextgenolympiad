@@ -45,12 +45,12 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
         <Quote className="pointer-events-none absolute left-[6%] top-6 h-16 w-16 rotate-180 text-ink/10" aria-hidden />
         <span className="pointer-events-none absolute right-[10%] top-10 h-6 w-6 rounded-full border-2 border-ink/10" aria-hidden />
         <span className="pointer-events-none absolute left-[4%] bottom-16 h-5 w-5 rounded-full border-2 border-ink/10" aria-hidden />
-        <Star className="pointer-events-none absolute left-[8%] top-1/2 h-4 w-4 text-[#2f6bff]/25" aria-hidden />
-        <Star className="pointer-events-none absolute right-[16%] top-6 h-4 w-4 text-[#2f6bff]/25" aria-hidden />
+        <Star className="pointer-events-none absolute left-[8%] top-1/2 h-4 w-4 text-[var(--brand)]/25" aria-hidden />
+        <Star className="pointer-events-none absolute right-[16%] top-6 h-4 w-4 text-[var(--brand)]/25" aria-hidden />
         <Star className="pointer-events-none absolute right-[6%] bottom-20 h-4 w-4 text-cherry/20" aria-hidden />
 
         {/* floating badge icons */}
-        <div className="pointer-events-none absolute left-3 top-1/2 hidden -translate-y-1/2 rotate-[-8deg] rounded-2xl bg-[#2f6bff] p-2.5 text-white shadow-soft sm:block">
+        <div className="pointer-events-none absolute left-3 top-1/2 hidden -translate-y-1/2 rotate-[-8deg] rounded-2xl bg-[var(--brand)] p-2.5 text-white shadow-soft sm:block">
           <ThumbsUp className="h-5 w-5" />
         </div>
         <div className="pointer-events-none absolute right-4 top-8 hidden rotate-[8deg] rounded-2xl bg-leaf p-2.5 text-white shadow-soft sm:block">
@@ -62,7 +62,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
             <span className="inline-block rounded-full bg-leaf/10 px-4 py-1.5 text-sm font-bold text-leaf">Loved by educators</span>
             <h2 className="mt-3 text-3xl font-black text-ink md:text-4xl">What schools say</h2>
             <div className="mt-3 flex justify-center gap-1.5">
-              <span className="h-1 w-8 rounded-full bg-[#2f6bff]" />
+              <span className="h-1 w-8 rounded-full bg-[var(--brand)]" />
               <span className="h-1 w-5 rounded-full bg-leaf" />
               <span className="h-1 w-3 rounded-full bg-saffron" />
             </div>
@@ -99,7 +99,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
           <div className="mt-8 flex justify-center gap-2">
             {T.map((_, i) => (
               <button key={i} onClick={() => setSlide(i)} aria-label={`Slide ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${i === slide ? "w-6 bg-[#2f6bff]" : "w-2 bg-ink/15"}`} />
+                className={`h-2 rounded-full transition-all ${i === slide ? "w-6 bg-[var(--brand)]" : "w-2 bg-ink/15"}`} />
             ))}
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
               <span className="inline-block rounded-full bg-saffron-soft px-4 py-1.5 text-sm font-bold text-saffron">Queries</span>
               <h2 className="mt-3 text-3xl font-black leading-tight text-ink md:text-4xl">Frequently asked</h2>
               <div className="mt-3 flex gap-1.5">
-                <span className="h-1 w-10 rounded-full bg-[#2f6bff]" />
+                <span className="h-1 w-10 rounded-full bg-[var(--brand)]" />
                 <span className="h-1 w-6 rounded-full bg-leaf" />
                 <span className="h-1 w-4 rounded-full bg-saffron" />
               </div>
@@ -125,20 +125,20 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
               {/* clean illustration: centered medallion + orbiting chips */}
               <div className="relative mt-10 hidden h-64 w-full lg:block">
                 {/* soft gradient blob backdrop */}
-                <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#2f6bff]/10 via-leaf/10 to-saffron/10 blur-xl" aria-hidden />
+                <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[var(--brand)]/10 via-leaf/10 to-saffron/10 blur-xl" aria-hidden />
                 {/* dashed orbit ring */}
                 <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-ink/10" aria-hidden />
 
                 {/* centerpiece */}
                 <div className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-soft ring-1 ring-ink/5">
-                  <HelpCircle className="h-11 w-11 text-[#2f6bff]" strokeWidth={1.75} />
+                  <HelpCircle className="h-11 w-11 text-[var(--brand)]" strokeWidth={1.75} />
                 </div>
 
                 {/* orbiting chips, evenly spaced */}
                 <div className="absolute left-1/2 top-2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-2xl bg-leaf text-white shadow-soft">
                   <ClipboardCheck className="h-5 w-5" />
                 </div>
-                <div className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-2xl bg-[#2f6bff] text-white shadow-soft">
+                <div className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-2xl bg-[var(--brand)] text-white shadow-soft">
                   <BookOpen className="h-5 w-5" />
                 </div>
                 <div className="absolute bottom-2 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-2xl bg-saffron text-white shadow-soft">

@@ -2,12 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Landmark, Target, Trophy, Globe2, ArrowRight, Brain } from "lucide-react";
 
-const FOOTER_ITEMS = [
-  { icon: Brain, title: "Knowledge", note: "that empowers" },
-  { icon: Target, title: "Skills", note: "that prepare" },
-  { icon: Trophy, title: "Excellence", note: "that defines us" },
-  { icon: Globe2, title: "Nationwide", note: "reach, lasting impact" },
-];
 
 const MINI_STATS = [
   ["I–X", "Classes"],
@@ -24,14 +18,14 @@ export default function About() {
           {/* TEXT */}
           <div className="animate-fade-up lg:col-span-6">
             <div className="flex items-center gap-2.5">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-gold-dark">
-                <Landmark className="h-4 w-4" />
+              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-brand/40 text-brand-deep">
+                <Landmark className="h-6 w-6" />
               </span>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-gold-dark">About the Foundation</span>
+              <span className="text-xl font-bold uppercase tracking-[0.25em] text-brand">About the Foundation</span>
             </div>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight text-navy md:text-[2.6rem]">
               Ranking ends the conversation.<br />
-              <span className="text-gold-dark">Benchmark</span> starts it.
+              <span className="text-crimson">Benchmark</span> starts it.
             </h2>
             <span className="mt-4 block h-1 w-14 rounded-full bg-gold" aria-hidden />
             <p className="mt-6 max-w-lg text-slate">
@@ -51,7 +45,7 @@ export default function About() {
             </div>
 
             <Link href="/about"
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-navy py-3 pl-6 pr-2 font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-navy-deep">
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-crimson py-3 pl-6 pr-2 font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-navy-deep">
               Explore Our Journey
               <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gold text-navy"><ArrowRight className="h-4 w-4" /></span>
             </Link>
@@ -67,10 +61,10 @@ export default function About() {
                 <Image src="/brand/about-scene.png" alt="Teacher guiding students through NextGen Olympiad activities"
                   width={1200} height={900} className="h-auto w-full rounded-t-[1.75rem] object-contain" priority />
 
-               
+
               </div>
 
-   
+
             </div>
           </div>
         </div>

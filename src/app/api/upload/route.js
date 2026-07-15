@@ -16,7 +16,7 @@ export async function POST(req) {
     if (!file || typeof file === "string") return fail("No file provided", 422);
     const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/svg+xml"];
     if (!allowed.includes(file.type)) return fail("Unsupported file type", 415);
-    if (file.size > 5 * 1024 * 1024) return fail("Max 5MB", 413);
+    if (file.size > 10 * 1024 * 1024) return fail("Max 10MB", 413);
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const res = await uploadToCloudinary(buffer, folder);

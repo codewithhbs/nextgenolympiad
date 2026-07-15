@@ -77,14 +77,14 @@ function LoginInner() {
               <p className="text-xs font-semibold uppercase tracking-wide text-white/40">One learner, three rounds</p>
               <svg viewBox="0 0 300 120" className="mt-3 w-full" role="img" aria-label="Score rising from 62 to 74 to 88 across three olympiad rounds">
                 <line x1="20" y1="100" x2="280" y2="100" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-                <path d="M28 84 L150 58 L272 24" fill="none" stroke="#D4A93D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M28 84 L150 58 L272 24" fill="none" stroke="var(--gold)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 {[
                   { x: 28, y: 84, v: "62%" },
                   { x: 150, y: 58, v: "74%" },
                   { x: 272, y: 24, v: "88%" },
                 ].map((p) => (
                   <g key={p.x}>
-                    <circle cx={p.x} cy={p.y} r="5" fill="#0B1B36" stroke="#D4A93D" strokeWidth="2.5" />
+                    <circle cx={p.x} cy={p.y} r="5" fill="var(--brand-deep)" stroke="var(--gold)" strokeWidth="2.5" />
                     <text x={p.x} y={p.y - 14} textAnchor="middle" fontSize="12" fontWeight="700" fill="#FFFFFF">{p.v}</text>
                   </g>
                 ))}
@@ -116,7 +116,7 @@ function LoginInner() {
       <div className="relative flex items-center justify-center bg-white px-5 py-8 sm:px-8">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,169,61,0.07),transparent_45%)] lg:hidden" aria-hidden />
 
-        <div className="relative w-full max-w-[380px]">
+        <div className="relative w-full max-w-[470px]">
           <Link href="/" className="mb-6 inline-flex items-center text-xl font-extrabold text-navy lg:hidden">
             NextGen<span className="text-gold-dark">.</span>
           </Link>
@@ -162,11 +162,11 @@ function LoginInner() {
           </div>
 
           <p className="mt-5 text-center text-sm text-ink-soft">
-            New school? <Link href="/register" className="font-semibold text-saffron hover:underline">Register here</Link>
+            New school? <Link href="/apply" className="font-semibold text-saffron hover:underline">Register here</Link>
           </p>
 
           <p className="mt-8 text-center text-xs text-ink-soft/60">
-            For Classes Bal Vatika I – X · <Link href="/privacy" className="hover:underline">Privacy</Link>
+            For Classes Bal Vatika I – X · <Link href="/privacy-policy" className="hover:underline">Privacy</Link>
           </p>
         </div>
       </div>

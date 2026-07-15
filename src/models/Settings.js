@@ -13,9 +13,40 @@ const slideSchema = new mongoose.Schema(
   { _id: false }
 );
 
+// Appearance — colors + typography, editable from Admin > Settings > Appearance.
+const themeSchema = new mongoose.Schema(
+  {
+    brand: { type: String, default: "#C8102E" },
+    brandHover: { type: String, default: "#A60D26" },
+    brandDeep: { type: String, default: "#151922" },
+    brandSoft: { type: String, default: "#FDEEF0" },
+    gold: { type: String, default: "#D4A537" },
+    goldDark: { type: String, default: "#9A6F16" },
+    goldSoft: { type: String, default: "#FCF3DF" },
+    goldInk: { type: String, default: "#5F4710" },
+    accent: { type: String, default: "#2F6FE0" },
+    accentSoft: { type: String, default: "#E9F1FF" },
+    ink: { type: String, default: "#16181D" },
+    muted: { type: String, default: "#454B57" },
+    bg: { type: String, default: "#FFFFFF" },
+    surface: { type: String, default: "#F7F8FA" },
+    line: { type: String, default: "#E6E8EC" },
+    crimson: { type: String, default: "#B00020" },
+    baseFontSize: { type: Number, default: 17, min: 14, max: 24 },
+    navFontSize: { type: Number, default: 16, min: 12, max: 22 },
+    logoHeight: { type: Number, default: 56, min: 36, max: 96 },
+    bodyWeight: { type: Number, default: 500 },
+    headingWeight: { type: Number, default: 800 },
+    headingFont: { type: String, default: "Playfair Display" },
+    bodyFont: { type: String, default: "Mulish" },
+  },
+  { _id: false }
+);
+
 const settingsSchema = new mongoose.Schema(
   {
     key: { type: String, default: "global", unique: true },
+    theme: { type: themeSchema, default: () => ({}) },
     siteName: { type: String, default: "NextGen Olympiad Foundation" },
     tagline: { type: String, default: "Learn • Compete • Excel" },
     logo: { url: String, publicId: String },
