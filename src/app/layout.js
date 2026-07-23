@@ -22,10 +22,15 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <meta
+          name="google-site-verification"
+          content="bPs-0qoY1-5jYUQgHliF3bkTEZPexB8GYl9-VRanG6A"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href={fontHref(theme)} rel="stylesheet" />
         {/* Admin-controlled colors + type scale */}
+    
         <style dangerouslySetInnerHTML={{ __html: buildThemeCss(theme) }} />
       </head>
       <body>
