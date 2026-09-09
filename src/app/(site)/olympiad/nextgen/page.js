@@ -47,9 +47,9 @@ export default function NextGenOlympiadPage() {
               <Link href="/awards"><Button variant="outline" size="lg">Awards &amp; Certification</Button></Link>
             </div>
           </div>
-          <div className="relative mx-auto aspect-square w-full max-w-md">
+          {/* <div className="relative mx-auto aspect-square w-full max-w-md">
             <Image src="/brand/poster.png" alt="NextGen Olympiad" fill className="object-contain drop-shadow-2xl" />
-          </div>
+          </div> */}
         </div>
       </section>
 
