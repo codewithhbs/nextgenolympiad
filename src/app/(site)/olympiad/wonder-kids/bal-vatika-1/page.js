@@ -85,11 +85,37 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Subject */}
+      <section className="mt-14">
+        <div className="flex items-center gap-3">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
+            01
+          </span>
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+            Subject
+          </h2>
+        </div>
+        <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
+          All <span className="text-brand">subjects covered</span>
+        </p>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+          {SUBJECTS.map((s) => (
+            <div
+              key={s.subject}
+              className="rounded-2xl border border-line bg-white px-5 py-4 text-center shadow-soft"
+            >
+              <p className="font-display text-lg font-extrabold text-brand">{s.subject}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Subject / Curriculum / Sample Paper accordion */}
       <section className="mt-10">
         <div className="flex items-center gap-3">
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
-            01
+            02
           </span>
           <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
             Curriculum
@@ -105,9 +131,8 @@ export default function Page() {
             return (
               <div
                 key={s.subject}
-                className={`rounded-2xl border border-line transition ${
-                  isOpen ? "bg-white shadow-soft" : "bg-slate-50/60"
-                }`}
+                className={`rounded-2xl border border-line transition ${isOpen ? "bg-white shadow-soft" : "bg-slate-50/60"
+                  }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? -1 : i)}
@@ -117,33 +142,21 @@ export default function Page() {
                     {s.subject}
                   </span>
                   <span
-                    className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                      isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
-                    }`}
+                    className={`flex h-7 w-7 items-center justify-center rounded-full ${isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
+                      }`}
                   >
                     {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                   </span>
                 </button>
 
                 {isOpen && (
-                  <div className="grid gap-6 border-t border-line px-5 py-5 md:grid-cols-3">
-                    {/* Subject */}
-                    <div>
-                      <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
-                        Subject
-                      </p>
-                      <p className="mt-2 text-[15px] font-bold text-ink">{s.subject}</p>
-                      <p className="mt-1 text-sm text-slate">
-                        {s.units.length} unit{s.units.length !== 1 ? "s" : ""} in this subject
-                      </p>
-                    </div>
-
+                  <div className="border-t border-line px-5 py-5">
                     {/* Curriculum */}
                     <div>
                       <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
                         Curriculum
                       </p>
-                      <div className="mt-2 flex flex-col gap-3">
+                      <div className="mt-3 grid gap-x-8 gap-y-4 md:grid-cols-2">
                         {s.units.map((u) => (
                           <div key={u.title}>
                             <p className="text-sm font-bold text-brand">{u.title}</p>
@@ -158,19 +171,6 @@ export default function Page() {
                         ))}
                       </div>
                     </div>
-
-                    {/* Sample Paper */}
-                    <div>
-                      <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
-                        Sample Paper
-                      </p>
-                      <Link
-                        href={s.sampleHref}
-                        className="mt-2 inline-flex items-center gap-1.5 text-[15px] font-semibold text-brand hover:underline"
-                      >
-                        <FileText className="h-4 w-4" /> {s.subject} Sample Paper
-                      </Link>
-                    </div>
                   </div>
                 )}
               </div>
@@ -184,7 +184,7 @@ export default function Page() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
-              02
+              03
             </span>
             <div>
               <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
@@ -204,7 +204,7 @@ export default function Page() {
           </a>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-line bg-white p-6 shadow-soft md:p-8">
+        {/* <div className="mt-6 rounded-2xl border border-line bg-white p-6 shadow-soft md:p-8">
           <div className="grid gap-8 md:grid-cols-2">
             {SUBJECTS.map((s) => (
               <div key={s.subject}>
@@ -226,7 +226,7 @@ export default function Page() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </section>
     </div>
   );

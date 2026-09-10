@@ -80,68 +80,134 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Subject / Curriculum / Sample Paper accordion */}
-      <section className="mt-10">
-        <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
-            01
-          </span>
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
-            Curriculum
-          </h2>
-        </div>
-        <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
-          Subject-wise <span className="text-brand">curriculum &amp; sample papers</span>
-        </p>
-
-        <div className="mt-6 flex flex-col gap-3">
-          {SUBJECTS.map((s, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <div
-                key={s.subject}
-                className={`rounded-2xl border border-line transition ${
-                  isOpen ? "bg-white shadow-soft" : "bg-slate-50/60"
-                }`}
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? -1 : i)}
-                  className="flex w-full items-center justify-between px-5 py-4 text-left"
-                >
-                  <span className={`font-display text-lg font-extrabold ${isOpen ? "text-brand" : "text-ink"}`}>
-                    {s.subject}
-                  </span>
-                  <span
-                    className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                      isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
-                    }`}
+      {/* Subject */}
+            <section className="mt-14">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
+                  01
+                </span>
+                <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+                  Subject
+                </h2>
+              </div>
+              <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
+                All <span className="text-brand">subjects covered</span>
+              </p>
+      
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+                {SUBJECTS.map((s) => (
+                  <div
+                    key={s.subject}
+                    className="rounded-2xl border border-line bg-white px-5 py-4 text-center shadow-soft"
                   >
-                    {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                  </span>
-                </button>
-
-                {isOpen && (
-                  <div className="grid gap-6 border-t border-line px-5 py-5 md:grid-cols-3">
-                    {/* Subject */}
-                    <div>
-                      <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
-                        Subject
-                      </p>
-                      <p className="mt-2 text-[15px] font-bold text-ink">{s.subject}</p>
-                      <p className="mt-1 text-sm text-slate">
-                        {s.units.length} unit{s.units.length !== 1 ? "s" : ""} in this subject
-                      </p>
+                    <p className="font-display text-lg font-extrabold text-brand">{s.subject}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+      
+            {/* Subject / Curriculum / Sample Paper accordion */}
+            <section className="mt-10">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
+                  02
+                </span>
+                <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+                  Curriculum
+                </h2>
+              </div>
+              <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
+                Subject-wise <span className="text-brand">curriculum &amp; sample papers</span>
+              </p>
+      
+              <div className="mt-6 flex flex-col gap-3">
+                {SUBJECTS.map((s, i) => {
+                  const isOpen = openIndex === i;
+                  return (
+                    <div
+                      key={s.subject}
+                      className={`rounded-2xl border border-line transition ${isOpen ? "bg-white shadow-soft" : "bg-slate-50/60"
+                        }`}
+                    >
+                      <button
+                        onClick={() => setOpenIndex(isOpen ? -1 : i)}
+                        className="flex w-full items-center justify-between px-5 py-4 text-left"
+                      >
+                        <span className={`font-display text-lg font-extrabold ${isOpen ? "text-brand" : "text-ink"}`}>
+                          {s.subject}
+                        </span>
+                        <span
+                          className={`flex h-7 w-7 items-center justify-center rounded-full ${isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
+                            }`}
+                        >
+                          {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                        </span>
+                      </button>
+      
+                      {isOpen && (
+                        <div className="border-t border-line px-5 py-5">
+                          {/* Curriculum */}
+                          <div>
+                            <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
+                              Curriculum
+                            </p>
+                            <div className="mt-3 grid gap-x-8 gap-y-4 md:grid-cols-2">
+                              {s.units.map((u) => (
+                                <div key={u.title}>
+                                  <p className="text-sm font-bold text-brand">{u.title}</p>
+                                  {u.items.length > 0 && (
+                                    <ul className="mt-1 list-disc pl-4 text-sm leading-relaxed text-slate">
+                                      {u.items.map((it) => (
+                                        <li key={it}>{it}</li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
-
-                    {/* Curriculum */}
-                    <div>
-                      <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
-                        Curriculum
-                      </p>
-                      <div className="mt-2 flex flex-col gap-3">
+                  );
+                })}
+              </div>
+            </section>
+      
+            {/* Full syllabus */}
+            <section className="mt-14">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
+                    03
+                  </span>
+                  <div>
+                    <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+                      Complete Syllabus
+                    </h2>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate">
+                      Bal Vatika – 1 · Olympiad Syllabus
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={SYLLABUS_PDF_HREF}
+                  download
+                  className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-soft transition hover:opacity-90"
+                >
+                  <Download className="h-4 w-4" /> Download Syllabus
+                </a>
+              </div>
+      
+              {/* <div className="mt-6 rounded-2xl border border-line bg-white p-6 shadow-soft md:p-8">
+                <div className="grid gap-8 md:grid-cols-2">
+                  {SUBJECTS.map((s) => (
+                    <div key={s.subject}>
+                      <h3 className="font-display text-lg font-extrabold text-brand">{s.subject}</h3>
+                      <div className="mt-3 flex flex-col gap-3">
                         {s.units.map((u) => (
                           <div key={u.title}>
-                            <p className="text-sm font-bold text-brand">{u.title}</p>
+                            <p className="text-sm font-bold text-ink">{u.title}</p>
                             {u.items.length > 0 && (
                               <ul className="mt-1 list-disc pl-4 text-sm leading-relaxed text-slate">
                                 {u.items.map((it) => (
@@ -153,76 +219,10 @@ export default function Page() {
                         ))}
                       </div>
                     </div>
-
-                    {/* Sample Paper */}
-                    <div>
-                      <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
-                        Sample Paper
-                      </p>
-                      <Link
-                        href={s.sampleHref}
-                        className="mt-2 inline-flex items-center gap-1.5 text-[15px] font-semibold text-brand hover:underline"
-                      >
-                        <FileText className="h-4 w-4" /> {s.subject} Sample Paper
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Full syllabus */}
-      <section className="mt-14">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
-              02
-            </span>
-            <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
-                Complete Syllabus
-              </h2>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate">
-                Bal Vatika – II · Olympiad Syllabus
-              </p>
-            </div>
-          </div>
-          <a
-            href={SYLLABUS_PDF_HREF}
-            download
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-soft transition hover:opacity-90"
-          >
-            <Download className="h-4 w-4" /> Download Syllabus
-          </a>
-        </div>
-
-        <div className="mt-6 rounded-2xl border border-line bg-white p-6 shadow-soft md:p-8">
-          <div className="grid gap-8 md:grid-cols-2">
-            {SUBJECTS.map((s) => (
-              <div key={s.subject}>
-                <h3 className="font-display text-lg font-extrabold text-brand">{s.subject}</h3>
-                <div className="mt-3 flex flex-col gap-3">
-                  {s.units.map((u) => (
-                    <div key={u.title}>
-                      <p className="text-sm font-bold text-ink">{u.title}</p>
-                      {u.items.length > 0 && (
-                        <ul className="mt-1 list-disc pl-4 text-sm leading-relaxed text-slate">
-                          {u.items.map((it) => (
-                            <li key={it}>{it}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              </div> */}
+            </section>
     </div>
   );
 }
