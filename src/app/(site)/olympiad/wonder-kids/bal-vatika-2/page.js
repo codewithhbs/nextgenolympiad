@@ -47,7 +47,7 @@ const SUBJECTS = [
   },
   {
     subject: "Drawing",
-    sampleHref: "#",
+    sampleHref: "/sample-papers/BAL-VATIKA-2-DRAWING.pdf",
     units: [
       { title: "Curriculum", items: ["Curriculum to be added soon"] },
     ],

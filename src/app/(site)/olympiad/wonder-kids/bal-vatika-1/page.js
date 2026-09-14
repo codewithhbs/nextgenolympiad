@@ -28,7 +28,7 @@ const SUBJECTS = [
   },
   {
     subject: "EVS",
-    sampleHref: "#",
+    sampleHref: "/sample-papers/BAL-VATIKA-1-EVS-OLYMPIAD-PAPER.pdf",
     units: [
       { title: "Unit 1: About Myself", items: ["All about me", "Who Am I?", "My Face", "My House", "My Good Habits"] },
       { title: "Unit 2: My Body", items: ["Eyes", "Ears", "Nose", "Tongue", "Head", "Hips", "Hand"] },
