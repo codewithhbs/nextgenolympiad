@@ -9,11 +9,11 @@ export const metadata = {
 };
 
 const SUBJECTS = [
-  { icon: BookOpen, name: "English", text: "Comprehension, grammar and expression tested through real usage." },
-  { icon: Calculator, name: "Mathematics", text: "Concept application over rote formula recall." },
-  { icon: Cpu, name: "Computational Thinking", text: "Logic, patterns, algorithms — the literacy of the next decade." },
+  { icon: BookOpen, name: "English", text: "Comprehension, grammar and expression tested through real usage.", href: "/olympiad/subjects/english" },
+  { icon: Calculator, name: "Mathematics", text: "Concept application over rote formula recall.", href: "/olympiad/subjects/maths" },
+  { icon: Cpu, name: "Computational Thinking", text: "Logic, patterns, algorithms — the literacy of the next decade.", href: "/olympiad/subjects/computational-thinking" },
   { icon: Leaf, name: "EVS", text: "Environment and everyday science awareness." },
-  { icon: FlaskConical, name: "S T E M", text: "Science, technology, engineering and maths, integrated." },
+  { icon: FlaskConical, name: "S T E M", text: "Science, technology, engineering and maths, integrated.", href: "/olympiad/subjects/stem" },
 ];
 
 const GAIN = [
@@ -63,15 +63,24 @@ export default function NextGenOlympiadPage() {
           <CrestDivider className="mt-6" />
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SUBJECTS.map((s) => (
-            <div key={s.name} className="rounded-3xl border border-line bg-white p-7 shadow-card transition hover:-translate-y-1 hover:border-gold hover:shadow-soft">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft text-brand">
-                <s.icon className="h-7 w-7" />
+          {SUBJECTS.map((s) => {
+            const card = (
+              <div className="rounded-3xl border border-line bg-white p-7 shadow-card transition hover:-translate-y-1 hover:border-gold hover:shadow-soft">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft text-brand">
+                  <s.icon className="h-7 w-7" />
+                </div>
+                <h3 className="mt-5 font-display text-2xl font-extrabold text-ink">{s.name}</h3>
+                <p className="mt-2 text-base font-medium leading-relaxed text-slate">{s.text}</p>
               </div>
-              <h3 className="mt-5 font-display text-2xl font-extrabold text-ink">{s.name}</h3>
-              <p className="mt-2 text-base font-medium leading-relaxed text-slate">{s.text}</p>
-            </div>
-          ))}
+            );
+            return s.href ? (
+              <Link key={s.name} href={s.href} className="block">
+                {card}
+              </Link>
+            ) : (
+              <div key={s.name}>{card}</div>
+            );
+          })}
         </div>
       </section>
 

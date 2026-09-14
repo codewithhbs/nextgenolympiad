@@ -17,10 +17,10 @@ const NAV = [
       {
         label: "Subjects", href: "/olympiad/nextgen/subjects",
         children: [
-          { label: "English" },
-          { label: "Maths" },
-          { label: "STEM" },
-          { label: "Computational Thinking" },
+          { label: "English", href: "/olympiad/subjects/english" },
+          { label: "Maths", href: "/olympiad/subjects/maths" },
+          { label: "STEM", href: "/olympiad/subjects/stem" },
+          { label: "Computational Thinking", href: "/olympiad/subjects/computational-thinking" },
         ]
       },
     ],
