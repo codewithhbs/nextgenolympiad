@@ -43,9 +43,9 @@ const NAV = [
 export default function Header({ settings, user }) {
   const [open, setOpen] = useState(false);
   const [drop, setDrop] = useState(null);
-  const [subDrop, setSubDrop] = useState(null); // NEW: tracks open nested submenu (desktop)
+  const [subDrop, setSubDrop] = useState(null);
   const [mDrop, setMDrop] = useState(null);
-  const [mSubDrop, setMSubDrop] = useState(null); // NEW: tracks open nested submenu (mobile)
+  const [mSubDrop, setMSubDrop] = useState(null);
   const pathname = usePathname();
   const ref = useRef(null);
 
@@ -67,8 +67,15 @@ export default function Header({ settings, user }) {
       : pathname.startsWith(n.href) || (n.children || []).some((c) => pathname.startsWith(c.href));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/95 shadow-[0_1px_0_rgba(0,0,0,0.02),0_8px_24px_-16px_rgba(0,0,0,0.18)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 md:px-6" ref={ref}>
+    // 👇 FIX: ref ab poore header pe hai (Row 1 + Row 2 dono), isliye dropdown
+    // ke andar click "outside click" nahi manega aur Link unmount hone se
+    // pehle navigate ho jayega.
+    <header
+      ref={ref}
+      className="sticky top-0 z-40 border-b border-line bg-white/95 shadow-[0_1px_0_rgba(0,0,0,0.02),0_8px_24px_-16px_rgba(0,0,0,0.18)] backdrop-blur-md"
+    >
+      {/* ROW 1 — logo + login/dashboard + mobile toggle */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 md:px-6">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <Image src={mark} alt={name} width={120} height={120} priority className="w-auto object-contain" style={{ height: "var(--logo-h)" }} />
           <span className="leading-none">
@@ -79,7 +86,24 @@ export default function Header({ settings, user }) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-0.5 xl:flex">
+        <div className="hidden items-center gap-2 xl:flex">
+          {isLoggedIn ? (
+            <Link href={dashboardHref}>
+              <Button variant="primary" size="sm"><LayoutDashboard className="mr-1.5 h-4 w-4 text-nowrap" /> Dashboard</Button>
+            </Link>
+          ) : (
+            <Link href="/login"><Button variant="outline" className="text-nowrap" size="sm">School Login</Button></Link>
+          )}
+        </div>
+
+        <button className="rounded-lg p-2 text-brand xl:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
+          {open ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {/* ROW 2 — nav links, desktop only, below logo row */}
+      <nav className="hidden border-t border-line xl:flex">
+        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-0.5 px-4 py-1.5 md:px-6">
           {NAV.map((n) => {
             const active = isActive(n);
             if (!n.children) {
@@ -101,15 +125,19 @@ export default function Header({ settings, user }) {
                   <div className="absolute left-0 top-full z-50 w-72 overflow-visible rounded-2xl border border-line bg-white p-2 shadow-soft">
                     {n.children.map((c) =>
                       c.children ? (
-                        // NEW: item with nested children renders its own hover-triggered submenu
                         <div key={c.label} className="relative" onMouseEnter={() => setSubDrop(c.label)} onMouseLeave={() => setSubDrop(null)}>
-                          <div className="flex items-center justify-between rounded-xl px-3 py-2.5 transition hover:bg-brand-soft cursor-pointer">
+                          {/* 👇 improvement: ab ye Link hai, isliye khud c.href pe bhi navigate ho sakta hai */}
+                          <Link
+                            href={c.href}
+                            onClick={() => { setDrop(null); setSubDrop(null); }}
+                            className="flex items-center justify-between rounded-xl px-3 py-2.5 transition hover:bg-brand-soft cursor-pointer"
+                          >
                             <div>
                               <span className="block text-[0.95rem] font-bold text-brand">{c.label}</span>
                               {c.desc && <span className="mt-0.5 block text-xs font-semibold text-slate">{c.desc}</span>}
                             </div>
                             <ChevronDown className={`h-4 w-4 -rotate-90 transition ${subDrop === c.label ? "text-brand" : "text-slate"}`} />
-                          </div>
+                          </Link>
                           {subDrop === c.label && (
                             <div className="absolute left-full top-0 z-50 w-64 overflow-hidden rounded-2xl border border-line bg-white p-2 shadow-soft">
                               {c.children.map((sc) =>
@@ -141,26 +169,10 @@ export default function Header({ settings, user }) {
               </div>
             );
           })}
-        </nav>
-
-        <div className="hidden items-center gap-2 xl:flex">
-          {isLoggedIn ? (
-            <Link href={dashboardHref}>
-              <Button variant="primary" size="sm"><LayoutDashboard className="mr-1.5 h-4 w-4 text-nowrap" /> Dashboard</Button>
-            </Link>
-          ) : (
-            <>
-              <Link href="/login"><Button variant="outline" className="text-nowrap" size="sm">School Login</Button></Link>
-
-            </>
-          )}
         </div>
+      </nav>
 
-        <button className="rounded-lg p-2 text-brand xl:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-
+      {/* MOBILE MENU (unchanged) */}
       {open && (
         <div className="border-t border-line bg-white px-4 py-3 xl:hidden">
           <div className="flex flex-col gap-1">
@@ -176,7 +188,6 @@ export default function Header({ settings, user }) {
                     <div className="ml-3 border-l-2 border-line pl-3">
                       {n.children.map((c) =>
                         c.children ? (
-                          // NEW: nested accordion level for mobile
                           <div key={c.label}>
                             <button onClick={() => setMSubDrop(mSubDrop === c.label ? null : c.label)}
                               className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[0.95rem] font-bold text-brand hover:bg-brand-soft">
@@ -187,7 +198,7 @@ export default function Header({ settings, user }) {
                               <div className="ml-3 border-l-2 border-line pl-3">
                                 {c.children.map((sc) =>
                                   sc.href ? (
-                                    <Link key={sc.href} href={sc.href} onClick={() => { setDrop(null); setSubDrop(null); }}
+                                    <Link key={sc.href} href={sc.href} onClick={() => { setDrop(null); setSubDrop(null); setOpen(false); }}
                                       className="block text-nowrap rounded-xl px-3 py-2.5 text-[0.95rem] font-bold text-brand transition hover:bg-brand-soft">
                                       {sc.label}
                                     </Link>

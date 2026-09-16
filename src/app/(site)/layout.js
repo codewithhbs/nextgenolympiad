@@ -14,7 +14,7 @@ export default async function SiteLayout({ children }) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <AnnouncementTicker />
+      {/* <AnnouncementTicker /> */}
       <Header settings={settings} user={user} />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />

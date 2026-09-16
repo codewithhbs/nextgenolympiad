@@ -19,6 +19,15 @@ const CAT_ORDER = [
     "Videos",
 ];
 
+const CAT_GRADIENTS = [
+    "linear-gradient(135deg,#f472b6 0%,#fb923c 100%)",
+    "linear-gradient(135deg,#60a5fa 0%,#22d3ee 100%)",
+    "linear-gradient(135deg,#4ade80 0%,#facc15 100%)",
+    "linear-gradient(135deg,#a78bfa 0%,#f472b6 100%)",
+    "linear-gradient(135deg,#fb7185 0%,#fbbf24 100%)",
+    "linear-gradient(135deg,#34d399 0%,#38bdf8 100%)",
+];
+
 const src = (i) =>
     i?.image?.url ||
     i?.imageUrl ||
@@ -106,9 +115,13 @@ export default function GalleryView({ items = [] }) {
     return (
         <div className="overflow-hidden bg-white">
             {/* HERO */}
-            <section className="relative bg-gradient-to-b from-[var(--surface)] via-[var(--surface)] to-white py-14 md:py-20">
-                <span className="pointer-events-none absolute -left-16 top-10 h-56 w-56 rounded-full bg-[var(--line)]/40 blur-2xl" />
-                <span className="pointer-events-none absolute right-10 top-24 h-32 w-32 rounded-full bg-[var(--line)]/60 blur-xl" />
+            <section
+                className="relative overflow-hidden py-14 md:py-20"
+                style={{ backgroundImage: "linear-gradient(160deg,#fff1f2 0%,#eef2ff 50%,#f0fdf4 100%)" }}
+            >
+                <span className="pointer-events-none absolute -left-16 top-10 h-56 w-56 rounded-full bg-rose-200/30 blur-3xl" />
+                <span className="pointer-events-none absolute right-10 top-24 h-40 w-40 rounded-full bg-sky-200/30 blur-3xl" />
+                <span className="pointer-events-none absolute left-1/2 bottom-0 h-48 w-48 -translate-x-1/2 rounded-full bg-amber-200/20 blur-3xl" />
                 <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2">
                     <div>
                         <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">
@@ -125,7 +138,7 @@ export default function GalleryView({ items = [] }) {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="relative col-span-1 h-56 overflow-hidden rounded-[2rem] rounded-tr-[6rem] bg-slate-100 md:h-64">
+                        <div className="relative col-span-1 h-56 overflow-hidden rounded-[2rem] rounded-tr-[6rem] bg-slate-100 shadow-card md:h-64">
                             {src(hero[0]) ? (
                                 <Image
                                     src={src(hero[0])}
@@ -136,7 +149,7 @@ export default function GalleryView({ items = [] }) {
                                 />
                             ) : null}
                         </div>
-                        <div className="relative col-span-1 h-40 self-start overflow-hidden rounded-[2rem] rounded-bl-[5rem] bg-slate-100 md:h-48">
+                        <div className="relative col-span-1 h-40 self-start overflow-hidden rounded-[2rem] rounded-bl-[5rem] bg-slate-100 shadow-card md:h-48">
                             {src(hero[1]) ? (
                                 <Image
                                     src={src(hero[1])}
@@ -147,7 +160,7 @@ export default function GalleryView({ items = [] }) {
                                 />
                             ) : null}
                         </div>
-                        <div className="relative col-span-2 h-44 overflow-hidden rounded-[2rem] rounded-tl-[6rem] bg-slate-100 md:h-52">
+                        <div className="relative col-span-2 h-44 overflow-hidden rounded-[2rem] rounded-tl-[6rem] bg-slate-100 shadow-card md:h-52">
                             {src(hero[2]) ? (
                                 <Image
                                     src={src(hero[2])}
@@ -166,20 +179,23 @@ export default function GalleryView({ items = [] }) {
             {cats.length > 1 ? (
                 <section className="mx-auto max-w-6xl px-4 pt-12">
                     <div className="flex flex-wrap gap-2">
-                        {cats.map((c) => (
-                            <button
-                                key={c}
-                                type="button"
-                                onClick={() => setActive(c)}
-                                className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
-                                    active === c
-                                        ? "bg-[var(--brand)] text-white"
-                                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                                }`}
-                            >
-                                {c}
-                            </button>
-                        ))}
+                        {cats.map((c, i) => {
+                            const isActive = active === c;
+                            const grad = CAT_GRADIENTS[i % CAT_GRADIENTS.length];
+                            return (
+                                <button
+                                    key={c}
+                                    type="button"
+                                    onClick={() => setActive(c)}
+                                    className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                                        isActive ? "text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                    }`}
+                                    style={isActive ? { backgroundImage: grad } : undefined}
+                                >
+                                    {c}
+                                </button>
+                            );
+                        })}
                     </div>
                 </section>
             ) : null}
@@ -194,7 +210,8 @@ export default function GalleryView({ items = [] }) {
                                 <button
                                     type="button"
                                     onClick={() => setCount((c) => c + PAGE)}
-                                    className="rounded-xl bg-[var(--brand)] px-7 py-3 text-sm font-bold text-white transition hover:bg-[var(--brand)]"
+                                    className="rounded-xl px-7 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                                    style={{ backgroundImage: "linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%)" }}
                                 >
                                     Load More
                                 </button>
@@ -206,14 +223,17 @@ export default function GalleryView({ items = [] }) {
                 )}
             </section>
 
-
             {/* CTA */}
             <section className="mx-auto max-w-6xl px-4 pb-20">
-                <div className="relative overflow-hidden rounded-3xl bg-[var(--brand)] px-6 py-8 md:px-10">
-                    <span className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/5" />
+                <div
+                    className="relative overflow-hidden rounded-3xl px-6 py-8 md:px-10"
+                    style={{ backgroundImage: "linear-gradient(135deg,#1e1b4b 0%,#7c3aed 55%,#db2777 100%)" }}
+                >
+                    <span className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
+                    <span className="pointer-events-none absolute -left-10 bottom-0 h-40 w-40 rotate-12 rounded-[2rem] bg-white/5 blur-xl" />
                     <div className="relative flex flex-col items-center gap-6 md:flex-row md:justify-between">
                         <div className="flex items-center gap-5">
-                            <span className="grid h-16 w-16 place-items-center rounded-2xl bg-white text-[var(--brand)]">
+                            <span className="grid h-16 w-16 place-items-center rounded-2xl bg-white text-[var(--brand)] shadow-sm">
                                 <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="1.8">
                                     <path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.6A3.5 3.5 0 0 1 18 18H7Z" />
                                     <path d="M12 12v6M9.5 14.5 12 12l2.5 2.5" />

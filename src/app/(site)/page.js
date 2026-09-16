@@ -18,9 +18,6 @@ import TestimonialAndFaq from "@/components/site/Testinomial&Faq";
 import Cta from "@/components/site/Cta";
 import GuidesResources from "@/components/site/Guidesresources";
 
-// Strips BSON types (ObjectId, Date) down to plain JSON-safe values.
-// Required before passing Mongoose `.lean()` docs into a Client Component —
-// RSC only accepts plain objects/arrays/strings/numbers across the boundary.
 function serialize(doc) {
   return JSON.parse(JSON.stringify(doc));
 }
@@ -52,6 +49,10 @@ const FALLBACK_GALLERY = [
   "/gallery/activity-4.jpg", "/gallery/activity-5.jpg", "/gallery/activity-6.jpg",
 ];
 
+const GALLERY_ACCENTS = [
+  "#f472b6", "#60a5fa", "#4ade80", "#facc15", "#a78bfa", "#fb923c", "#22d3ee", "#f87171",
+];
+
 export default async function Home() {
   const [{ faqs, testimonials, gallery, schools, results }, settings] = await Promise.all([getData(), getSettings().catch(() => ({}))]);
   const galleryImgs = gallery.length ? gallery.map((g) => ({ src: g.image.url, alt: g.alt || "Activity" })) : FALLBACK_GALLERY.map((src) => ({ src, alt: "Students at a NextGen activity" }));
@@ -78,21 +79,42 @@ export default async function Home() {
       <QuizAndResult />
 
       {/* GALLERY */}
-      <section className="mx-auto max-w-7xl px-4 py-16 md:px-6">
-        <div className="text-center">
-          <Badge tone="gold">Our Moments</Badge>
-          <h2 className="mt-4 font-display text-3xl font-extrabold text-navy">Learning in action</h2>
-          <p className="mx-auto mt-3 max-w-xl text-slate">Children participating in activities, competitions and joyful learning across our partner schools.</p>
-          <CrestDivider className="mt-6" />
+      <section
+        className="relative overflow-hidden py-16 md:px-6"
+        style={{ backgroundImage: "linear-gradient(160deg,#fff7ed 0%,#fdf2f8 45%,#eff6ff 100%)" }}
+      >
+        <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-rose-200/25 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-sky-200/25 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-4">
+          <div className="text-center">
+            <Badge tone="gold">Our Moments</Badge>
+            <h2 className="mt-4 font-display text-3xl font-extrabold text-navy">Learning in action</h2>
+            <p className="mx-auto mt-3 max-w-xl text-slate">Children participating in activities, competitions and joyful learning across our partner schools.</p>
+            <CrestDivider className="mt-6" />
+          </div>
+          <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {galleryImgs.slice(0, 8).map((g, i) => {
+              const rotations = ["-rotate-2", "rotate-2", "-rotate-1", "rotate-1"];
+              const accent = GALLERY_ACCENTS[i % GALLERY_ACCENTS.length];
+              return (
+                <div
+                  key={i}
+                  className={`group relative aspect-square overflow-hidden rounded-3xl bg-white p-1.5 shadow-card transition duration-300 hover:-translate-y-1 hover:rotate-0 hover:shadow-soft ${rotations[i % rotations.length]}`}
+                  style={{ boxShadow: `0 0 0 3px ${accent}33` }}
+                >
+                  <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                    <Image src={g.src} alt={g.alt} fill className="object-cover transition duration-300 group-hover:scale-110" />
+                  </div>
+                  <span
+                    className="absolute -right-1.5 -top-1.5 h-6 w-6 rounded-full border-2 border-white shadow-sm"
+                    style={{ backgroundColor: accent }}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-8 text-center"><Link href="/gallery"><Button variant="outline">View full gallery</Button></Link></div>
         </div>
-        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {galleryImgs.slice(0, 8).map((g, i) => (
-            <div key={i} className="relative aspect-square overflow-hidden rounded-2xl border border-line shadow-card">
-              <Image src={g.src} alt={g.alt} fill className="object-contain transition duration-300 hover:scale-105" />
-            </div>
-          ))}
-        </div>
-        <div className="mt-8 text-center"><Link href="/gallery"><Button variant="outline">View full gallery</Button></Link></div>
       </section>
 
       <TestimonialAndFaq faqs={faqs} testimonials={testimonials} />

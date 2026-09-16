@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Atom, Plus, Minus } from "lucide-react";
+import { Atom, Plus, Minus, FlaskConical, Cpu, Calculator, Brain, Download } from "lucide-react";
 
 // entries can be a plain string (flat bullet) or { title, items } (topic with sub-points)
 const SYLLABUS = {
@@ -160,7 +160,33 @@ const SYLLABUS = {
   },
 };
 
+// Sample paper links — replace "#" with actual file paths when ready
+const SAMPLE_PAPERS = {
+  "Class 1": "#",
+  "Class 2": "#",
+  "Class 3": "#",
+  "Class 4": "#",
+  "Class 5": "#",
+  "Class 6": "#",
+  "Class 7": "#",
+  "Class 8": "#",
+  "Class 9": "#",
+};
+
+const SKILLS_ASSESSED = [
+  { icon: FlaskConical, title: "Scientific Thinking" },
+  { icon: Cpu, title: "Coding & Technology" },
+  { icon: Calculator, title: "Mathematical Reasoning" },
+  { icon: Brain, title: "Logical Reasoning" },
+];
+
 const CLASSES = Object.keys(SYLLABUS);
+
+const NAV_TABS = [
+  { label: "Skills Assessed", id: "skills-assessed-section" },
+  { label: "Curriculum", id: "curriculum-section" },
+  { label: "Sample Paper", id: "sample-paper-section" },
+];
 
 function SectionEntry({ entry }) {
   if (typeof entry === "string") {
@@ -182,69 +208,228 @@ function SectionEntry({ entry }) {
 
 export default function Page() {
   const [openClass, setOpenClass] = useState(CLASSES[0]);
+  const [openSampleClass, setOpenSampleClass] = useState(CLASSES[0]);
+
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 md:px-6 md:py-16">
-      <section className="border-b border-line pb-10">
-        <div className="inline-flex items-center gap-2 rounded-full bg-brand-soft px-4 py-2 text-sm font-bold text-brand">
-          <Atom className="h-4 w-4" /> NextGen Olympiad
+    <div>
+      <section
+        className="relative overflow-hidden border-b border-line"
+        style={{ backgroundImage: "linear-gradient(160deg,#fff1f2 0%,#ffffff 45%,#eff6ff 100%)" }}
+      >
+        <div className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-rose-200/25 blur-3xl" />
+        <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-sky-200/25 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-12 md:px-6 md:pt-16">
+          <div className="inline-flex items-center gap-2 rounded-full bg-brand-soft px-4 py-2 text-sm font-bold text-brand">
+            <Atom className="h-4 w-4" /> NextGen Olympiad
+          </div>
+          <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
+            STEM
+          </h1>
+          <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-slate">
+            Class-wise STEM syllabus covering Science, Technology &amp; Engineering, and
+            Mathematics.
+          </p>
         </div>
-        <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-          STEM
-        </h1>
-        <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-slate">
-          Class-wise STEM syllabus covering Science, Technology &amp; Engineering, and
-          Mathematics.
-        </p>
       </section>
 
-      {/* Class-wise accordion */}
-      <section className="mt-8 flex flex-col gap-3">
-        {CLASSES.map((c) => {
-          const isOpen = openClass === c;
-          const data = SYLLABUS[c];
-          return (
-            <div
-              key={c}
-              className={`rounded-2xl border border-line transition ${
-                isOpen ? "bg-white shadow-soft" : "bg-slate-50/60"
-              }`}
+      {/* Sticky tab navigation */}
+      <div className="sticky top-0 z-20 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl border-b border-line gap-2 overflow-x-auto px-4 py-3 md:px-6">
+          {NAV_TABS.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => scrollToSection(tab.id)}
+              className="whitespace-nowrap rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:border-brand hover:text-brand hover:bg-brand-soft"
             >
-              <button
-                onClick={() => setOpenClass(isOpen ? null : c)}
-                className="flex w-full items-center justify-between px-5 py-4 text-left"
-              >
-                <span className={`font-display text-lg font-extrabold ${isOpen ? "text-brand" : "text-ink"}`}>
-                  {c}
-                </span>
-                <span
-                  className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                    isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Skills Assessed */}
+      <section
+        id="skills-assessed-section"
+        className="relative scroll-mt-20 overflow-hidden"
+        style={{ backgroundImage: "linear-gradient(180deg,#ffffff 0%,#fefce8 50%,#ffffff 100%)" }}
+      >
+        <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-amber-200/25 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-14 md:px-6">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
+              01
+            </span>
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+              Skills Assessed with STEM Olympiad
+            </h2>
+          </div>
+          <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
+            For Classes 1 to 9
+          </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {SKILLS_ASSESSED.map(({ icon: Icon, title }, i) => {
+              const gradients = [
+                "linear-gradient(135deg,#f472b6 0%,#fb923c 100%)",
+                "linear-gradient(135deg,#60a5fa 0%,#22d3ee 100%)",
+                "linear-gradient(135deg,#4ade80 0%,#facc15 100%)",
+                "linear-gradient(135deg,#a78bfa 0%,#f472b6 100%)",
+              ];
+              const grad = gradients[i % gradients.length];
+              return (
+                <div
+                  key={title}
+                  className="flex flex-col items-center rounded-2xl px-4 py-8 text-center text-white shadow-soft transition hover:-translate-y-1"
+                  style={{ backgroundImage: grad }}
+                >
+                  <Icon className="h-8 w-8" strokeWidth={1.75} />
+                  <p className="mt-3 text-sm font-bold">{title}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Curriculum: Class-wise accordion */}
+      <section
+        id="curriculum-section"
+        className="relative scroll-mt-20 overflow-hidden"
+        style={{ backgroundImage: "linear-gradient(160deg,#eef2ff 0%,#fdf2f8 50%,#f0fdf4 100%)" }}
+      >
+        <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-violet-200/25 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-emerald-200/25 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-14 md:px-6">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
+              02
+            </span>
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+              Curriculum
+            </h2>
+          </div>
+          <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
+            Class-wise <span className="text-brand">syllabus breakdown</span>
+          </p>
+
+          <div className="mt-6 flex flex-col gap-3">
+            {CLASSES.map((c) => {
+              const isOpen = openClass === c;
+              const data = SYLLABUS[c];
+              return (
+                <div
+                  key={c}
+                  className={`rounded-2xl border border-line transition ${
+                    isOpen ? "bg-white shadow-soft" : "bg-white/60"
                   }`}
                 >
-                  {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                </span>
-              </button>
+                  <button
+                    onClick={() => setOpenClass(isOpen ? null : c)}
+                    className="flex w-full items-center justify-between px-5 py-4 text-left"
+                  >
+                    <span className={`font-display text-lg font-extrabold ${isOpen ? "text-brand" : "text-ink"}`}>
+                      {c}
+                    </span>
+                    <span
+                      className={`flex h-7 w-7 items-center justify-center rounded-full ${
+                        isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
+                      }`}
+                    >
+                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                    </span>
+                  </button>
 
-              {isOpen && (
-                <div className="grid gap-8 border-t border-line px-5 py-5 md:grid-cols-3">
-                  {Object.entries(data).map(([section, entries]) => (
-                    <div key={section}>
-                      <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
-                        {section}
-                      </p>
-                      <ul className="mt-2 list-disc pl-4 text-sm leading-relaxed text-slate">
-                        {entries.map((entry, idx) => (
-                          <SectionEntry key={idx} entry={entry} />
-                        ))}
-                      </ul>
+                  {isOpen && (
+                    <div className="grid gap-8 border-t border-line px-5 py-5 md:grid-cols-3">
+                      {Object.entries(data).map(([section, entries]) => (
+                        <div key={section}>
+                          <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
+                            {section}
+                          </p>
+                          <ul className="mt-2 list-disc pl-4 text-sm leading-relaxed text-slate">
+                            {entries.map((entry, idx) => (
+                              <SectionEntry key={idx} entry={entry} />
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
-              )}
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Sample Paper: Class-wise accordion */}
+      <section
+        id="sample-paper-section"
+        className="relative scroll-mt-20 overflow-hidden"
+        style={{ backgroundImage: "linear-gradient(180deg,#ffffff 0%,#f0fdfa 50%,#ffffff 100%)" }}
+      >
+        <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-200/25 blur-3xl" />
+        <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-fuchsia-200/20 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-14 md:px-6 md:pb-20">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
+              03
+            </span>
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+              Sample Paper
+            </h2>
+          </div>
+          <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
+            Class-wise <span className="text-brand">downloadable sample papers</span>
+          </p>
+
+          <div className="mt-6 flex flex-col gap-3">
+            {CLASSES.map((c) => {
+              const isOpen = openSampleClass === c;
+              return (
+                <div
+                  key={c}
+                  className={`rounded-2xl border border-line transition ${
+                    isOpen ? "bg-white shadow-soft" : "bg-white/60"
+                  }`}
+                >
+                  <button
+                    onClick={() => setOpenSampleClass(isOpen ? null : c)}
+                    className="flex w-full items-center justify-between px-5 py-4 text-left"
+                  >
+                    <span className={`font-display text-lg font-extrabold ${isOpen ? "text-brand" : "text-ink"}`}>
+                      {c}
+                    </span>
+                    <span
+                      className={`flex h-7 w-7 items-center justify-center rounded-full ${
+                        isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
+                      }`}
+                    >
+                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="border-t border-line px-5 py-5">
+                      <a
+                        href={SAMPLE_PAPERS[c]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-soft transition hover:opacity-90"
+                      >
+                        <Download className="h-4 w-4" /> Download {c} Sample Paper
+                      </a>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </section>
     </div>
   );

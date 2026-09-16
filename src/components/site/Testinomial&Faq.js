@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import {
   Star, Quote, ThumbsUp, ChevronUp, ChevronDown,
-  HelpCircle, ClipboardCheck, BookOpen, Coffee, Leaf, MessageSquareText,
+  HelpCircle, ClipboardCheck, BookOpen, Coffee, Leaf, MessageSquareText, Sparkles,
 } from "lucide-react";
 
 const DEFAULT_TESTIMONIALS = [
@@ -25,6 +25,14 @@ const DEFAULT_FAQS = [
     answer: "Yes. Every participant receives a certificate, and top performers earn medals and trophies." },
 ];
 
+const FAQ_GRADIENTS = [
+  "linear-gradient(135deg,#f472b6 0%,#fb923c 100%)",
+  "linear-gradient(135deg,#60a5fa 0%,#22d3ee 100%)",
+  "linear-gradient(135deg,#4ade80 0%,#facc15 100%)",
+  "linear-gradient(135deg,#a78bfa 0%,#f472b6 100%)",
+  "linear-gradient(135deg,#fb7185 0%,#fbbf24 100%)",
+];
+
 export default function TestimonialAndFaq({ testimonials, faqs }) {
   const T = (testimonials?.length ? testimonials : DEFAULT_TESTIMONIALS).slice(0, 3);
   const F = faqs?.length ? faqs : DEFAULT_FAQS;
@@ -41,7 +49,6 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
     <div>
       {/* ============ TESTIMONIALS ============ */}
       <section className="relative overflow-hidden bg-gradient-to-b from-sky to-cloud py-16 md:py-20">
-        {/* faint corner quote + dots + stars */}
         <Quote className="pointer-events-none absolute left-[6%] top-6 h-16 w-16 rotate-180 text-ink/10" aria-hidden />
         <span className="pointer-events-none absolute right-[10%] top-10 h-6 w-6 rounded-full border-2 border-ink/10" aria-hidden />
         <span className="pointer-events-none absolute left-[4%] bottom-16 h-5 w-5 rounded-full border-2 border-ink/10" aria-hidden />
@@ -49,7 +56,6 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
         <Star className="pointer-events-none absolute right-[16%] top-6 h-4 w-4 text-[var(--brand)]/25" aria-hidden />
         <Star className="pointer-events-none absolute right-[6%] bottom-20 h-4 w-4 text-cherry/20" aria-hidden />
 
-        {/* floating badge icons */}
         <div className="pointer-events-none absolute left-3 top-1/2 hidden -translate-y-1/2 rotate-[-8deg] rounded-2xl bg-[var(--brand)] p-2.5 text-white shadow-soft sm:block">
           <ThumbsUp className="h-5 w-5" />
         </div>
@@ -95,7 +101,6 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
             ))}
           </div>
 
-          {/* pagination dots */}
           <div className="mt-8 flex justify-center gap-2">
             {T.map((_, i) => (
               <button key={i} onClick={() => setSlide(i)} aria-label={`Slide ${i + 1}`}
@@ -105,81 +110,76 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
         </div>
       </section>
 
-      {/* ============ FAQ ============ */}
-      <section className="relative overflow-hidden bg-cream py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
-          <div className="grid items-start gap-10 lg:grid-cols-[380px_1fr]">
-            {/* LEFT — heading + icon-collage illustration */}
-            <div>
-              <span className="inline-block rounded-full bg-saffron-soft px-4 py-1.5 text-sm font-bold text-saffron">Queries</span>
-              <h2 className="mt-3 text-3xl font-black leading-tight text-ink md:text-4xl">Frequently asked</h2>
-              <div className="mt-3 flex gap-1.5">
-                <span className="h-1 w-10 rounded-full bg-[var(--brand)]" />
-                <span className="h-1 w-6 rounded-full bg-leaf" />
-                <span className="h-1 w-4 rounded-full bg-saffron" />
-              </div>
-              <p className="mt-4 max-w-sm text-ink-soft">
-                Can&apos;t find what you&apos;re looking for? Reach out and our team will help right away.
-              </p>
+      {/* ============ FAQ — redesigned, colorful ============ */}
+      <section
+        className="relative overflow-hidden py-16 md:py-20"
+        style={{ backgroundImage: "linear-gradient(160deg,#eef2ff 0%,#fdf2f8 50%,#fff7ed 100%)" }}
+      >
+        <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-violet-200/30 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-amber-200/30 blur-3xl" />
+        <Sparkles className="pointer-events-none absolute right-[12%] top-10 h-6 w-6 text-saffron/40" aria-hidden />
+        <Sparkles className="pointer-events-none absolute left-[10%] bottom-16 h-5 w-5 text-[var(--brand)]/30" aria-hidden />
 
-              {/* clean illustration: centered medallion + orbiting chips */}
-              <div className="relative mt-10 hidden h-64 w-full lg:block">
-                {/* soft gradient blob backdrop */}
-                <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[var(--brand)]/10 via-leaf/10 to-saffron/10 blur-xl" aria-hidden />
-                {/* dashed orbit ring */}
-                <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-ink/10" aria-hidden />
-
-                {/* centerpiece */}
-                <div className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-soft ring-1 ring-ink/5">
-                  <HelpCircle className="h-11 w-11 text-[var(--brand)]" strokeWidth={1.75} />
-                </div>
-
-                {/* orbiting chips, evenly spaced */}
-                <div className="absolute left-1/2 top-2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-2xl bg-leaf text-white shadow-soft">
-                  <ClipboardCheck className="h-5 w-5" />
-                </div>
-                <div className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-2xl bg-[var(--brand)] text-white shadow-soft">
-                  <BookOpen className="h-5 w-5" />
-                </div>
-                <div className="absolute bottom-2 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-2xl bg-saffron text-white shadow-soft">
-                  <MessageSquareText className="h-5 w-5" />
-                </div>
-                <div className="absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-2xl bg-white text-cherry shadow-soft ring-1 ring-ink/5">
-                  <Coffee className="h-5 w-5" />
-                </div>
-
-                {/* mini support card, bottom-anchored */}
-                <div className="absolute bottom-0 left-0 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-card ring-1 ring-ink/5">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf/10 text-leaf">
-                    <Leaf className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-bold text-ink">Still have questions?</p>
-                    <p className="text-[11px] text-ink-soft">We reply within 24 hours</p>
-                  </div>
-                </div>
-              </div>
+        <div className="relative mx-auto max-w-4xl px-4 md:px-6">
+          <div className="text-center">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-sm font-bold text-saffron shadow-sm">
+              <HelpCircle className="h-4 w-4" /> Got Questions?
+            </span>
+            <h2 className="mt-3 text-3xl font-black leading-tight text-ink md:text-4xl">Frequently Asked Questions</h2>
+            <p className="mx-auto mt-3 max-w-md text-ink-soft">
+              Quick answers for parents, schools and curious little minds.
+            </p>
+            <div className="mt-3 flex justify-center gap-1.5">
+              <span className="h-1 w-10 rounded-full bg-[var(--brand)]" />
+              <span className="h-1 w-6 rounded-full bg-leaf" />
+              <span className="h-1 w-4 rounded-full bg-saffron" />
             </div>
+          </div>
 
-            {/* RIGHT — accordion, first item open by default (matches reference) */}
-            <div className="rounded-3xl bg-white p-3 shadow-card ring-1 ring-ink/5 sm:p-5">
-              {F.map((f, i) => {
-                const isOpen = open === i;
-                return (
-                  <div key={f._id || i} className={i !== F.length - 1 ? "border-b border-ink/5" : ""}>
-                    <button onClick={() => setOpen(isOpen ? -1 : i)}
-                      className="flex w-full items-center justify-between gap-4 px-3 py-5 text-left sm:px-4">
-                      <span className="font-bold text-ink">{f.question}</span>
-                      <span className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${isOpen ? "bg-saffron text-white" : "text-saffron"}`}>
-                        {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <p className="px-3 pb-5 text-sm leading-relaxed text-ink-soft sm:px-4">{f.answer}</p>
-                    )}
-                  </div>
-                );
-              })}
+          <div className="mt-10 flex flex-col gap-4">
+            {F.map((f, i) => {
+              const isOpen = open === i;
+              const grad = FAQ_GRADIENTS[i % FAQ_GRADIENTS.length];
+              return (
+                <div
+                  key={f._id || i}
+                  className={`overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-ink/5 transition-all duration-300 ${isOpen ? "shadow-soft" : ""}`}
+                >
+                  <button
+                    onClick={() => setOpen(isOpen ? -1 : i)}
+                    className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6"
+                  >
+                    <span
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-lg font-black text-white shadow-sm transition-transform duration-300"
+                      style={{ backgroundImage: grad, transform: isOpen ? "rotate(6deg) scale(1.05)" : "none" }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1 font-bold text-ink">{f.question}</span>
+                    <span
+                      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white transition-transform duration-300"
+                      style={{ backgroundImage: grad, transform: isOpen ? "rotate(180deg)" : "none" }}
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-6 pl-[4.75rem] sm:px-6 sm:pl-[5.25rem]">
+                      <p className="text-sm leading-relaxed text-ink-soft">{f.answer}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 flex items-center justify-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-card ring-1 ring-ink/5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-leaf/10 text-leaf">
+              <MessageSquareText className="h-5 w-5" />
+            </span>
+            <div className="text-left">
+              <p className="text-sm font-bold text-ink">Still have questions?</p>
+              <p className="text-xs text-ink-soft">We reply within 24 hours</p>
             </div>
           </div>
         </div>
