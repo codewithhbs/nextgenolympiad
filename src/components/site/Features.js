@@ -74,7 +74,7 @@ const WONDER = [
   { label: "Mathematics", icon: Calculator },
   { label: "EVS", icon: Leaf },
   { label: "Drawing", icon: Palette },
-  { label: "Hindi", icon: Languages },
+  // { label: "Hindi", icon: Languages },
 ];
 
 /* ================= helpers ================= */

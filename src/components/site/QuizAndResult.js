@@ -79,7 +79,7 @@ const PROGRAMS = [
       { label: "English", icon: BookOpen, anim: "qr-pop" },
       { label: "Mathematics", icon: Calculator, anim: "qr-wiggle" },
       { label: "EVS", icon: Leaf, anim: "qr-float" },
-      { label: "Hindi", icon: Languages, anim: "qr-pop" },
+      // { label: "Hindi", icon: Languages, anim: "qr-pop" },
       { label: "Drawing", icon: Palette, anim: "qr-wiggle" },
     ],
   },

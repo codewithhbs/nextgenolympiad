@@ -29,7 +29,7 @@ const programs = [
     name: "Wonder Kids — Bal Vatika",
     forWhom: "Bal Vatika I – III",
     color: "grape",
-    subjects: ["English", "Mathematics", "EVS", "Hindi", "Drawing"],
+    subjects: ["English", "Mathematics", "EVS", "Drawing"],
     points: ["Play-based, joyful format", "Age-appropriate questions", "Participation certificate", "Little-champion awards"],
   },
 ];
