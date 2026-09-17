@@ -131,11 +131,11 @@ export default function Features() {
       <div className="relative z-20 mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-14">
         {/* ============ header ============ */}
         <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-rose-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.2em] text-white shadow-lg shadow-rose-400/40 sm:text-sm">
+          {/* <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-rose-500 px-4 py-1.5 text-xl font-extrabold uppercase text-white shadow-lg shadow-rose-400/40 sm:text-3xl">
             <Sparkles className="wn-glow h-4 w-4 text-amber-300" />
             Why NextGen
             <Sparkles className="wn-glow h-4 w-4 text-amber-300" style={{ animationDelay: "1s" }} />
-          </span>
+          </span> */}
 
           <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
             Built for{" "}
@@ -203,7 +203,7 @@ export default function Features() {
 
           <div className="relative flex items-center justify-center gap-3">
             <Wheat className="wn-swing h-6 w-6 -scale-x-100 text-amber-400" />
-            <span className="text-center text-xs font-extrabold uppercase tracking-[0.2em] text-white sm:text-sm">
+            <span className="text-center text-xs font-extrabold uppercase text-white sm:text-3xl">
               Olympiad Subjects <span className="text-amber-400">·</span> Classes I–X
             </span>
             <Wheat className="wn-swing h-6 w-6 text-amber-400" style={{ animationDelay: ".5s" }} />
@@ -227,7 +227,7 @@ export default function Features() {
             <div className="flex flex-col items-center gap-3 rounded-[14px] bg-slate-900/90 px-4 py-4 sm:flex-row sm:gap-5">
               <span className="flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-extrabold text-slate-900">
                 <Star className="wn-spin h-3.5 w-3.5 fill-slate-900" />
-                Wonder Kids Olympiad · Bal Vatika I-II–III
+                Wonder Kids Olympiad · Bal Vatika I To Bal Vatika–III
               </span>
               <div className="wn-marquee-wrap relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
                 <div className="wn-marquee flex w-max gap-3">

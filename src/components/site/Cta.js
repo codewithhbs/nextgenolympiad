@@ -82,7 +82,7 @@ export default function Cta() {
             <div className="relative grid items-center gap-12 lg:grid-cols-[1.3fr_1fr]">
               {/* ============ text ============ */}
               <div className="text-center lg:text-left">
-                <span className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-300 backdrop-blur">
+                <span className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-xl font-bold uppercase tracking-wider text-amber-300 backdrop-blur sm:text-2xl">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />

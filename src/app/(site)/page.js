@@ -145,7 +145,7 @@ function GallerySection({ images }) {
                   <Camera className="gl-flash h-4 w-4" />
                 </span>
               </span>
-              <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-red-600">Gallery</span>
+              <span className="text-xl font-extrabold uppercase text-red-600 sm:text-3xl">Gallery</span>
               <Sparkles className="gl-glow h-4 w-4 text-amber-500" />
             </span>
 

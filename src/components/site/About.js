@@ -95,7 +95,7 @@ export default function About() {
         <div className="animate-fade-up text-center lg:text-left">
           <span className="inline-flex items-center gap-3 rounded-full bg-white/80 py-1.5 pl-1.5 pr-5 shadow-[0_12px_30px_-18px_rgba(216,31,38,0.8)] ring-1 ring-rose-100 backdrop-blur">
             <AnimIcon icon={Landmark} anim="ab-pop" grad="from-red-600 to-rose-500" size="sm" ping={false} round />
-            <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-red-600 sm:text-sm">About the Foundation</span>
+            <span className="text-xs font-extrabold uppercase text-red-600 sm:text-3xl">About the Foundation</span>
             <Sparkles className="ab-glow h-4 w-4 text-amber-500" />
           </span>
 

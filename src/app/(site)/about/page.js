@@ -94,7 +94,7 @@ function Eyebrow({ children, icon: Icon = Sparkles }) {
   return (
     <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-100 via-white to-rose-100 px-4 py-2 ring-1 ring-amber-300 shadow-[0_10px_30px_-15px_rgba(240,180,41,0.9)]">
       <Icon className="ng-glow h-3.5 w-3.5 text-amber-500" />
-      <span className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-red-600 sm:text-xs">{children}</span>
+      <span className="text-sm font-extrabold uppercase text-red-600 sm:text-2xl">{children}</span>
     </span>
   );
 }
@@ -222,7 +222,7 @@ export default function AboutPage() {
           <div className="ng-rise text-center lg:text-left">
             <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-100 via-white to-rose-100 px-4 py-2 ring-1 ring-amber-300 shadow-[0_10px_30px_-15px_rgba(240,180,41,0.9)] sm:gap-3 sm:px-5">
               <Laurel className="h-4 w-4 text-amber-500" />
-              <span className="text-[10px] font-extrabold uppercase tracking-[0.14em] sm:text-xs sm:tracking-[0.18em]">
+              <span className="text-[14px] font-extrabold uppercase tracking-[0.14em] sm:text-xl sm:tracking-[0.18em]">
                 <span className="text-red-600">Learn</span> <span className="text-amber-500">•</span>{" "}
                 <span className="text-violet-600">Compete</span> <span className="text-amber-500">•</span>{" "}
                 <span className="text-emerald-600">Excel</span>

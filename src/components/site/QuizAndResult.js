@@ -63,7 +63,7 @@ const PROGRAMS = [
     key: "wonder",
     icon: Palette,
     iconAnim: "qr-wiggle",
-    eyebrow: "Bal Vatika I - II – III",
+    eyebrow: "Balvatika I To Balvatika III",
     title: "Wonder Kids Olympiad",
     text: "Joyful, age-appropriate assessments designed for early learners.",
     href: "/olympiad/wonder-kids",
@@ -104,7 +104,7 @@ const QuizAndResult = () => {
         <div className="text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-100 via-white to-rose-100 px-4 py-2 ring-1 ring-amber-300 shadow-[0_10px_30px_-15px_rgba(240,180,41,0.9)]">
             <Sparkles className="qr-glow h-4 w-4 text-amber-500" />
-            <span className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-red-600 sm:text-xs">Our Programs</span>
+            <span className="text-xl font-extrabold uppercase text-red-600 sm:text-3xl">Our Programs</span>
           </span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
             Pick the right{" "}
@@ -141,7 +141,7 @@ const QuizAndResult = () => {
               </div>
 
               {/* content */}
-              <div className="relative z-10 max-w-[64%] sm:max-w-[60%]">
+              <div className="relative z-10 max-w-[100%] sm:max-w-[60%]">
                 <div className="flex items-center gap-3">
                   <span className="relative inline-grid h-14 w-14 shrink-0 place-items-center rounded-2xl">
                     <span className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${p.iconGrad} opacity-50 animate-ping`} style={{ animationDuration: "2.6s" }} />
@@ -149,7 +149,7 @@ const QuizAndResult = () => {
                       <p.icon className={`h-7 w-7 ${p.iconAnim}`} strokeWidth={1.8} />
                     </span>
                   </span>
-                  <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest ring-1 ring-white/25 backdrop-blur">
+                  <span className="rounded-full bg-white/15 px-3 py-1 text-xs sm:text-xl font-extrabold uppercase tracking-widest ring-1 ring-white/25 backdrop-blur">
                     {p.eyebrow}
                   </span>
                 </div>

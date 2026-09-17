@@ -43,10 +43,10 @@ const ANIM_CSS = `
 const DEFAULT_TESTIMONIALS = [
   { name: "Mrs. Anjali Verma", role: "Principal", school: "Sunrise Public School", rating: 5,
     message: "NextGen Olympiad made competitive learning genuinely exciting for our students. The process was smooth and results were quick." },
-  { name: "Mr. Rakesh Kumar", role: "Parent", school: "", rating: 5,
-    message: "My daughter loved the Wonder Kids Olympiad. It felt like play, not pressure. Highly recommended!" },
-  { name: "Ms. Priya Nair", role: "Coordinator", school: "Green Valley School", rating: 5,
-    message: "Well-designed papers that reward thinking. The school dashboard makes managing students effortless." },
+  // { name: "Mr. Rakesh Kumar", role: "Parent", school: "", rating: 5,
+  //   message: "My daughter loved the Wonder Kids Olympiad. It felt like play, not pressure. Highly recommended!" },
+  // { name: "Ms. Priya Nair", role: "Coordinator", school: "Green Valley School", rating: 5,
+  //   message: "Well-designed papers that reward thinking. The school dashboard makes managing students effortless." },
 ];
 
 const DEFAULT_FAQS = [
@@ -73,7 +73,7 @@ const ROLE_ICON = { Principal: School, Parent: Heart, Coordinator: Users };
 /* ================= helpers ================= */
 function Stars({ n = 5, size = "h-4 w-4", animate = false }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex shrink-0 gap-0.5">
       {Array.from({ length: n }).map((_, j) => (
         <Star key={j} className={`${size} fill-amber-400 text-amber-400 ${animate ? "tf-pop" : ""}`} style={animate ? { animationDelay: `${j * 0.12}s` } : undefined} />
       ))}
@@ -93,15 +93,15 @@ function Avatar({ t, tone, size = "h-12 w-12" }) {
 
 function Eyebrow({ icon: Icon, anim, children }) {
   return (
-    <span className="inline-flex items-center gap-3 rounded-full bg-white/80 py-1.5 pl-1.5 pr-5 shadow-[0_12px_30px_-18px_rgba(216,31,38,0.8)] ring-1 ring-rose-100 backdrop-blur">
-      <span className="relative grid h-9 w-9 place-items-center rounded-full">
+    <span className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/80 py-1.5 pl-1.5 pr-4 shadow-[0_12px_30px_-18px_rgba(216,31,38,0.8)] ring-1 ring-rose-100 backdrop-blur sm:gap-3 sm:pr-5">
+      <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-full">
         <span className="absolute inset-0 animate-ping rounded-full bg-rose-400/40" style={{ animationDuration: "2.6s" }} />
         <span className="relative grid h-full w-full place-items-center rounded-full bg-gradient-to-br from-red-600 to-rose-500 text-white">
           <Icon className={`h-4 w-4 ${anim}`} />
         </span>
       </span>
-      <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-red-600">{children}</span>
-      <Sparkles className="tf-glow h-4 w-4 text-amber-500" />
+      <span className="truncate text-xs font-extrabold uppercase text-red-600 sm:text-2xl">{children}</span>
+      <Sparkles className="tf-glow h-4 w-4 shrink-0 text-amber-500" />
     </span>
   );
 }
@@ -127,7 +127,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
   const [open, setOpen] = useState(0);
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />
 
       {/* ============ TESTIMONIALS ============ */}
@@ -163,38 +163,38 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[2.05rem] bg-slate-900 p-7 text-white sm:p-10">
+              <div className="relative flex h-full flex-col overflow-hidden rounded-[2.05rem] bg-slate-900 p-6 text-white sm:p-10">
                 <div className={`tf-blob pointer-events-none absolute -right-16 -top-16 h-64 w-64 bg-gradient-to-br ${activeTone.grad} opacity-30 blur-2xl`} aria-hidden />
                 <div className="pointer-events-none absolute inset-0 opacity-15" style={{ backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "22px 22px" }} aria-hidden />
 
-                <div className="relative flex items-center justify-between">
-                  <span className={`grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${activeTone.grad} shadow-lg`}>
-                    <Quote className="tf-wiggle h-7 w-7 fill-white/30" />
+                <div className="relative flex items-center justify-between gap-3">
+                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${activeTone.grad} shadow-lg sm:h-14 sm:w-14`}>
+                    <Quote className="tf-wiggle h-6 w-6 fill-white/30 sm:h-7 sm:w-7" />
                   </span>
-                  <Stars n={active.rating || 5} size="h-5 w-5" animate />
+                  <Stars n={active.rating || 5} size="h-4 w-4 sm:h-5 sm:w-5" animate />
                 </div>
 
-                <p key={`msg-${slide}`} className="tf-in relative mt-7 flex-1 text-lg font-semibold leading-relaxed sm:text-2xl sm:leading-relaxed">
+                <p key={`msg-${slide}`} className="tf-in relative mt-6 flex-1 break-words text-base font-semibold leading-relaxed sm:mt-7 sm:text-2xl sm:leading-relaxed">
                   &ldquo;{active.message}&rdquo;
                 </p>
 
-                <div key={`who-${slide}`} className="tf-in relative mt-8 flex items-center gap-4">
-                  <Avatar t={active} tone={activeTone} size="h-14 w-14" />
-                  <div className="min-w-0">
-                    <p className="text-lg font-extrabold">{active.name}</p>
-                    <p className="flex items-center gap-1.5 text-sm text-white/70">
-                      <ActiveRoleIcon className="tf-beat h-4 w-4 text-amber-300" />
+                <div key={`who-${slide}`} className="tf-in relative mt-8 flex min-w-0 items-center gap-4">
+                  <Avatar t={active} tone={activeTone} size="h-12 w-12 sm:h-14 sm:w-14" />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-base font-extrabold sm:text-lg">{active.name}</p>
+                    <p className="flex min-w-0 items-center gap-1.5 text-sm text-white/70">
+                      <ActiveRoleIcon className="tf-beat h-4 w-4 shrink-0 text-amber-300" />
                       <span className="truncate">{active.role}{active.school ? ` · ${active.school}` : ""}</span>
                     </p>
                   </div>
                 </div>
 
                 {/* controls */}
-                <div className="relative mt-8 flex items-center gap-4">
-                  <button onClick={() => go(-1)} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full bg-white/10 ring-1 ring-white/20 transition hover:bg-white/20">
+                <div className="relative mt-8 flex items-center gap-2 sm:gap-4">
+                  <button onClick={() => go(-1)} aria-label="Previous" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/10 ring-1 ring-white/20 transition hover:bg-white/20 sm:h-10 sm:w-10">
                     <ChevronLeft className="h-5 w-5" />
                   </button>
-                  <div className="flex flex-1 gap-2">
+                  <div className="flex flex-1 gap-2 overflow-hidden">
                     {T.map((_, i) => (
                       <button key={i} onClick={() => setSlide(i)} aria-label={`Slide ${i + 1}`} className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/15">
                         {i < slide && <span className="block h-full w-full bg-white/70" />}
@@ -207,7 +207,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
                       </button>
                     ))}
                   </div>
-                  <button onClick={() => go(1)} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full bg-white/10 ring-1 ring-white/20 transition hover:bg-white/20">
+                  <button onClick={() => go(1)} aria-label="Next" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/10 ring-1 ring-white/20 transition hover:bg-white/20 sm:h-10 sm:w-10">
                     <ChevronRight className="h-5 w-5" />
                   </button>
                 </div>
@@ -215,7 +215,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
             </div>
 
             {/* list */}
-            <div className="flex flex-col gap-4">
+            <div className="flex min-w-0 flex-col gap-4">
               {T.map((t, i) => {
                 const tone = TONES[i % TONES.length];
                 const on = i === slide;
@@ -223,19 +223,19 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
                   <button
                     key={t._id || i}
                     onClick={() => setSlide(i)}
-                    className={`group relative flex w-full items-start gap-4 overflow-hidden rounded-3xl p-5 text-left ring-1 transition duration-300 ${
+                    className={`group relative flex w-full min-w-0 items-start gap-3 overflow-hidden rounded-3xl p-4 text-left ring-1 transition duration-300 sm:gap-4 sm:p-5 ${
                       on ? `${tone.soft} ${tone.ring} -translate-y-0.5 shadow-[0_20px_45px_-28px_rgba(15,23,42,0.6)]` : "bg-white ring-black/5 hover:-translate-y-0.5 hover:shadow-md"
                     }`}
                   >
                     <span className={`absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b ${tone.grad} transition ${on ? "opacity-100" : "opacity-0 group-hover:opacity-60"}`} />
                     <Avatar t={t} tone={tone} />
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="truncate font-bold text-slate-900">{t.name}</p>
+                      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+                        <p className="max-w-full truncate font-bold text-slate-900">{t.name}</p>
                         <Stars n={t.rating || 5} size="h-3.5 w-3.5" />
                       </div>
-                      <p className={`text-xs font-semibold ${tone.text}`}>{t.role}{t.school ? ` · ${t.school}` : ""}</p>
-                      <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">&ldquo;{t.message}&rdquo;</p>
+                      <p className={`truncate text-xs font-semibold ${tone.text}`}>{t.role}{t.school ? ` · ${t.school}` : ""}</p>
+                      <p className="mt-2 line-clamp-2 break-words text-sm leading-6 text-slate-600">&ldquo;{t.message}&rdquo;</p>
                     </div>
                   </button>
                 );
@@ -291,16 +291,16 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
             {/* help card */}
             <div className="relative mt-8 overflow-hidden rounded-[2rem] bg-slate p-6 text-white shadow-[0_30px_70px_-40px_rgba(15,23,42,0.9)]">
               <div className="tf-blob pointer-events-none absolute -right-12 -top-12 h-40 w-40 bg-emerald-400/30 blur-2xl" aria-hidden />
-              <div className="relative flex items-center gap-4">
+              <div className="relative flex min-w-0 items-center gap-4">
                 <span className="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl">
                   <span className="absolute inset-0 animate-ping rounded-2xl bg-emerald-400/40" style={{ animationDuration: "2.6s" }} />
                   <span className="relative grid h-full w-full place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 to-lime-400">
                     <MessageSquareText className="tf-pop h-7 w-7" />
                   </span>
                 </span>
-                <div>
-                  <p className="text-lg font-extrabold">Still have questions?</p>
-                  <p className="text-sm text-white/70">We reply within 24 hours</p>
+                <div className="min-w-0">
+                  <p className="truncate text-lg font-extrabold">Still have questions?</p>
+                  <p className="truncate text-sm text-white/70">We reply within 24 hours</p>
                 </div>
               </div>
               <Link
@@ -313,7 +313,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
           </div>
 
           {/* right — accordion */}
-          <div className="flex flex-col gap-4">
+          <div className="flex min-w-0 flex-col gap-4">
             {F.map((f, i) => {
               const isOpen = open === i;
               const tone = TONES[i % TONES.length];
@@ -328,16 +328,16 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
                   <button
                     onClick={() => setOpen(isOpen ? -1 : i)}
                     aria-expanded={isOpen}
-                    className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6"
+                    className="flex w-full items-center gap-3 px-4 py-4 text-left sm:gap-4 sm:px-6 sm:py-5"
                   >
                     <span
-                      className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${tone.grad} text-lg font-black text-white shadow-md transition-transform duration-300 ${isOpen ? "rotate-6 scale-105" : "group-hover:-rotate-6"}`}
+                      className={`grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${tone.grad} text-base font-black text-white shadow-md transition-transform duration-300 sm:h-12 sm:w-12 sm:text-lg ${isOpen ? "rotate-6 scale-105" : "group-hover:-rotate-6"}`}
                     >
-                      {isOpen ? <Lightbulb className="tf-glow h-6 w-6" /> : String(i + 1).padStart(2, "0")}
+                      {isOpen ? <Lightbulb className="tf-glow h-5 w-5 sm:h-6 sm:w-6" /> : String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className={`flex-1 font-bold transition ${isOpen ? tone.text : "text-slate-900"}`}>{f.question}</span>
+                    <span className={`min-w-0 flex-1 break-words font-bold transition ${isOpen ? tone.text : "text-slate-900"}`}>{f.question}</span>
                     <span
-                      className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition duration-300 ${
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition duration-300 sm:h-9 sm:w-9 ${
                         isOpen ? `rotate-180 bg-gradient-to-br ${tone.grad} text-white` : "bg-slate-100 text-slate-500 group-hover:bg-slate-200"
                       }`}
                     >
@@ -348,7 +348,7 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
                   {/* smooth height */}
                   <div className={`grid transition-all duration-500 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                     <div className="overflow-hidden">
-                      <div className="px-5 pb-6 pl-[5.25rem] sm:px-6 sm:pl-[5.5rem]">
+                      <div className="px-4 pb-6 pl-[3.75rem] sm:px-6 sm:pl-[5.5rem]">
                         <p className={`rounded-2xl ${tone.soft} p-4 text-sm leading-relaxed text-slate-700`}>{f.answer}</p>
                       </div>
                     </div>
