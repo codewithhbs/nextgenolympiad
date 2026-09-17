@@ -42,7 +42,7 @@ export default async function ContactPage() {
         <Sparkles className="pointer-events-none absolute right-[15%] bottom-8 h-5 w-5 text-brand/30" aria-hidden />
 
         <div className="relative mx-auto max-w-3xl px-4 text-center">
-          <h1 className="text-4xl font-extrabold text-ink md:text-5xl">We&apos;d love to hear from you</h1>
+          <h1 className="text-4xl font-extrabold text-ink md:text-5xl">We&apos;d Love to Hear From You</h1>
           <p className="mx-auto mt-4 max-w-xl text-lg text-ink-soft">Questions about registration or the olympiad? Send us a message.</p>
         </div>
       </section>

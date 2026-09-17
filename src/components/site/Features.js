@@ -227,7 +227,7 @@ export default function Features() {
             <div className="flex flex-col items-center gap-3 rounded-[14px] bg-slate-900/90 px-4 py-4 sm:flex-row sm:gap-5">
               <span className="flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-xs font-extrabold text-slate-900">
                 <Star className="wn-spin h-3.5 w-3.5 fill-slate-900" />
-                Wonder Kids Olympiad · Bal Vatika I–III
+                Wonder Kids Olympiad · Bal Vatika I-II–III
               </span>
               <div className="wn-marquee-wrap relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
                 <div className="wn-marquee flex w-max gap-3">

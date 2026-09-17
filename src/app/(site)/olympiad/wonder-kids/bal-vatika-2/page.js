@@ -34,7 +34,7 @@ const SUBJECTS = [
   },
   {
     subject: "EVS",
-    sampleHref: "#",
+    sampleHref: "/sample-papers/Balvatika_II_EVS.pdf",
     units: [
       { title: "1. Me and My Family", items: ["Body parts", "Good habits / Bad habits", "Exploring emotions", "My family", "Magical words"] },
       { title: "2. Animals and Plants", items: ["Domestic / Wild Animals", "Animals and their young ones", "Habitats of Animals", "Parts of Plant", "Fruits", "Fruit with single seed and multiple seed", "Vegetable"] },

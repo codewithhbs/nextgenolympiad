@@ -9,7 +9,7 @@ export async function generateMetadata() {
   try { s = await getSettings(); } catch {}
   return buildMetadata({
     title: `Olympiads & Quizzes • ${s.siteName || "NextGen Olympiad Foundation"}`,
-    description: "Explore NextGen Olympiad for Classes I–X and Wonder Kids for Bal Vatika I–III. Subjects, eligibility, exam pattern, rewards and how to register.",
+    description: "Explore NextGen Olympiad for Classes I–X and Wonder Kids for Bal Vatika I-II–III. Subjects, eligibility, exam pattern, rewards and how to register.",
     keywords: ["nextgen olympiad", "wonder kids", "bal vatika olympiad", "olympiad subjects", "olympiad exam pattern"],
     path: "/quiz",
     siteName: s.siteName,
@@ -27,7 +27,7 @@ const programs = [
   },
   {
     name: "Wonder Kids — Bal Vatika",
-    forWhom: "Bal Vatika I – III",
+    forWhom: "Bal Vatika I - II – III",
     color: "grape",
     subjects: ["English", "Mathematics", "EVS", "Drawing"],
     points: ["Play-based, joyful format", "Age-appropriate questions", "Participation certificate", "Little-champion awards"],

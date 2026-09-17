@@ -63,7 +63,7 @@ const PROGRAMS = [
     key: "wonder",
     icon: Palette,
     iconAnim: "qr-wiggle",
-    eyebrow: "Bal Vatika I – III",
+    eyebrow: "Bal Vatika I - II – III",
     title: "Wonder Kids Olympiad",
     text: "Joyful, age-appropriate assessments designed for early learners.",
     href: "/olympiad/wonder-kids",
