@@ -166,7 +166,7 @@ function LoginInner() {
           </p>
 
           <p className="mt-8 text-center text-xs text-ink-soft/60">
-            For Classes Bal Vatika I – X · <Link href="/privacy-policy" className="hover:underline">Privacy</Link>
+            For Classes Balvatika I – X · <Link href="/privacy-policy" className="hover:underline">Privacy</Link>
           </p>
         </div>
       </div>

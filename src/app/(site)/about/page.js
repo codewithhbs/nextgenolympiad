@@ -135,7 +135,7 @@ export async function generateMetadata() {
   try { s = await getSettings(); } catch { }
   return buildMetadata({
     title: `About Us • ${s.siteName || "NextGen Olympiad Foundation"}`,
-    description: "NextGen Olympiad Foundation — a veteran of national education olympiads with over a decade of experience, nurturing learners from Bal Vatika to Class X.",
+    description: "NextGen Olympiad Foundation — a veteran of national education olympiads with over a decade of experience, nurturing learners from Balvatika to Class X.",
     keywords: ["about nextgen olympiad", "olympiad foundation india", "wonder kids olympiad", "school olympiad"],
     path: "/about",
     siteName: s.siteName,
@@ -154,7 +154,7 @@ const SUBJECTS = [
 const STATS = [
   { value: "10+", label: "Years of experience", icon: Clock, anim: "ng-spin", grad: "from-red-500 to-rose-500", tint: "from-rose-50 to-white" },
   { value: "Bal Vatika – X", label: "Classes covered", icon: GraduationCap, anim: "ng-float", grad: "from-amber-400 to-orange-500", tint: "from-amber-50 to-white" },
-  { value: "200", label: "Scholarships awarded", icon: HeartHandshake, anim: "ng-beat", grad: "from-violet-500 to-fuchsia-500", tint: "from-violet-50 to-white" },
+  { value: "Exciting", label: "Scholarships", icon: HeartHandshake, anim: "ng-beat", grad: "from-violet-500 to-fuchsia-500", tint: "from-violet-50 to-white" },
   { value: "Pan-India", label: "School network", icon: Globe2, anim: "ng-spin", grad: "from-emerald-500 to-teal-500", tint: "from-emerald-50 to-white" },
 ];
 

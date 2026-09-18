@@ -18,6 +18,7 @@ import QuizAndResult from "@/components/site/QuizAndResult";
 import TestimonialAndFaq from "@/components/site/Testinomial&Faq";
 import Cta from "@/components/site/Cta";
 import GuidesResources from "@/components/site/Guidesresources";
+import AlignmentSection from "@/components/site/Alignmentsection";
 
 function serialize(doc) {
   return JSON.parse(JSON.stringify(doc));
@@ -271,6 +272,7 @@ export default async function Home() {
         ]}
       /> */}
       <QuizAndResult />
+      <AlignmentSection />
 
       <GallerySection images={galleryImgs} />
 

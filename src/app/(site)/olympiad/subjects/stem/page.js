@@ -1,6 +1,33 @@
 "use client";
-import { useState } from "react";
-import { Atom, Plus, Minus, FlaskConical, Cpu, Calculator, Brain, Download } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Atom, Plus, Minus, FlaskConical, Cpu, Calculator, Brain, Download, FileText, Sparkles, GraduationCap, ChevronRight } from "lucide-react";
+
+/* ================= animation css ================= */
+const ANIM_CSS = `
+@keyframes en-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes en-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(6deg)}}
+@keyframes en-beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(.96)}45%{transform:scale(1.12)}}
+@keyframes en-pop{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(-5px) scale(1.1)}60%{transform:translateY(0) scale(.95)}}
+@keyframes en-spin{to{transform:rotate(360deg)}}
+@keyframes en-glow{0%,100%{filter:drop-shadow(0 0 0 rgba(251,191,36,0))}50%{filter:drop-shadow(0 0 9px rgba(251,191,36,.95))}}
+@keyframes en-shine{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes en-blob{0%,100%{border-radius:42% 58% 63% 37%/41% 44% 56% 59%}50%{border-radius:61% 39% 35% 65%/58% 62% 38% 42%}}
+@keyframes en-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes en-drop{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@keyframes en-sweep{0%{transform:translateX(-120%) skewX(-20deg)}100%{transform:translateX(320%) skewX(-20deg)}}
+.en-float{animation:en-float 3.2s ease-in-out infinite}
+.en-wiggle{animation:en-wiggle 2.4s ease-in-out infinite}
+.en-beat{animation:en-beat 1.6s ease-in-out infinite}
+.en-pop{animation:en-pop 1.8s ease-in-out infinite}
+.en-spin{animation:en-spin 14s linear infinite}
+.en-glow{animation:en-glow 2s ease-in-out infinite}
+.en-shine{background-size:200% 100%;animation:en-shine 3.5s linear infinite}
+.en-blob{animation:en-blob 10s ease-in-out infinite}
+.en-rise{animation:en-rise .7s ease-out both}
+.en-drop{animation:en-drop 1s ease-in-out infinite}
+.en-card:hover .en-sweep{animation:en-sweep 1s ease-out}
+@media (prefers-reduced-motion:reduce){[class*="en-"]{animation:none!important}}
+`;
 
 // entries can be a plain string (flat bullet) or { title, items } (topic with sub-points)
 const SYLLABUS = {
@@ -180,6 +207,21 @@ const SKILLS_ASSESSED = [
   { icon: Brain, title: "Logical Reasoning" },
 ];
 
+const SKILL_STYLES = [
+  { bg: "linear-gradient(135deg,#ec4899 0%,#fb923c 100%)", glow: "rgba(236,72,153,.55)", anim: "en-pop" },
+  { bg: "linear-gradient(135deg,#0ea5e9 0%,#22d3ee 100%)", glow: "rgba(14,165,233,.55)", anim: "en-spin" },
+  { bg: "linear-gradient(135deg,#10b981 0%,#a3e635 100%)", glow: "rgba(16,185,129,.55)", anim: "en-beat" },
+  { bg: "linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%)", glow: "rgba(139,92,246,.55)", anim: "en-wiggle" },
+];
+
+const CLASS_TONES = [
+  { bg: "linear-gradient(135deg,#ec4899 0%,#fb923c 100%)", ring: "ring-pink-200", soft: "bg-pink-50", text: "text-pink-600" },
+  { bg: "linear-gradient(135deg,#0ea5e9 0%,#22d3ee 100%)", ring: "ring-blue-200", soft: "bg-blue-50", text: "text-blue-600" },
+  { bg: "linear-gradient(135deg,#10b981 0%,#a3e635 100%)", ring: "ring-emerald-200", soft: "bg-emerald-50", text: "text-emerald-600" },
+  { bg: "linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%)", ring: "ring-violet-200", soft: "bg-violet-50", text: "text-violet-600" },
+  { bg: "linear-gradient(135deg,#f43f5e 0%,#fbbf24 100%)", ring: "ring-rose-200", soft: "bg-rose-50", text: "text-rose-600" },
+];
+
 const CLASSES = Object.keys(SYLLABUS);
 
 const NAV_TABS = [
@@ -188,17 +230,19 @@ const NAV_TABS = [
   { label: "Sample Paper", id: "sample-paper-section" },
 ];
 
+/* ================= small pieces ================= */
+// entries can be a plain string (flat bullet) or { title, items } (topic with sub-points)
 function SectionEntry({ entry }) {
   if (typeof entry === "string") {
-    return <li>{entry}</li>;
+    return <li className="leading-relaxed">{entry}</li>;
   }
   return (
-    <li className="mb-1 list-none">
-      <span className="font-bold text-ink">{entry.title}</span>
+    <li className="mb-2 list-none">
+      <span className="font-bold text-slate">{entry.title}</span>
       {entry.items?.length > 0 && (
         <ul className="mt-1 list-disc pl-4 text-slate">
           {entry.items.map((it) => (
-            <li key={it}>{it}</li>
+            <li key={it} className="leading-relaxed">{it}</li>
           ))}
         </ul>
       )}
@@ -206,9 +250,83 @@ function SectionEntry({ entry }) {
   );
 }
 
+function SectionHeading({ n, title, sub }) {
+  return (
+    <div className="en-rise">
+      <div className="flex items-center gap-4">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-slate to-indigo-900 font-display text-base font-extrabold text-white shadow-lg sm:h-14 sm:w-14 sm:text-lg">
+          {n}
+        </span>
+        <h2 className="font-display text-2xl font-extrabold leading-tight tracking-tight text-slate sm:text-4xl xl:text-5xl">{title}</h2>
+      </div>
+      <p className="ml-16 mt-2 text-xs font-bold uppercase tracking-[0.2em] text-slate sm:ml-[4.5rem] sm:text-sm">{sub}</p>
+    </div>
+  );
+}
+
+function ClassAccordion({ items, open, setOpen, renderBody }) {
+  return (
+    <div className="mt-8 flex flex-col gap-3">
+      {items.map((c, i) => {
+        const isOpen = open === c;
+        const tone = CLASS_TONES[i % CLASS_TONES.length];
+        return (
+          <div
+            key={c}
+            className={`overflow-hidden rounded-3xl ring-1 transition-all duration-300 ${
+              isOpen ? `bg-white ${tone.ring} shadow-[0_25px_55px_-32px_rgba(15,23,42,.6)]` : "bg-white/70 ring-black/5 backdrop-blur hover:bg-white hover:shadow-md"
+            }`}
+          >
+            <button onClick={() => setOpen(isOpen ? null : c)} aria-expanded={isOpen} className="group flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6">
+              <span
+                className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-white shadow-md transition-transform duration-300 ${isOpen ? "rotate-6 scale-105" : "group-hover:-rotate-6"}`}
+                style={{ backgroundImage: tone.bg }}
+              >
+                <GraduationCap className={`h-6 w-6 ${isOpen ? "en-pop" : ""}`} />
+              </span>
+              <span className={`flex-1 font-display text-xl font-extrabold tracking-tight sm:text-2xl ${isOpen ? tone.text : "text-slate"}`}>{c}</span>
+              <span
+                className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition duration-300 ${isOpen ? "text-white" : "bg-slate text-white group-hover:bg-slate"}`}
+                style={isOpen ? { backgroundImage: tone.bg } : undefined}
+              >
+                {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+              </span>
+            </button>
+
+            <div className={`grid transition-all duration-500 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+              <div className="overflow-hidden">{renderBody(c, tone)}</div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Page() {
   const [openClass, setOpenClass] = useState(CLASSES[0]);
   const [openSampleClass, setOpenSampleClass] = useState(CLASSES[0]);
+  const [activeTab, setActiveTab] = useState(NAV_TABS[0].id);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        let cur = NAV_TABS[0].id;
+        NAV_TABS.forEach((t) => {
+          const el = document.getElementById(t.id);
+          if (el && el.getBoundingClientRect().top <= 140) cur = t.id;
+        });
+        setActiveTab(cur);
+        ticking.current = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -216,78 +334,110 @@ export default function Page() {
 
   return (
     <div>
+      <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />
+
+      {/* ============ HERO ============ */}
       <section
-        className="relative overflow-hidden border-b border-line"
+        className="relative w-full overflow-hidden"
         style={{ backgroundImage: "linear-gradient(160deg,#fff1f2 0%,#ffffff 45%,#eff6ff 100%)" }}
       >
-        <div className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-rose-200/25 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-sky-200/25 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-12 md:px-6 md:pt-16">
-          <div className="inline-flex items-center gap-2 rounded-full bg-brand-soft px-4 py-2 text-sm font-bold text-brand">
-            <Atom className="h-4 w-4" /> NextGen Olympiad
-          </div>
-          <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-            STEM
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="en-blob absolute -left-24 -top-24 h-96 w-96 bg-rose-300/30 blur-3xl" />
+          <div className="en-blob absolute -right-24 bottom-0 h-96 w-96 bg-blue-300/30 blur-3xl" />
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{ backgroundImage: "radial-gradient(#fda4af 1px, transparent 1px)", backgroundSize: "26px 26px", maskImage: "linear-gradient(to bottom, black, transparent)" }}
+          />
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[1600px] px-4 pb-16 pt-14 sm:px-6 md:pb-20 md:pt-20 lg:px-10 xl:px-14">
+          <span className="inline-flex items-center gap-3 rounded-full bg-white/80 py-1.5 pl-1.5 pr-5 shadow-[0_12px_30px_-18px_rgba(216,31,38,.8)] ring-1 ring-rose-100 backdrop-blur">
+            <span className="relative grid h-10 w-10 place-items-center rounded-full">
+              <span className="absolute inset-0 animate-ping rounded-full bg-rose-400/40" style={{ animationDuration: "2.6s" }} />
+              <span className="relative grid h-full w-full place-items-center rounded-full bg-gradient-to-br from-red-600 to-rose-500 text-white">
+                <Atom className="en-spin h-5 w-5" />
+              </span>
+            </span>
+            <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-red-600 sm:text-sm">NextGen Olympiad</span>
+            <Sparkles className="en-glow h-4 w-4 text-amber-500" />
+          </span>
+
+          <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-slate sm:text-6xl xl:text-7xl">
+            <span className="en-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">STEM</span>
           </h1>
-          <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-slate">
+
+          <p className="mt-5 max-w-3xl text-base leading-8 text-slate sm:text-xl sm:leading-9">
             Class-wise STEM syllabus covering Science, Technology &amp; Engineering, and
             Mathematics.
           </p>
+
+          <div className="mt-7 flex flex-wrap gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate shadow-sm ring-1 ring-black/5 sm:text-base">
+              <GraduationCap className="en-float h-5 w-5 text-red-600" /> For Classes 1 to 9
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate shadow-sm ring-1 ring-black/5 sm:text-base">
+              <FileText className="en-pop h-5 w-5 text-violet-600" /> Sample papers available
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* Sticky tab navigation */}
-      <div className="sticky top-0 z-20 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl border-b border-line gap-2 overflow-x-auto px-4 py-3 md:px-6">
-          {NAV_TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => scrollToSection(tab.id)}
-              className="whitespace-nowrap rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:border-brand hover:text-brand hover:bg-brand-soft"
-            >
-              {tab.label}
-            </button>
-          ))}
+      {/* ============ STICKY TABS ============ */}
+      <div className="sticky top-0 z-30 border-b border-black/5 bg-white/85 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-[1600px] gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:px-10 xl:px-14">
+          {NAV_TABS.map((tab) => {
+            const on = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => scrollToSection(tab.id)}
+                className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-bold transition sm:text-base ${
+                  on ? "bg-gradient-to-r from-red-600 to-rose-500 text-white shadow-lg shadow-rose-400/40" : "bg-slate text-white hover:bg-slate"
+                }`}
+              >
+                {tab.label}
+                <ChevronRight className={`h-4 w-4 transition ${on ? "rotate-90" : "opacity-50"}`} />
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Skills Assessed */}
+      {/* ============ SKILLS ASSESSED ============ */}
       <section
         id="skills-assessed-section"
-        className="relative scroll-mt-20 overflow-hidden"
+        className="relative w-full scroll-mt-24 overflow-hidden"
         style={{ backgroundImage: "linear-gradient(180deg,#ffffff 0%,#fefce8 50%,#ffffff 100%)" }}
       >
-        <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-amber-200/25 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-14 md:px-6">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
-              01
-            </span>
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
-              Skills Assessed with STEM Olympiad
-            </h2>
-          </div>
-          <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
-            For Classes 1 to 9
-          </p>
+        <div className="en-blob pointer-events-none absolute -right-24 top-10 h-80 w-80 bg-amber-300/30 blur-3xl" aria-hidden />
+        <div className="relative mx-auto w-full max-w-[1600px] px-4 pb-16 pt-16 sm:px-6 lg:px-10 xl:px-14">
+          <SectionHeading n="01" title="Skills Assessed with STEM Olympiad" sub="For Classes 1 to 9" />
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {SKILLS_ASSESSED.map(({ icon: Icon, title }, i) => {
-              const gradients = [
-                "linear-gradient(135deg,#f472b6 0%,#fb923c 100%)",
-                "linear-gradient(135deg,#60a5fa 0%,#22d3ee 100%)",
-                "linear-gradient(135deg,#4ade80 0%,#facc15 100%)",
-                "linear-gradient(135deg,#a78bfa 0%,#f472b6 100%)",
-              ];
-              const grad = gradients[i % gradients.length];
+              const st = SKILL_STYLES[i % SKILL_STYLES.length];
               return (
                 <div
                   key={title}
-                  className="flex flex-col items-center rounded-2xl px-4 py-8 text-center text-white shadow-soft transition hover:-translate-y-1"
-                  style={{ backgroundImage: grad }}
+                  className="en-card en-rise group relative flex flex-col items-center overflow-hidden rounded-[2rem] px-5 py-9 text-center text-white transition duration-300 hover:-translate-y-2"
+                  style={{ backgroundImage: st.bg, boxShadow: `0 25px 50px -28px ${st.glow}`, animationDelay: `${i * 0.1}s` }}
                 >
-                  <Icon className="h-8 w-8" strokeWidth={1.75} />
-                  <p className="mt-3 text-sm font-bold">{title}</p>
+                  <div className="pointer-events-none absolute inset-0" aria-hidden>
+                    <div className="en-blob absolute -right-8 -top-10 h-32 w-32 bg-white/20 blur-xl transition-transform duration-500 group-hover:scale-150" />
+                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
+                    <div className="en-sweep absolute inset-y-0 -left-1/3 w-1/3 -translate-x-[120%] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  </div>
+
+                  <div className="relative h-20 w-20">
+                    <svg className="en-spin absolute inset-0 h-full w-full" viewBox="0 0 100 100" fill="none" aria-hidden>
+                      <circle cx="50" cy="50" r="46" stroke="white" strokeOpacity=".6" strokeWidth="2" strokeDasharray="40 18" strokeLinecap="round" />
+                    </svg>
+                    <span className="absolute inset-2 grid place-items-center rounded-full bg-white/25 ring-1 ring-white/40 backdrop-blur transition duration-300 group-hover:scale-110 group-hover:bg-white/35">
+                      <Icon className={`h-8 w-8 ${st.anim}`} strokeWidth={1.8} style={{ animationDelay: `${i * 0.3}s` }} />
+                    </span>
+                  </div>
+
+                  <p className="relative mt-4 font-display text-base font-extrabold sm:text-lg">{title}</p>
                 </div>
               );
             })}
@@ -295,140 +445,80 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Curriculum: Class-wise accordion */}
+      {/* ============ CURRICULUM ============ */}
       <section
         id="curriculum-section"
-        className="relative scroll-mt-20 overflow-hidden"
+        className="relative w-full scroll-mt-24 overflow-hidden"
         style={{ backgroundImage: "linear-gradient(160deg,#eef2ff 0%,#fdf2f8 50%,#f0fdf4 100%)" }}
       >
-        <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-violet-200/25 blur-3xl" />
-        <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-emerald-200/25 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-14 md:px-6">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
-              02
-            </span>
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
-              Curriculum
-            </h2>
-          </div>
-          <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
-            Class-wise <span className="text-brand">syllabus breakdown</span>
-          </p>
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="en-blob absolute -left-24 top-0 h-96 w-96 bg-violet-300/25 blur-3xl" />
+          <div className="en-blob absolute -right-24 bottom-0 h-96 w-96 bg-emerald-300/25 blur-3xl" />
+        </div>
 
-          <div className="mt-6 flex flex-col gap-3">
-            {CLASSES.map((c) => {
-              const isOpen = openClass === c;
-              const data = SYLLABUS[c];
-              return (
-                <div
-                  key={c}
-                  className={`rounded-2xl border border-line transition ${
-                    isOpen ? "bg-white shadow-soft" : "bg-white/60"
-                  }`}
-                >
-                  <button
-                    onClick={() => setOpenClass(isOpen ? null : c)}
-                    className="flex w-full items-center justify-between px-5 py-4 text-left"
-                  >
-                    <span className={`font-display text-lg font-extrabold ${isOpen ? "text-brand" : "text-ink"}`}>
-                      {c}
-                    </span>
-                    <span
-                      className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                        isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
-                      }`}
-                    >
-                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                    </span>
-                  </button>
+        <div className="relative mx-auto w-full max-w-[1600px] px-4 pb-16 pt-16 sm:px-6 lg:px-10 xl:px-14">
+          <SectionHeading n="02" title="Curriculum" sub="Class-wise syllabus breakdown" />
 
-                  {isOpen && (
-                    <div className="grid gap-8 border-t border-line px-5 py-5 md:grid-cols-3">
-                      {Object.entries(data).map(([section, entries]) => (
-                        <div key={section}>
-                          <p className="text-xs font-extrabold uppercase tracking-wider text-gold-dark">
-                            {section}
-                          </p>
-                          <ul className="mt-2 list-disc pl-4 text-sm leading-relaxed text-slate">
-                            {entries.map((entry, idx) => (
-                              <SectionEntry key={idx} entry={entry} />
-                            ))}
-                          </ul>
-                        </div>
+          <ClassAccordion
+            items={CLASSES}
+            open={openClass}
+            setOpen={setOpenClass}
+            renderBody={(c, tone) => (
+              <div className="grid gap-5 border-t border-black/5 px-5 py-6 sm:px-6 md:grid-cols-2 lg:grid-cols-3">
+                {Object.entries(SYLLABUS[c]).map(([section, entries]) => (
+                  <div key={section} className={`rounded-2xl ${tone.soft} p-5 ring-1 ring-black/5`}>
+                    <p className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate sm:text-sm">
+                      <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundImage: tone.bg }} />
+                      {section}
+                    </p>
+                    <ul className="mt-3 list-disc pl-4 text-sm leading-relaxed text-slate sm:text-[15px]">
+                      {entries.map((entry, idx) => (
+                        <SectionEntry key={idx} entry={entry} />
                       ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          />
         </div>
       </section>
 
-      {/* Sample Paper: Class-wise accordion */}
+      {/* ============ SAMPLE PAPER ============ */}
       <section
         id="sample-paper-section"
-        className="relative scroll-mt-20 overflow-hidden"
+        className="relative w-full scroll-mt-24 overflow-hidden"
         style={{ backgroundImage: "linear-gradient(180deg,#ffffff 0%,#f0fdfa 50%,#ffffff 100%)" }}
       >
-        <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-200/25 blur-3xl" />
-        <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-fuchsia-200/20 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-14 md:px-6 md:pb-20">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b2545] text-sm font-extrabold text-white">
-              03
-            </span>
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
-              Sample Paper
-            </h2>
-          </div>
-          <p className="ml-12 mt-1 text-xs font-bold uppercase tracking-[0.2em] text-slate">
-            Class-wise <span className="text-brand">downloadable sample papers</span>
-          </p>
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="en-blob absolute -right-24 top-0 h-96 w-96 bg-cyan-300/25 blur-3xl" />
+          <div className="en-blob absolute -left-24 bottom-0 h-96 w-96 bg-fuchsia-300/25 blur-3xl" />
+        </div>
 
-          <div className="mt-6 flex flex-col gap-3">
-            {CLASSES.map((c) => {
-              const isOpen = openSampleClass === c;
-              return (
-                <div
-                  key={c}
-                  className={`rounded-2xl border border-line transition ${
-                    isOpen ? "bg-white shadow-soft" : "bg-white/60"
-                  }`}
+        <div className="relative mx-auto w-full max-w-[1600px] px-4 pb-20 pt-16 sm:px-6 lg:px-10 xl:px-14">
+          <SectionHeading n="03" title="Sample Paper" sub="Class-wise downloadable sample papers" />
+
+          <ClassAccordion
+            items={CLASSES}
+            open={openSampleClass}
+            setOpen={setOpenSampleClass}
+            renderBody={(c, tone) => (
+              <div className="border-t border-black/5 px-5 py-6 sm:px-6">
+                <a
+                  href={SAMPLE_PAPERS[c]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-3 rounded-full py-3 pl-6 pr-2 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 sm:text-base"
+                  style={{ backgroundImage: tone.bg }}
                 >
-                  <button
-                    onClick={() => setOpenSampleClass(isOpen ? null : c)}
-                    className="flex w-full items-center justify-between px-5 py-4 text-left"
-                  >
-                    <span className={`font-display text-lg font-extrabold ${isOpen ? "text-brand" : "text-ink"}`}>
-                      {c}
-                    </span>
-                    <span
-                      className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                        isOpen ? "bg-orange-500 text-white" : "bg-white text-slate ring-1 ring-line"
-                      }`}
-                    >
-                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-                    </span>
-                  </button>
-
-                  {isOpen && (
-                    <div className="border-t border-line px-5 py-5">
-                      <a
-                        href={SAMPLE_PAPERS[c]}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-soft transition hover:opacity-90"
-                      >
-                        <Download className="h-4 w-4" /> Download {c} Sample Paper
-                      </a>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                  Download {c} Sample Paper
+                  <span className="grid h-9 w-9 place-items-center rounded-full bg-white/25">
+                    <Download className="en-drop h-4 w-4" />
+                  </span>
+                </a>
+              </div>
+            )}
+          />
         </div>
       </section>
     </div>

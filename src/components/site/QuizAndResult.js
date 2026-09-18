@@ -107,7 +107,7 @@ const QuizAndResult = () => {
             <span className="text-xl font-extrabold uppercase text-red-600 sm:text-3xl">Our Programs</span>
           </span>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-            Pick the right{" "}
+            Pick The Right{" "}
             <span className="qr-shine-text bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">Olympiad</span>
           </h2>
         </div>

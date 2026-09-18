@@ -9,7 +9,7 @@ export async function generateMetadata() {
   const d = s?.seoDefaults || {};
   return buildMetadata({
     title: { default: d.metaTitle || "NextGen Olympiad Foundation", template: `%s · ${s?.siteName || "NextGen Olympiad"}` },
-    description: d.metaDescription || "National level Olympiad for Classes I–X and Wonder Kids for Bal Vatika.",
+    description: d.metaDescription || "National level Olympiad for Classes I–X and Wonder Kids for Balvatika.",
     keywords: d.keywords, image: d.ogImage, siteName: s?.siteName,
   });
 }
