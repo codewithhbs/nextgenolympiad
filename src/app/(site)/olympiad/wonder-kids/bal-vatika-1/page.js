@@ -5,30 +5,22 @@ import { Plus, Minus, Clock, Download, FileText, BookOpen, Calculator, Leaf, Pal
 
 /* ================= animation css ================= */
 const ANIM_CSS = `
-@keyframes bv-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes bv-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(6deg)}}
-@keyframes bv-beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(.96)}45%{transform:scale(1.12)}}
+@keyframes bv-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes bv-pop{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(-5px) scale(1.1)}60%{transform:translateY(0) scale(.95)}}
-@keyframes bv-spin{to{transform:rotate(360deg)}}
 @keyframes bv-tick{0%,100%{transform:rotate(0)}50%{transform:rotate(180deg)}}
 @keyframes bv-glow{0%,100%{filter:drop-shadow(0 0 0 rgba(251,191,36,0))}50%{filter:drop-shadow(0 0 9px rgba(251,191,36,.95))}}
 @keyframes bv-shine{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes bv-blob{0%,100%{border-radius:42% 58% 63% 37%/41% 44% 56% 59%}50%{border-radius:61% 39% 35% 65%/58% 62% 38% 42%}}
-@keyframes bv-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes bv-drop{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
-@keyframes bv-sweep{0%{transform:translateX(-120%) skewX(-20deg)}100%{transform:translateX(320%) skewX(-20deg)}}
-.bv-float{animation:bv-float 3.2s ease-in-out infinite}
-.bv-wiggle{animation:bv-wiggle 2.4s ease-in-out infinite}
-.bv-beat{animation:bv-beat 1.6s ease-in-out infinite}
+@keyframes bv-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bv-spin{to{transform:rotate(360deg)}}
+.bv-float{animation:bv-float 3.4s ease-in-out infinite}
 .bv-pop{animation:bv-pop 1.8s ease-in-out infinite}
-.bv-spin{animation:bv-spin 14s linear infinite}
 .bv-tick{animation:bv-tick 4s ease-in-out infinite}
 .bv-glow{animation:bv-glow 2s ease-in-out infinite}
 .bv-shine{background-size:200% 100%;animation:bv-shine 3.5s linear infinite}
 .bv-blob{animation:bv-blob 10s ease-in-out infinite}
-.bv-rise{animation:bv-rise .7s ease-out both}
-.bv-drop{animation:bv-drop 1s ease-in-out infinite}
-.bv-card:hover .bv-sweep{animation:bv-sweep 1s ease-out}
+.bv-rise{animation:bv-rise .8s ease-out both}
+.bv-spin-slow{animation:bv-spin 30s linear infinite}
 @media (prefers-reduced-motion:reduce){[class*="bv-"]{animation:none!important}}
 `;
 
@@ -91,7 +83,7 @@ const NAV_TABS = [
   { label: "Subjects", id: "subject-section" },
   { label: "Curriculum", id: "curriculum-section" },
   { label: "Sample Paper", id: "sample-paper-section" },
-  { label: "Syllabus", id: "syllabus-section" },
+  // { label: "Syllabus", id: "syllabus-section" },
 ];
 
 /* look per subject */
@@ -194,35 +186,91 @@ export default function Page() {
 
       {/* ============ HERO ============ */}
      <section
-        className="relative overflow-hidden border-b border-line"
-        style={{ backgroundImage: "linear-gradient(160deg,#fff1f2 0%,#ffffff 45%,#eff6ff 100%)" }}
-      >
-        <div className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-rose-200/25 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-sky-200/25 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
-          <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-            Bal Vatika – I
-          </h1>
-          <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-gold-dark">
-            Nurturing young minds for future-ready learning
-          </p>
-          <p className="mt-5 max-w-3xl text-[18px] leading-relaxed text-slate">
-            At Bal Vatika – I, our Olympiad is a joyful first step towards learning beyond the
-            classroom. Designed for our 3-year-old little learners, it encourages curiosity,
-            observation, thinking, and confidence through fun and age-appropriate examination.
-          </p>
-          <p className="mt-3 max-w-3xl text-[17px] leading-relaxed text-slate">
-            We believe every child is naturally curious — and our aim is to nurture that
-            curiosity, one little discovery at a time.
-          </p>
-          <div className="mt-6 flex justify-center max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-brand-soft px-5 py-2.5 text-md font-bold text-brand shadow-sm">
-              <Clock className="h-4 w-4" />
-              Flexible exam window
-            </div>
-          </div>
-        </div>
-      </section>
+  className="relative w-full overflow-hidden"
+  style={{ backgroundImage: "linear-gradient(160deg,#fff1f2 0%,#ffffff 45%,#eff6ff 100%)" }}
+>
+  <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />
+ 
+  {/* backdrop */}
+  <div className="pointer-events-none absolute inset-0" aria-hidden>
+    <div className="bv-blob absolute -left-24 -top-24 h-80 w-80 bg-rose-300/35 blur-3xl" />
+    <div className="bv-blob absolute -right-24 bottom-0 h-80 w-80 bg-blue-300/35 blur-3xl" />
+    <div className="bv-blob absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 bg-amber-300/25 blur-3xl" />
+    <div
+      className="absolute inset-0 opacity-30"
+      style={{ backgroundImage: "radial-gradient(#fda4af 1px, transparent 1px)", backgroundSize: "26px 26px", maskImage: "linear-gradient(to bottom, black, transparent)" }}
+    />
+    <Star className="bv-pop absolute left-[6%] top-14 h-5 w-5 fill-amber-400 text-amber-400" />
+    <Star className="bv-float absolute right-[10%] top-24 h-4 w-4 fill-rose-400 text-rose-400" />
+    <Star className="bv-pop absolute left-[35%] bottom-10 hidden h-4 w-4 fill-violet-400 text-violet-400 sm:block" />
+ 
+    {/* playful floating bubbles */}
+    <span className="bv-float absolute right-[6%] top-1/2 hidden h-20 w-20 place-items-center rounded-3xl bg-white/80 font-display text-2xl font-black text-pink-500 shadow-xl ring-1 ring-black/5 backdrop-blur lg:grid">
+      Aa
+    </span>
+    <span className="bv-float absolute right-[16%] bottom-14 hidden h-16 w-16 place-items-center rounded-2xl bg-white/80 font-display text-xl font-black text-blue-500 shadow-xl ring-1 ring-black/5 backdrop-blur lg:grid" style={{ animationDelay: "1s" }}>
+      123
+    </span>
+    <span className="bv-float absolute right-[26%] top-16 hidden h-14 w-14 place-items-center rounded-2xl bg-white/80 text-2xl shadow-xl ring-1 ring-black/5 backdrop-blur xl:grid" style={{ animationDelay: ".5s" }}>
+      🎨
+    </span>
+  </div>
+ 
+  <div className="relative mx-auto w-full max-w-[1600px] px-4 py-16 sm:px-6 md:py-24 lg:px-10 xl:px-14">
+    {/* badge */}
+    <span className="bv-rise inline-flex items-center gap-3 rounded-full bg-white/85 py-1.5 pl-1.5 pr-5 shadow-[0_12px_30px_-18px_rgba(216,31,38,.8)] ring-1 ring-rose-100 backdrop-blur">
+      <span className="relative grid h-10 w-10 place-items-center rounded-full">
+        <span className="absolute inset-0 animate-ping rounded-full bg-amber-400/40" style={{ animationDuration: "2.6s" }} />
+        <span className="relative grid h-full w-full place-items-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white">
+          <Baby className="bv-pop h-5 w-5" />
+        </span>
+      </span>
+      <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-red-600 sm:text-sm">Wonder Kids Olympiad</span>
+      <Sparkles className="bv-glow h-4 w-4 text-amber-500" />
+    </span>
+ 
+    {/* title */}
+    <h1 className="bv-rise mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-6xl xl:text-7xl">
+      Balvatika –{" "}
+      <span className="relative inline-block">
+        <span className="bv-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">I</span>
+        <span className="bv-spin-slow absolute -inset-4 rounded-full border-2 border-dashed border-amber-300/70" aria-hidden />
+      </span>
+    </h1>
+ 
+    <p className="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-amber-600 sm:text-base">
+      Nurturing young minds for future-ready learning
+    </p>
+ 
+    <span className="mt-5 block h-1.5 w-24 rounded-full bg-gradient-to-r from-red-600 via-amber-400 to-red-600" aria-hidden />
+ 
+    <p className="mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-xl sm:leading-9">
+      At Bal Vatika – I, our Olympiad is a joyful first step towards learning beyond the
+      classroom. Designed for our 3-year-old little learners, it encourages curiosity,
+      observation, thinking, and confidence through fun and age-appropriate examination.
+    </p>
+    <p className="mt-4 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
+      We believe every child is naturally curious — and our aim is to nurture that
+      curiosity, one little discovery at a time.
+    </p>
+ 
+    {/* chips */}
+    <div className="mt-8 flex flex-wrap gap-3">
+      <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
+        <Clock className="bv-tick h-5 w-5 text-red-600" />
+        Flexible exam window
+      </span>
+      <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
+        <Baby className="bv-pop h-5 w-5 text-amber-600" />
+        Age 3+ little learners
+      </span>
+      <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
+        <Sparkles className="bv-glow h-5 w-5 text-violet-600" />
+        Play-based questions
+      </span>
+    </div>
+  </div>
+</section>
 
       {/* ============ STICKY TABS ============ */}
       <div className="sticky top-0 z-30 border-b border-black/5 bg-white/85 backdrop-blur">
@@ -383,7 +431,7 @@ export default function Page() {
       </section>
 
       {/* ============ FULL SYLLABUS ============ */}
-      <section
+      {/* <section
         id="syllabus-section"
         className="relative w-full scroll-mt-24 overflow-hidden"
         style={{ backgroundImage: "linear-gradient(180deg,#ffffff 0%,#fff7ed 50%,#ffffff 100%)" }}
@@ -428,7 +476,7 @@ export default function Page() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -59,7 +59,7 @@ function AnimIcon({ icon: Icon, anim = "ab-float", grad = "from-red-500 to-rose-
 
 /* ================= data ================= */
 const MINI_STATS = [
-  { a: "I–X", b: "Classes", icon: GraduationCap, anim: "ab-float", grad: "from-pink-500 to-orange-400" },
+  { a: "Balvatika I–X", b: "Classes", icon: GraduationCap, anim: "ab-float", grad: "from-pink-500 to-orange-400" },
   { a: "9+", b: "Subjects", icon: BookOpen, anim: "ab-flip", grad: "from-red-500 to-cyan-400" },
   { a: "All", b: "Boards", icon: Library, anim: "ab-pop", grad: "from-emerald-500 to-lime-400" },
 ];
