@@ -41,8 +41,10 @@ const ANIM_CSS = `
 
 /* ================= defaults ================= */
 const DEFAULT_TESTIMONIALS = [
-  { name: "Mrs. Anjali Verma", role: "Principal", school: "Sunrise Public School", rating: 5,
-    message: "NextGen Olympiad made competitive learning genuinely exciting for our students. The process was smooth and results were quick." },
+  {
+    name: "Mrs. Anjali Verma", role: "Principal", school: "Sunrise Public School", rating: 5,
+    message: "NextGen Olympiad made competitive learning genuinely exciting for our students. The process was smooth and results were quick."
+  },
   // { name: "Mr. Rakesh Kumar", role: "Parent", school: "", rating: 5,
   //   message: "My daughter loved the Wonder Kids Olympiad. It felt like play, not pressure. Highly recommended!" },
   // { name: "Ms. Priya Nair", role: "Coordinator", school: "Green Valley School", rating: 5,
@@ -50,19 +52,28 @@ const DEFAULT_TESTIMONIALS = [
 ];
 
 const DEFAULT_FAQS = [
-  { question: "Who can participate in NextGen Olympiad?",
-    answer: "Students from Classes I to X can participate in the NextGen Olympiad, and Bal Vatika I to III can join our Wonder Kids." },
-  { question: "How does my school register?",
-    answer: "Click Register, fill in your school details, verify your email via OTP, and our team will approve your account." },
-  { question: "How are results published?",
-    answer: "The admin uploads results per school. They instantly appear in your school dashboard and can be checked publicly using the student code." },
-  { question: "Do all participants get certificates?",
-    answer: "Yes. Every participant receives a certificate, and top performers earn medals and trophies." },
+  {
+    question: "Who can participate in NextGen Olympiad?",
+    answer: "Students from Classes I to X can participate in the NextGen Olympiad, and Bal Vatika I to III can join our Wonder Kids."
+  },
+  {
+    question: "How does my school register?",
+    answer: "Click Register, fill in your school details, verify your email via OTP, and our team will approve your account."
+  },
+  {
+    question: "How are results published?",
+    answer: "The admin uploads results per school. They instantly appear in your school dashboard and can be checked publicly using the student code."
+  },
+  {
+    question: "Do all participants get certificates?",
+    answer: "Yes. Every participant receives a certificate, and top performers earn medals and trophies."
+  },
 ];
 
 const TONES = [
   { grad: "from-pink-500 to-orange-400", soft: "bg-pink-50", ring: "ring-pink-200", text: "text-pink-600" },
-  { grad: "from-blue-500 to-cyan-400", soft: "bg-sky", ring: "ring-sky", text: "text-sky" },
+  { grad: "from-blue-500 to-cyan-400", soft: "bg-sky-50", ring: "ring-sky-500", text: "text-sky-500",
+  },
   { grad: "from-emerald-500 to-lime-400", soft: "bg-emerald-50", ring: "ring-emerald-200", text: "text-emerald-600" },
   { grad: "from-violet-500 to-pink-500", soft: "bg-violet-50", ring: "ring-violet-200", text: "text-violet-600" },
   { grad: "from-rose-500 to-amber-400", soft: "bg-rose-50", ring: "ring-rose-200", text: "text-rose-600" },
@@ -151,8 +162,8 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
           <div className="text-center">
             <Eyebrow icon={ThumbsUp} anim="tf-thumb">Loved by Educators</Eyebrow>
             <h2 className="mt-5 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-              What{" "}
-              <span className="tf-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">Schools Say</span>
+              Client{" "}
+              <span className="tf-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">Reviews</span>
             </h2>
           </div>
 
@@ -223,9 +234,8 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
                   <button
                     key={t._id || i}
                     onClick={() => setSlide(i)}
-                    className={`group relative flex w-full min-w-0 items-start gap-3 overflow-hidden rounded-3xl p-4 text-left ring-1 transition duration-300 sm:gap-4 sm:p-5 ${
-                      on ? `${tone.soft} ${tone.ring} -translate-y-0.5 shadow-[0_20px_45px_-28px_rgba(15,23,42,0.6)]` : "bg-white ring-black/5 hover:-translate-y-0.5 hover:shadow-md"
-                    }`}
+                    className={`group relative flex w-full min-w-0 items-start gap-3 overflow-hidden rounded-3xl p-4 text-left ring-1 transition duration-300 sm:gap-4 sm:p-5 ${on ? `${tone.soft} ${tone.ring} -translate-y-0.5 shadow-[0_20px_45px_-28px_rgba(15,23,42,0.6)]` : "bg-white ring-black/5 hover:-translate-y-0.5 hover:shadow-md"
+                      }`}
                   >
                     <span className={`absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b ${tone.grad} transition ${on ? "opacity-100" : "opacity-0 group-hover:opacity-60"}`} />
                     <Avatar t={t} tone={tone} />
@@ -320,9 +330,8 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
               return (
                 <div
                   key={f._id || i}
-                  className={`group relative overflow-hidden rounded-3xl ring-1 transition-all duration-300 ${
-                    isOpen ? `bg-white ${tone.ring} shadow-[0_25px_55px_-30px_rgba(15,23,42,0.6)]` : "bg-white/80 ring-black/5 backdrop-blur hover:bg-white hover:shadow-md"
-                  }`}
+                  className={`group relative overflow-hidden rounded-3xl ring-1 transition-all duration-300 ${isOpen ? `bg-white ${tone.ring} shadow-[0_25px_55px_-30px_rgba(15,23,42,0.6)]` : "bg-white/80 ring-black/5 backdrop-blur hover:bg-white hover:shadow-md"
+                    }`}
                 >
                   <span className={`absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b ${tone.grad} transition ${isOpen ? "opacity-100" : "opacity-0"}`} />
                   <button
@@ -337,9 +346,8 @@ export default function TestimonialAndFaq({ testimonials, faqs }) {
                     </span>
                     <span className={`min-w-0 flex-1 break-words font-bold transition ${isOpen ? tone.text : "text-slate-900"}`}>{f.question}</span>
                     <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition duration-300 sm:h-9 sm:w-9 ${
-                        isOpen ? `rotate-180 bg-gradient-to-br ${tone.grad} text-white` : "bg-slate-100 text-slate-500 group-hover:bg-slate-200"
-                      }`}
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition duration-300 sm:h-9 sm:w-9 ${isOpen ? `rotate-180 bg-gradient-to-br ${tone.grad} text-white` : "bg-slate-100 text-slate-500 group-hover:bg-slate-200"
+                        }`}
                     >
                       <ChevronDown className="h-4 w-4" />
                     </span>

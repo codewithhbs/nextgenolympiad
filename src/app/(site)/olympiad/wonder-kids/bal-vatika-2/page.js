@@ -120,9 +120,8 @@ function SubjectAccordion({ items, open, setOpen, renderBody }) {
         return (
           <div
             key={s.subject}
-            className={`overflow-hidden rounded-3xl ring-1 transition-all duration-300 ${
-              isOpen ? `bg-white ${st.ring} shadow-[0_25px_55px_-32px_rgba(15,23,42,.6)]` : "bg-white/70 ring-black/5 backdrop-blur hover:bg-white hover:shadow-md"
-            }`}
+            className={`overflow-hidden rounded-3xl ring-1 transition-all duration-300 ${isOpen ? `bg-white ${st.ring} shadow-[0_25px_55px_-32px_rgba(15,23,42,.6)]` : "bg-white/70 ring-black/5 backdrop-blur hover:bg-white hover:shadow-md"
+              }`}
           >
             <button onClick={() => setOpen(isOpen ? -1 : i)} aria-expanded={isOpen} className="group flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6">
               <span
@@ -185,88 +184,88 @@ export default function Page() {
 
       {/* ============ HERO ============ */}
       <section
-  className="relative w-full overflow-hidden"
-  style={{ backgroundImage: "linear-gradient(160deg,#fff1f2 0%,#ffffff 45%,#eff6ff 100%)" }}
->
-  <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />
- 
-  {/* backdrop */}
-  <div className="pointer-events-none absolute inset-0" aria-hidden>
-    <div className="bv-blob absolute -left-24 -top-24 h-80 w-80 bg-rose-300/35 blur-3xl" />
-    <div className="bv-blob absolute -right-24 bottom-0 h-80 w-80 bg-blue-300/35 blur-3xl" />
-    <div className="bv-blob absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 bg-amber-300/25 blur-3xl" />
-    <div
-      className="absolute inset-0 opacity-30"
-      style={{ backgroundImage: "radial-gradient(#fda4af 1px, transparent 1px)", backgroundSize: "26px 26px", maskImage: "linear-gradient(to bottom, black, transparent)" }}
-    />
-    <Star className="bv-pop absolute left-[6%] top-14 h-5 w-5 fill-amber-400 text-amber-400" />
-    <Star className="bv-float absolute right-[10%] top-24 h-4 w-4 fill-rose-400 text-rose-400" />
-    <Star className="bv-pop absolute left-[35%] bottom-10 hidden h-4 w-4 fill-violet-400 text-violet-400 sm:block" />
- 
-    {/* playful floating bubbles */}
-    <span className="bv-float absolute right-[6%] top-1/2 hidden h-20 w-20 place-items-center rounded-3xl bg-white/80 font-display text-2xl font-black text-pink-500 shadow-xl ring-1 ring-black/5 backdrop-blur lg:grid">
-      Aa
-    </span>
-    <span className="bv-float absolute right-[16%] bottom-14 hidden h-16 w-16 place-items-center rounded-2xl bg-white/80 font-display text-xl font-black text-blue-500 shadow-xl ring-1 ring-black/5 backdrop-blur lg:grid" style={{ animationDelay: "1s" }}>
-      123
-    </span>
-    <span className="bv-float absolute right-[26%] top-16 hidden h-14 w-14 place-items-center rounded-2xl bg-white/80 text-2xl shadow-xl ring-1 ring-black/5 backdrop-blur xl:grid" style={{ animationDelay: ".5s" }}>
-      🎨
-    </span>
-  </div>
- 
-  <div className="relative mx-auto w-full max-w-[1600px] px-4 py-16 sm:px-6 md:py-24 lg:px-10 xl:px-14">
-    {/* badge */}
-    <span className="bv-rise inline-flex items-center gap-3 rounded-full bg-white/85 py-1.5 pl-1.5 pr-5 shadow-[0_12px_30px_-18px_rgba(216,31,38,.8)] ring-1 ring-rose-100 backdrop-blur">
-      <span className="relative grid h-10 w-10 place-items-center rounded-full">
-        <span className="absolute inset-0 animate-ping rounded-full bg-amber-400/40" style={{ animationDuration: "2.6s" }} />
-        <span className="relative grid h-full w-full place-items-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white">
-          <Baby className="bv-pop h-5 w-5" />
-        </span>
-      </span>
-      <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-red-600 sm:text-sm">Wonder Kids Olympiad</span>
-      <Sparkles className="bv-glow h-4 w-4 text-amber-500" />
-    </span>
- 
-    {/* title */}
-    <h1 className="bv-rise mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-6xl xl:text-7xl">
-      Balvatika –{" "}
-      <span className="relative inline-block">
-        <span className="bv-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">II</span>
-        <span className="bv-spin-slow absolute -inset-4 rounded-full border-2 border-dashed border-amber-300/70" aria-hidden />
-      </span>
-    </h1>
- 
-    <p className="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-amber-600 sm:text-base">
-      Age-appropriate assessment across core early-learning areas
-    </p>
- 
-    <span className="mt-5 block h-1.5 w-24 rounded-full bg-gradient-to-r from-red-600 via-amber-400 to-red-600" aria-hidden />
- 
-    <p className="mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-xl sm:leading-9">
-      At Bal Vatika – II, our Olympiad encourages 4-year-olds to explore, observe, think,
-      and learn with confidence. Through simple and engaging age-appropriate examination,
-      children get an opportunity to strengthen their early learning skills while enjoying
-      the excitement of discovering something new.
-    </p>
- 
-    {/* chips */}
-    <div className="mt-8 flex flex-wrap gap-3">
-      <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
-        <Clock className="bv-tick h-5 w-5 text-red-600" />
-        Flexible exam window
-      </span>
-      <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
-        <Baby className="bv-pop h-5 w-5 text-amber-600" />
-        Age 4+ little learners
-      </span>
-      <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
-        <Sparkles className="bv-glow h-5 w-5 text-violet-600" />
-        Play-based questions
-      </span>
-    </div>
-  </div>
-</section>
+        className="relative w-full overflow-hidden"
+        style={{ backgroundImage: "linear-gradient(160deg,#fff1f2 0%,#ffffff 45%,#eff6ff 100%)" }}
+      >
+        <style dangerouslySetInnerHTML={{ __html: ANIM_CSS }} />
+
+        {/* backdrop */}
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="bv-blob absolute -left-24 -top-24 h-80 w-80 bg-rose-300/35 blur-3xl" />
+          <div className="bv-blob absolute -right-24 bottom-0 h-80 w-80 bg-blue-300/35 blur-3xl" />
+          <div className="bv-blob absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 bg-amber-300/25 blur-3xl" />
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{ backgroundImage: "radial-gradient(#fda4af 1px, transparent 1px)", backgroundSize: "26px 26px", maskImage: "linear-gradient(to bottom, black, transparent)" }}
+          />
+          <Star className="bv-pop absolute left-[6%] top-14 h-5 w-5 fill-amber-400 text-amber-400" />
+          <Star className="bv-float absolute right-[10%] top-24 h-4 w-4 fill-rose-400 text-rose-400" />
+          <Star className="bv-pop absolute left-[35%] bottom-10 hidden h-4 w-4 fill-violet-400 text-violet-400 sm:block" />
+
+          {/* playful floating bubbles */}
+          <span className="bv-float absolute right-[6%] top-1/2 hidden h-20 w-20 place-items-center rounded-3xl bg-white/80 font-display text-2xl font-black text-pink-500 shadow-xl ring-1 ring-black/5 backdrop-blur lg:grid">
+            Aa
+          </span>
+          <span className="bv-float absolute right-[16%] bottom-14 hidden h-16 w-16 place-items-center rounded-2xl bg-white/80 font-display text-xl font-black text-blue-500 shadow-xl ring-1 ring-black/5 backdrop-blur lg:grid" style={{ animationDelay: "1s" }}>
+            123
+          </span>
+          <span className="bv-float absolute right-[26%] top-16 hidden h-14 w-14 place-items-center rounded-2xl bg-white/80 text-2xl shadow-xl ring-1 ring-black/5 backdrop-blur xl:grid" style={{ animationDelay: ".5s" }}>
+            🎨
+          </span>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-[1600px] px-4 py-16 sm:px-6 md:py-24 lg:px-10 xl:px-14">
+          {/* badge */}
+          <span className="bv-rise inline-flex items-center gap-3 rounded-full bg-white/85 py-1.5 pl-1.5 pr-5 shadow-[0_12px_30px_-18px_rgba(216,31,38,.8)] ring-1 ring-rose-100 backdrop-blur">
+            <span className="relative grid h-10 w-10 place-items-center rounded-full">
+              <span className="absolute inset-0 animate-ping rounded-full bg-amber-400/40" style={{ animationDuration: "2.6s" }} />
+              <span className="relative grid h-full w-full place-items-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white">
+                <Baby className="bv-pop h-5 w-5" />
+              </span>
+            </span>
+            <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-red-600 sm:text-sm">Wonder Kids Olympiad</span>
+            <Sparkles className="bv-glow h-4 w-4 text-amber-500" />
+          </span>
+
+          {/* title */}
+          <h1 className="bv-rise mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-6xl xl:text-7xl">
+            Balvatika –{" "}
+            <span className="relative inline-block">
+              <span className="bv-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">II</span>
+              <span className="bv-spin-slow absolute -inset-4 rounded-full border-2 border-dashed border-amber-300/70" aria-hidden />
+            </span>
+          </h1>
+
+          <p className="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-amber-600 sm:text-base">
+            Age-appropriate assessment across core early-learning areas
+          </p>
+
+          <span className="mt-5 block h-1.5 w-24 rounded-full bg-gradient-to-r from-red-600 via-amber-400 to-red-600" aria-hidden />
+
+          <p className="mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-xl sm:leading-9">
+            At Bal Vatika – II, our Olympiad encourages 4-year-olds to explore, observe, think,
+            and learn with confidence. Through simple and engaging age-appropriate examination,
+            children get an opportunity to strengthen their early learning skills while enjoying
+            the excitement of discovering something new.
+          </p>
+
+          {/* chips */}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
+              <Clock className="bv-tick h-5 w-5 text-red-600" />
+              Flexible exam window
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
+              <Baby className="bv-pop h-5 w-5 text-amber-600" />
+              Age 4+ little learners
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-black/5 sm:text-base">
+              <Sparkles className="bv-glow h-5 w-5 text-violet-600" />
+              Play-based questions
+            </span>
+          </div>
+        </div>
+      </section>
 
       {/* ============ STICKY TABS ============ */}
       <div className="sticky top-0 z-30 border-b border-black/5 bg-white/85 backdrop-blur">
@@ -277,9 +276,8 @@ export default function Page() {
               <button
                 key={tab.id}
                 onClick={() => scrollToSection(tab.id)}
-                className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-bold transition sm:text-base ${
-                  on ? "bg-gradient-to-r from-red-600 to-rose-500 text-white shadow-lg shadow-rose-400/40" : "bg-slate text-white hover:bg-slate"
-                }`}
+                className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-bold transition sm:text-base ${on ? "bg-gradient-to-r from-red-600 to-rose-500 text-white shadow-lg shadow-rose-400/40" : "bg-slate text-white hover:bg-slate"
+                  }`}
               >
                 {tab.label}
                 <ChevronRight className={`h-4 w-4 transition ${on ? "rotate-90" : "opacity-50"}`} />

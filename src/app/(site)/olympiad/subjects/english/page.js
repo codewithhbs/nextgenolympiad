@@ -97,7 +97,7 @@ const SAMPLE_PAPERS = {
   "Class 7": "/sample-papers/NEXTGEN-ENGLISH-CLASS-7.pdf",
   "Class 8": "/sample-papers/NEXTGEN-ENGLISH-CLASS-8.pdf",
   "Class 9": "#",
-  "Class 10": "#",
+  "Class 10": "/sample-papers/NEXTGEN-ENGLISH-CLASS-10.pdf",
 };
 
 const SKILLS_ASSESSED = [
