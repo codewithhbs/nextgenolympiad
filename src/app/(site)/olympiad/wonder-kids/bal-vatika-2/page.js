@@ -243,7 +243,7 @@ export default function Page() {
           <span className="mt-5 block h-1.5 w-24 rounded-full bg-gradient-to-r from-red-600 via-amber-400 to-red-600" aria-hidden />
 
           <p className="mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-xl sm:leading-9">
-            At Bal Vatika – II, our Olympiad encourages 4-year-olds to explore, observe, think,
+            At Balvatika – II, our Olympiad encourages 4-year-olds to explore, observe, think,
             and learn with confidence. Through simple and engaging age-appropriate examination,
             children get an opportunity to strengthen their early learning skills while enjoying
             the excitement of discovering something new.
@@ -453,7 +453,7 @@ export default function Page() {
               <div>
                 <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-4xl xl:text-5xl">Complete Syllabus</h2>
                 <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70 sm:text-sm">
-                  Bal Vatika – II · Olympiad Syllabus
+                  Balvatika – II · Olympiad Syllabus
                 </p>
               </div>
             </div>

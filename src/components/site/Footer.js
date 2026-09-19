@@ -33,7 +33,7 @@ export default function Footer({ settings }) {
             </span>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/85">
-            {settings?.footerText || "Learn • Compete • Excel. A national-level Olympiad for Classes I–X and Wonder Kids (Bal Vatika)."}
+            {settings?.footerText || "Learn • Compete • Excel. A national-level Olympiad for Classes I–X and Wonder Kids (Balvatika)."}
           </p>
           {activeSocials.length > 0 && (
             <div className="mt-5 flex gap-2.5">

@@ -153,7 +153,7 @@ const SUBJECTS = [
 
 const STATS = [
   { value: "10+", label: "Years of experience", icon: Clock, anim: "ng-spin", grad: "from-red-500 to-rose-500", tint: "from-rose-50 to-white" },
-  { value: "Bal Vatika – X", label: "Classes covered", icon: GraduationCap, anim: "ng-float", grad: "from-amber-400 to-orange-500", tint: "from-amber-50 to-white" },
+  { value: "Balvatika – X", label: "Classes covered", icon: GraduationCap, anim: "ng-float", grad: "from-amber-400 to-orange-500", tint: "from-amber-50 to-white" },
   { value: "Exciting", label: "Scholarships", icon: HeartHandshake, anim: "ng-beat", grad: "from-violet-500 to-fuchsia-500", tint: "from-violet-50 to-white" },
   { value: "Pan-India", label: "School network", icon: Globe2, anim: "ng-spin", grad: "from-emerald-500 to-teal-500", tint: "from-emerald-50 to-white" },
 ];
@@ -167,7 +167,7 @@ const FEATURES = [
 
 const VISION = [
   { icon: Eye, anim: "ng-blink", grad: "from-red-500 to-rose-500", accent: "bg-rose-500", title: "Our Vision", text: "To empower students and teachers for a future-ready educational system, and to see Bharat as the Vishwaguru — discovering learners' potential by opening new opportunities and strengthening their knowledge base and confidence." },
-  { icon: ShieldCheck, anim: "ng-pop", grad: "from-amber-400 to-orange-500", accent: "bg-amber-500", title: "A Registered Trust", text: "NextGen Olympiad Foundation is a trust registered by the Govt. of NCT of Delhi, headquartered in New Delhi, dedicated to promoting learning beyond the school curriculum for Classes Bal Vatika I to X." },
+  { icon: ShieldCheck, anim: "ng-pop", grad: "from-amber-400 to-orange-500", accent: "bg-amber-500", title: "A Registered Trust", text: "NextGen Olympiad Foundation is a trust registered by the Govt. of NCT of Delhi, headquartered in New Delhi, dedicated to promoting learning beyond the school curriculum for Classes Balvatika I to X." },
   { icon: Users, anim: "ng-float", grad: "from-violet-500 to-fuchsia-500", accent: "bg-violet-500", title: "In Partnership", text: "We are proud to associate with esteemed, future-ready institutions in spreading quality education — reckoned as the organiser of one of the biggest and most popular national olympiads." },
 ];
 
@@ -371,7 +371,7 @@ export default function AboutPage() {
               <AnimIcon icon={GraduationCap} anim="ng-wiggle" grad="from-amber-400 to-orange-500" size="sm" ping={false} />
               <div className="leading-tight">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500">For students</p>
-                <p className="font-display text-sm font-extrabold text-neutral-900 sm:text-base">Bal Vatika I – Class X</p>
+                <p className="font-display text-sm font-extrabold text-neutral-900 sm:text-base">Balvatika I – Class X</p>
               </div>
             </div>
 
@@ -386,7 +386,7 @@ export default function AboutPage() {
 
           {/* TEXT */}
           <div className="order-1 text-center lg:order-2 lg:text-left">
-            <Eyebrow icon={Star4}>About the Foundation</Eyebrow>
+            {/* <Eyebrow icon={Star4}>About the Foundation</Eyebrow> */}
 
             <h2 className="mt-5 font-display text-3xl font-extrabold leading-[1.15] tracking-tight text-neutral-900 sm:text-4xl xl:text-5xl">
               Inspiring Young Minds, <GradText>Beyond the Classroom</GradText>
@@ -398,7 +398,7 @@ export default function AboutPage() {
 
             <div className="mt-6 grid gap-4 text-left sm:grid-cols-2">
               {[
-                { t: "Our Mission", d: "Inspire young minds and nurture talent in students from Bal Vatika I to Class X.", icon: Target, anim: "ng-beat", grad: "from-red-500 to-rose-500", bar: "from-red-500 to-rose-400" },
+                { t: "Our Mission", d: "Inspire young minds and nurture talent in students from Balvatika I to Class X.", icon: Target, anim: "ng-beat", grad: "from-red-500 to-rose-500", bar: "from-red-500 to-rose-400" },
                 { t: "Our Vision", d: "A future-ready education system that builds knowledge, confidence and critical thinking.", icon: Eye, anim: "ng-blink", grad: "from-violet-500 to-fuchsia-500", bar: "from-violet-500 to-fuchsia-400" },
               ].map((c) => (
                 <div key={c.t} className="group relative overflow-hidden rounded-2xl bg-white p-5 shadow-[0_18px_45px_-30px_rgba(0,0,0,0.5)] ring-1 ring-black/5 transition hover:-translate-y-1">

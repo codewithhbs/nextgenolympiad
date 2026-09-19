@@ -54,7 +54,7 @@ const DEFAULT_TESTIMONIALS = [
 const DEFAULT_FAQS = [
   {
     question: "Who can participate in NextGen Olympiad?",
-    answer: "Students from Classes I to X can participate in the NextGen Olympiad, and Bal Vatika I to III can join our Wonder Kids."
+    answer: "Students from Classes I to X can participate in the NextGen Olympiad, and Balvatika I to III can join our Wonder Kids."
   },
   {
     question: "How does my school register?",

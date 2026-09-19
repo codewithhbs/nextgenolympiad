@@ -151,7 +151,7 @@ export default function Cta() {
                 {/* badge */}
                 {/* <div className="ct-float absolute -bottom-2 left-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-white px-4 py-2 text-xs font-extrabold text-violet-900 shadow-xl" style={{ translate: "-50% 0" }}>
                   <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  Classes Bal Vatika – X
+                  Classes Balvatika – X
                 </div> */}
               </div>
             </div>

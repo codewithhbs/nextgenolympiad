@@ -14,7 +14,7 @@ const PILLARS = [
 const STRIP = [
     { icon: Globe, a: "National-Level", b: "Olympiad" },
     { icon: ShieldCheck, a: "Secure & Fair", b: "" },
-    { icon: BarChart3, a: "For Classes I–X", b: "& Wonder Kids (Bal Vatika)" },
+    { icon: BarChart3, a: "For Classes I–X", b: "& Wonder Kids (Balvatika)" },
 ];
 
 export default function Hero() {
@@ -35,7 +35,7 @@ export default function Hero() {
 
                         &{" "}
                         <span className="text-leaf">Wonder Kids</span>{" "}
-                        <span className="text-saffron">(Bal Vatika)</span>
+                        <span className="text-saffron">(Balvatika)</span>
                     </h1>
 
                     <p className="mt-4 max-w-xl text-lg text-ink-soft">

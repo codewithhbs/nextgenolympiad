@@ -5,9 +5,9 @@ import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight, Trophy, Brain, Globe, ShieldCheck } from "lucide-react";
 
 const DEFAULT_SLIDES = [
-  { image: "/brand/hero-scene.png", kicker: "National-Level Olympiad · 2026–27", title: "Learn. Compete. Excel.", subtitle: "A national-level Olympiad for Classes I–X and Wonder Kids (Bal Vatika I-II–III), designed to reward reasoning over rote.", ctaText: "Register Your School", ctaHref: "/apply" },
+  { image: "/brand/hero-scene.png", kicker: "National-Level Olympiad · 2026–27", title: "Learn. Compete. Excel.", subtitle: "A national-level Olympiad for Classes I–X and Wonder Kids (Balvatika I-II–III), designed to reward reasoning over rote.", ctaText: "Register Your School", ctaHref: "/apply" },
   { image: "/gallery/activity-1.jpg", kicker: "Benchmark, not just rank", title: "Every child competes with their own best self.", subtitle: "Detailed Student Progress Reports show what learners know, where the gaps are, and how they grow.", ctaText: "How It Works", ctaHref: "/about" },
-  { image: "/gallery/activity-5.jpg", kicker: "Wonder Kids Olympiad", title: "Joyful, play-based learning for early years.", subtitle: "Aligned with NEP 2020, Wonder Kids gently introduces Bal Vatika learners to structured thinking.", ctaText: "Explore Wonder Kids", ctaHref: "/about" },
+  { image: "/gallery/activity-5.jpg", kicker: "Wonder Kids Olympiad", title: "Joyful, play-based learning for early years.", subtitle: "Aligned with NEP 2020, Wonder Kids gently introduces Balvatika learners to structured thinking.", ctaText: "Explore Wonder Kids", ctaHref: "/about" },
 ];
 
 const PILLARS = [

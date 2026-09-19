@@ -87,7 +87,7 @@ const settingsSchema = new mongoose.Schema(
     },
     seoDefaults: {
       metaTitle: { type: String, default: "NextGen Olympiad Foundation" },
-      metaDescription: { type: String, default: "National level Olympiad for Classes I–X and Wonder Kids for Bal Vatika." },
+      metaDescription: { type: String, default: "National level Olympiad for Classes I–X and Wonder Kids for Balvatika." },
       keywords: { type: [String], default: ["olympiad", "nextgen", "wonder kids", "school olympiad"] },
       ogImage: String,
     },

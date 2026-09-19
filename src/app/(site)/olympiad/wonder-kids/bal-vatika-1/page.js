@@ -245,7 +245,7 @@ export default function Page() {
     <span className="mt-5 block h-1.5 w-24 rounded-full bg-gradient-to-r from-red-600 via-amber-400 to-red-600" aria-hidden />
  
     <p className="mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-xl sm:leading-9">
-      At Bal Vatika – I, our Olympiad is a joyful first step towards learning beyond the
+      At Balvatika – I, our Olympiad is a joyful first step towards learning beyond the
       classroom. Designed for our 3-year-old little learners, it encourages curiosity,
       observation, thinking, and confidence through fun and age-appropriate examination.
     </p>
@@ -459,7 +459,7 @@ export default function Page() {
               <div>
                 <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-4xl xl:text-5xl">Complete Syllabus</h2>
                 <p className="mt-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70 sm:text-sm">
-                  Bal Vatika – I · Olympiad Syllabus
+                  Balvatika – I · Olympiad Syllabus
                 </p>
               </div>
             </div>

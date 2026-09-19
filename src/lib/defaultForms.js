@@ -54,7 +54,7 @@ export const DEFAULT_FORMS = [
   {
     slug: "wonderkids",
     title: "Wonder Kids Olympiad — School Registration",
-    subtitle: "Bal Vatika I, II & III · English · Mathematics · EVS · Drawing",
+    subtitle: "Balvatika I, II & III · English · Mathematics · EVS · Drawing",
     order: 2,
     isActive: true,
     formVersion: FORM_VERSION,

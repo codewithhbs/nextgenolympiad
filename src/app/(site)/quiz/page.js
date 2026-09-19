@@ -9,8 +9,8 @@ export async function generateMetadata() {
   try { s = await getSettings(); } catch {}
   return buildMetadata({
     title: `Olympiads & Quizzes • ${s.siteName || "NextGen Olympiad Foundation"}`,
-    description: "Explore NextGen Olympiad for Classes I–X and Wonder Kids for Bal Vatika I-II–III. Subjects, eligibility, exam pattern, rewards and how to register.",
-    keywords: ["nextgen olympiad", "wonder kids", "bal vatika olympiad", "olympiad subjects", "olympiad exam pattern"],
+    description: "Explore NextGen Olympiad for Classes I–X and Wonder Kids for Balvatika I-II–III. Subjects, eligibility, exam pattern, rewards and how to register.",
+    keywords: ["nextgen olympiad", "wonder kids", "balvatika olympiad", "olympiad subjects", "olympiad exam pattern"],
     path: "/quiz",
     siteName: s.siteName,
     image: s.seoDefaults?.ogImage,
@@ -26,8 +26,8 @@ const programs = [
     points: ["Two-level examination", "Concept + application focus", "Certificate for every participant", "Merit ranks & medals"],
   },
   {
-    name: "Wonder Kids — Bal Vatika",
-    forWhom: "Bal Vatika I - II – III",
+    name: "Wonder Kids — Balvatika",
+    forWhom: "Balvatika I - II – III",
     color: "grape",
     subjects: ["English", "Mathematics", "EVS", "Drawing"],
     points: ["Play-based, joyful format", "Age-appropriate questions", "Participation certificate", "Little-champion awards"],
@@ -50,7 +50,7 @@ export default function QuizPage() {
             <span className="mb-3 inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold text-saffron">Session 2026-27</span>
             <h1 className="text-4xl font-extrabold md:text-5xl">Olympiads built to make thinking fun</h1>
             <p className="mt-4 max-w-lg text-white/80">
-              From Bal Vatika to Class X, our olympiads reward curiosity, reasoning and real understanding — not memorisation.
+              From Balvatika to Class X, our olympiads reward curiosity, reasoning and real understanding — not memorisation.
             </p>
             <div className="mt-7 flex gap-3">
               <Link href="/register"><Button size="lg">Register your school</Button></Link>

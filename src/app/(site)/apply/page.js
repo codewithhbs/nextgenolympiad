@@ -7,7 +7,7 @@ export async function generateMetadata() {
   try { s = await getSettings(); } catch {}
   return buildMetadata({
     title: `Register School • ${s.siteName || "NextGen Olympiad Foundation"}`,
-    description: "Register your school for the NextGen Olympiad 2026–27 — Classes I–X and Wonder Kids (Bal Vatika).",
+    description: "Register your school for the NextGen Olympiad 2026–27 — Classes I–X and Wonder Kids (Balvatika).",
     path: "/apply",
     siteName: s.siteName,
   });

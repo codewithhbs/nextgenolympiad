@@ -9,7 +9,7 @@ import { Button, Badge, CrestDivider } from "@/components/ui";
 export const metadata = {
   title: "Wonder Kids Olympiad",
   description:
-    "Wonder Kids Olympiad from NextGen — for Bal Vatika I, II & III. English, Mathematics, EVS and Drawing, aligned with NEP 2020 and ECCE.",
+    "Wonder Kids Olympiad from NextGen — for Balvatika I, II & III. English, Mathematics, EVS and Drawing, aligned with NEP 2020 and ECCE.",
 };
 
 /* ================= animation css ================= */
@@ -96,7 +96,7 @@ export default function WonderKidsPage() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:py-20 md:grid-cols-2 md:px-6">
           <div className="text-center md:text-left">
             <span className="inline-flex rounded-full bg-gold-soft px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-gold-ink sm:text-sm">
-              Bal Vatika I, II &amp; III
+              Balvatika I, II &amp; III
             </span>
             <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight text-ink md:text-5xl">
               Wonder Kids <span className="text-brand">Olympiad</span>

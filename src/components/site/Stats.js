@@ -22,7 +22,7 @@ const ANIM_CSS = `
 `;
 
 const PILLARS = [
-  { icon: GraduationCap, anim: "st-cap", title: "For Balvatika I to X", text: "Age-appropriate assessment, Bal Vatika to Class 10.", bg: "linear-gradient(135deg,#ec4899 0%,#fb923c 100%)", tint: "#fdf2f8", line: "#ec4899", glow: "rgba(236,72,153,0.45)" },
+  { icon: GraduationCap, anim: "st-cap", title: "For Balvatika I to X", text: "Age-appropriate assessment, Balvatika to Class 10.", bg: "linear-gradient(135deg,#ec4899 0%,#fb923c 100%)", tint: "#fdf2f8", line: "#ec4899", glow: "rgba(236,72,153,0.45)" },
   { icon: Target, anim: "st-beat", title: "Benchmark, Not Rank", text: "Students grow against their own past self.", bg: "linear-gradient(135deg,#0ea5e9 0%,#22d3ee 100%)", tint: "#eff6ff", line: "#0ea5e9", glow: "rgba(14,165,233,0.45)" },
   { icon: ShieldCheck, anim: "st-pop", title: "All Boards Welcome", text: "One consistent standard across every board.", bg: "linear-gradient(135deg,#10b981 0%,#a3e635 100%)", tint: "#ecfdf5", line: "#10b981", glow: "rgba(16,185,129,0.45)" },
   { icon: Sparkles, anim: "st-twinkle", title: "9+ Subjects", text: "From core academics to computational thinking.", bg: "linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%)", tint: "#f5f3ff", line: "#8b5cf6", glow: "rgba(139,92,246,0.45)" },
