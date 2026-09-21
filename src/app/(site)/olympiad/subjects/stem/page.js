@@ -191,12 +191,12 @@ const SYLLABUS = {
 const SAMPLE_PAPERS = {
   "Class 1": "#",
   "Class 2": "#",
-  "Class 3": "#",
+  "Class 3": "/sample-papers/NEXTGEN-STEM-CLASS-3.pdf",
   "Class 4": "#",
   "Class 5": "#",
-  "Class 6": "#",
-  "Class 7": "#",
-  "Class 8": "#",
+  "Class 6": "/sample-papers/NEXTGEN-STEM-CLASS-6.pdf",
+  "Class 7": "/sample-papers/NEXTGEN-STEM-CLASS-7.pdf",
+  "Class 8": "/sample-papers/NEXTGEN-STEM-CLASS-8.pdf",
   "Class 9": "#",
 };
 
