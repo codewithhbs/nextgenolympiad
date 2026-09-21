@@ -367,8 +367,7 @@ export default function Page() {
           </h1>
 
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate sm:text-xl sm:leading-9">
-            Class-wise STEM syllabus covering Science, Technology &amp; Engineering, and
-            Mathematics.
+            The world of tomorrow is built on science, technology, engineering, and maths, and every big idea begins with a curious mind. Our STEM Olympiad is a competitive challenge that pushes students to ask questions, think creatively, and solve real-world problems. Give your child the chance to explore, experiment, and discover the innovator inside them.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">

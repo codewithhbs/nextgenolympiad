@@ -242,8 +242,7 @@ export default function Page() {
           </h1>
 
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate sm:text-xl sm:leading-9">
-            Class-wise Computational Thinking syllabus covering logic, patterns, algorithms and
-            problem-solving — the literacy of the next decade.
+            Computational thinking is the skill of breaking big problems into small steps and finding smart ways to solve them, and it is a superpower for the digital age. Our Computational Thinking Olympiad is a competitive challenge that builds logic, pattern recognition, and creative problem-solving, with no coding experience needed. Give your child the chance to think like a innovator, solve puzzles with confidence, and get ready for a future powered by technology.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">

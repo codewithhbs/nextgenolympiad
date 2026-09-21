@@ -248,8 +248,7 @@ export default function Page() {
           </h1>
 
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate sm:text-xl sm:leading-9">
-            Class-wise English syllabus covering Grammar, Vocabulary, Reading &amp; Comprehension,
-            Writing Skills and the Excellence Zone.
+            English opens doors to better schools, brighter careers, and a world of new ideas. Our English Olympiad is a competitive challenge where students sharpen their grammar, vocabulary, and reading skills while discovering what they are truly capable of. Give your child the chance to test their talent, see where they stand, and grow with confidence.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
