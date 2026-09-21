@@ -163,9 +163,8 @@ function ClassAccordion({ items, open, setOpen, renderBody }) {
         return (
           <div
             key={c}
-            className={`overflow-hidden rounded-3xl ring-1 transition-all duration-300 ${
-              isOpen ? `bg-white ${tone.ring} shadow-[0_25px_55px_-32px_rgba(15,23,42,.6)]` : "bg-white/70 ring-black/5 backdrop-blur hover:bg-white hover:shadow-md"
-            }`}
+            className={`overflow-hidden rounded-3xl ring-1 transition-all duration-300 ${isOpen ? `bg-white ${tone.ring} shadow-[0_25px_55px_-32px_rgba(15,23,42,.6)]` : "bg-white/70 ring-black/5 backdrop-blur hover:bg-white hover:shadow-md"
+              }`}
           >
             <button onClick={() => setOpen(isOpen ? null : c)} aria-expanded={isOpen} className="group flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6">
               <span
@@ -257,8 +256,7 @@ export default function Page() {
           </h1>
 
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate sm:text-xl sm:leading-9">
-            Maths is more than numbers. It teaches students to think sharply, solve problems, and see patterns in the world around them. Our Maths Olympiad is a competitive challenge that goes beyond the textbook and rewards curiosity, logic, and clear reasoning. Give your child the chance to test their talent, see where they stand, and fall in love with problem-solving.
-          </p>
+            Maths is more than numbers. It teaches students to think sharply, solve problems, and see patterns in the world around them. Our Maths Olympiad is a competitive challenge that goes beyond the textbook and rewards curiosity, logic, and clear reasoning. Give your child the chance to test their talent, see where they stand, and fall in love with problem-solving.          </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate shadow-sm ring-1 ring-black/5 sm:text-base">
@@ -280,9 +278,8 @@ export default function Page() {
               <button
                 key={tab.id}
                 onClick={() => scrollToSection(tab.id)}
-                className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-bold transition sm:text-base ${
-                  on ? "bg-gradient-to-r from-red-600 to-rose-500 text-white shadow-lg shadow-rose-400/40" : "bg-slate text-white hover:bg-slate"
-                }`}
+                className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-bold transition sm:text-base ${on ? "bg-gradient-to-r from-red-600 to-rose-500 text-white shadow-lg shadow-rose-400/40" : "bg-slate text-white hover:bg-slate"
+                  }`}
               >
                 {tab.label}
                 <ChevronRight className={`h-4 w-4 transition ${on ? "rotate-90" : "opacity-50"}`} />
