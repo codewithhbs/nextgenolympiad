@@ -32,21 +32,86 @@ const ANIM_CSS = `
 // Syllabus sourced from Delhi Heritage School — Mathematics, Class I to IX
 const SYLLABUS = {
   "Class 1": {
-    "Number Sense": ["Backward and Forward Counting", "Ones and Tens"],
-    "Computation Operations": ["Addition", "Subtraction", "Comparison"],
-    "Patterns, Shapes": ["Patterns", "Shapes"],
-    "Money, Time": ["Money", "Time"],
-    "Length, Weight and Comparison": ["Measurement"],
-    "Geometrical Shapes": ["Identification of Geometrical Figures"],
+    "Numbers": [
+      "Numbers 1–100",
+      "Number Names (1 to 100)",
+      "Place Value",
+      "Before, After, Between",
+      "Skip Counting",
+      "Ordinal Numbers"
+    ],
+
+    "Number Comparison": [
+      "Ascending Order",
+      "Descending Order",
+      "Greater Than, Less Than, Equal To"
+    ],
+
+    "Operations": [
+      "Addition – 1 digit",
+      "Addition – 2 digit",
+      "Addition with Carry",
+      "Addition Word Problems",
+      "Subtraction – 1 digit",
+      "Subtraction – 2 digit",
+      "Subtraction with Borrow",
+      "Subtraction Word Problems",
+      "Addition and Subtraction on Number Line",
+      "Multiplication"
+    ],
+
+    "Geometry": [
+      "Shapes",
+      "Patterns"
+    ],
+
+    "Measurement": [
+      "Time",
+      "Months of the Year",
+      "Days of the Week",
+      "Money",
+      "Length",
+      "Weight",
+      "Capacity"
+    ],
+
+    "Data Handling & Reasoning": [
+      "Data Interpretation",
+      "Logical Reasoning",
+      "Higher Order Thinking Skills (HOTS)"
+    ]
   },
   "Class 2": {
-    "Numbers Sense": ["Ones, Tens and Hundreds"],
-    "Computation Operations": ["Addition", "Subtraction", "Multiplication", "Division", "Comparison"],
-    "Shapes and Patterns": ["Shapes and Patterns"],
-    "Money, Time and Calendar": ["Money", "Time and Calendar"],
-    "Length, Weight and Capacity": ["Measurement"],
-    "Geometrical Shapes": ["Geometrical Figures"],
-  },
+  "Number Sense": [
+    "Words for Numbers",
+    "Comparing Numbers",
+    "Number Patterns",
+    "Position and Value"
+  ],
+
+  "Computation Operations": [
+    "Addition – Carrying of 2 and 3 Digits",
+    "Subtraction – Borrowing of 2 and 3 Digits",
+    "Multiplication – 2 and 3 Digit Numbers",
+    "Division – 2 and 3 Digit Numbers"
+  ],
+
+  "Measure and Explore": [
+    "Measurement",
+    "2D Shapes",
+    "3D Shapes",
+    "Time",
+    "Money",
+    "Calendar"
+  ],
+
+  "Logical Thinking and Data Handling": [
+    "Higher Order Thinking Skills (HOTS)",
+    "Data Handling",
+    "Patterns and Sequences",
+    "Number Puzzles"
+  ]
+},
   "Class 3": {
     "Numbers and Their Operations": ["Number Sense and Numeration", "Addition and Subtraction", "Multiplication and Division"],
     "Parts and Wholes": ["Fractions"],

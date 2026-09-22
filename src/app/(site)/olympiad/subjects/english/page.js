@@ -30,6 +30,19 @@ const ANIM_CSS = `
 `;
 
 const SYLLABUS = {
+  "Class 1": {
+    "SECTION A : Alphabet & Phonics ": ["Alphabets A–Z ", "Vowels and Consonants", "Phonics", "Rhyming Words"],
+    "SECTION B : Vocabulary": ["Opposite Words ", "Picture Vocabulary ", "Naming Words "],
+    "SECTION C : Grammar": ["Nouns / Naming Words", "Pronouns (He, She, It)", "Verbs / Action Words ", "Gender (Masculine – Feminine) ", "Singular - Plural","Use of ‘A’ and ‘An’", "Has & Have", "Prepositions / Position Words" ],
+    "SECTION D : Sentence Formation ": ["Simple Sentences", "Reading Comprehension"],
+    "SECTION E : Achievers Section": ["Higher Order Thinking Skills (HOTS) ", "Questions based on the topics covered in above sections"],
+  },
+  "Class 2": {
+    "SECTION A : Word and Structure Knowledge ": ["Spellings", "Synonyms", "Antonyms", "Words formations ", "Jumbled sentences"],
+    "SECTION B : Building Blocks of Language": ["Nouns ", "Pronouns ", "Adjectives", "Articles", "Verbs"],
+    "SECTION C : Reading and Analytical Skills": ["Reading comprehension", "Picture – based questions", "Character analysis ", "Words relationships"],
+    "SECTION D :  Achievers Sections ": ["Higher Order Thinking Skills (HOTS)", "Questions based on the topics covered in first three sections "],
+  },
   "Class 3": {
     "SECTION A : GRAMMAR": ["Nouns (Proper, Common, Abstract)", "Pronouns (he, she, it, they)", "Verbs (action words, is/am/are)", "Adjectives (describing words)", "Articles (a, an, the — basic use)", "Prepositions", "Simple sentences (subject + verb + object)", "Types of sentences (statement and question)"],
     "SECTION B : VOCABULARY": ["Synonyms & Antonyms", "Picture vocabulary", "Spelling Correction (simple words)", "One-word naming (basic objects)"],
@@ -90,6 +103,8 @@ const SYLLABUS = {
 
 // Sample paper links — replace "#" with actual file paths when ready
 const SAMPLE_PAPERS = {
+  "Class 1": "/sample-papers/NEXTGEN-ENGLISH-CLASS-1.pdf",
+  "Class 2": "#",
   "Class 3": "/sample-papers/NEXTGEN-ENGLISH-CLASS-III.pdf",
   "Class 4": "/sample-papers/NEXTGEN-ENGLISH-CLASS-4.pdf",
   "Class 5": "/sample-papers/NEXTGEN-ENGLISH-CLASS-5.pdf",
