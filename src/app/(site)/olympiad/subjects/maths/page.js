@@ -107,7 +107,17 @@ const SYLLABUS = {
 };
 
 // Sample paper links — replace "#" with actual file paths when ready
-const SAMPLE_PAPERS = Object.fromEntries(Object.keys(SYLLABUS).map((c) => [c, "#"]));
+const SAMPLE_PAPERS = {
+  "Class 1": "#",
+  "Class 2": "#",
+  "Class 3": "/sample-papers/NEXTGEN-MATHS-CLASS-3.pdf",
+  "Class 4": "#",
+  "Class 5": "#",
+  "Class 6": "#",
+  "Class 7": "#",
+  "Class 8": "#",
+  "Class 9": "#",
+};
 
 const SKILLS_ASSESSED = [
   { icon: Calculator, title: "Number Sense" },
