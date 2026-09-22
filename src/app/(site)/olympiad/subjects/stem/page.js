@@ -31,22 +31,57 @@ const ANIM_CSS = `
 
 // entries can be a plain string (flat bullet) or { title, items } (topic with sub-points)
 const SYLLABUS = {
-  "Class 1": {
-    "Section A: Science": ["Plants", "Living and Non-Living Things", "Animals", "Food", "Air and Water", "Human Body"],
-    "Section B: Technology & Engineering": ["Introduction to Computer", "Uses of Computer", "Parts of Computer", "Introduction to Artificial Intelligence", "Intelligence Assessment with Logical Reasoning"],
-    "Section C: Mathematics": ["Numbers and its Counting", "Operation of Addition and Subtraction", "Money, Time, Measuring Length", "Weight and Volume", "Identifying Patterns", "Visualizing Shapes"],
-  },
-  "Class 2": {
+  "Class 1 EVS": {
+  "Myself": [
+    "Body Parts",
+    "Sense Organs",
+    "Healthy Habits",
+    "Good Habits"
+  ],
+
+  "Family & School": [
+    "Family Relation",
+    "My School"
+  ],
+
+  "Plants & Animals": [
+    "Plants",
+    "Animals and Birds"
+  ],
+
+  "Environment": [
+    "Living and Non-Living Things",
+    "Air",
+    "Water",
+    "Seasons",
+    "Clothes"
+  ],
+
+  "Surroundings": [
+    "Transport",
+    "Safety Rules",
+    "First Aid",
+    "Earth and Sky",
+    "People and Places"
+  ],
+
+  "Food": [
+    "Health and Hygiene",
+    "Healthy Food",
+    "Unhealthy Food"
+  ]
+},
+  "Class 2 EVS": {
     "Section A: Science": ["Animals", "Plants", "Food", "Air and Water", "Human Body", "Our Universe"],
     "Section B: Technology & Engineering": ["Introduction to Computer", "Types of computer", "Uses of Computer", "Parts of Computer", "Working of Computer", "Keyboard and Mouse", "Introduction to Artificial Intelligence", "Intelligence Assessment with Logical Reasoning"],
     "Section C: Mathematics": ["Knowing Numbers", "Fundamental Operation of Numbers", "Patterns, Uses of Numbers in Daily Life", "Measurement", "Identifying 2D and 3D Shapes"],
   },
-  "Class 3": {
+  "Class 3 STEM": {
     "Section A: Science": ["Understanding motion: Force and its impact", "The magical world of planets, moons and stars", "The three physical states of matter", "Sensors of the human body", "Kingdom of plants and animals"],
     "Section B: Technology & Engineering (Information Technology)": ["Introduction to Hardware and Software", "Usage of the Internet", "Coding using 'Scratch' - Block-based Programming Language (Beginner)", "Introduction to Artificial Intelligence (AI vs Human Intelligence)", "Intelligence assessment with Logical Reasoning"],
     "Section C: Mathematics": ["Exploring Numbers", "Splitting a Number", "Daily Mathematics", "Geometrical Shapes", "Working on Data"],
   },
-  "Class 4": {
+  "Class 4 STEM": {
     "Section A: Science": [
       { title: "Forces and their applications", items: ["Force, effects of forces, different types of force"] },
       { title: "Energy and its different forms", items: ["Energy, different types of energy"] },
@@ -69,7 +104,7 @@ const SYLLABUS = {
       { title: "Representing Data", items: ["Pictograph, Bar Graph"] },
     ],
   },
-  "Class 5": {
+  "Class 5 STEM": {
     "Section A: Science": [
       { title: "Force, work & energy", items: ["Frictional force, Magnetic force, Gravitational force, Elastic force", "Work, Energy"] },
       { title: "The simple machines", items: ["Lever, Plane, Pulley, Wheel & Axle, Screw"] },
@@ -93,7 +128,7 @@ const SYLLABUS = {
       { title: "Handling Data", items: ["Handling Data and its Representation"] },
     ],
   },
-  "Class 6": {
+  "Class 6 STEM": {
     "Section A: Science": [
       { title: "Everyday science", items: ["Materials, Properties of materials, Grouping materials, Separation of components of mixture"] },
       { title: "Story of Movement", items: ["Transport, measurement, Motion"] },
@@ -116,7 +151,7 @@ const SYLLABUS = {
       { title: "Data Handling", items: ["Graphical representation of data"] },
     ],
   },
-  "Class 7": {
+  "Class 7 STEM": {
     "Section A: Science": [
       { title: "Light and its interaction with objects", items: ["Rectilinear property of light, Laws of reflections, Object & image, Mirrors, Lenses, Dispersion of light"] },
       { title: "Current and its effects", items: ["Electric components, Electric circuits, Heating effect of current, Magnetic effect of current, Electromagnet, Fuse"] },
@@ -140,7 +175,7 @@ const SYLLABUS = {
       { title: "Mensuration", items: ["Perimeter, Area and Volume"] },
     ],
   },
-  "Class 8": {
+  "Class 8 STEM": {
     "Section A: Science": [
       { title: "Some important physical quantities", items: ["Light, Electricity, Force, Sound"] },
       { title: "Some natural phenomena", items: ["Electric charge, Electroscope, Lightening, Earthquake"] },
@@ -162,7 +197,7 @@ const SYLLABUS = {
       { title: "Handling Data", items: ["Introduction to graphs, Line graphs, Pie Chart, Probability of an event"] },
     ],
   },
-  "Class 9": {
+  "Class 9 STEM": {
     "Section A: Science": [
       { title: "Chemical composition of our physical world", items: ["Matter, Metals, Non-metals, Metalloids, Mixture, Atoms, Molecules"] },
       { title: "Force & Motion", items: ["Motion, Displacement, Acceleration, Equations of motion, Force, Newton's laws of motion"] },
@@ -189,7 +224,7 @@ const SYLLABUS = {
 
 // Sample paper links — replace "#" with actual file paths when ready
 const SAMPLE_PAPERS = {
-  "Class 1": "#",
+  "Class 1": "/sample-papers/NEXTGEN-STEM-CLASS-1.pdf",
   "Class 2": "#",
   "Class 3": "/sample-papers/NEXTGEN-STEM-CLASS-3.pdf",
   "Class 4": "#",
