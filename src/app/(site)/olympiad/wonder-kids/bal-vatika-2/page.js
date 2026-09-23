@@ -46,7 +46,7 @@ const SUBJECTS = [
   },
   {
     subject: "Maths",
-    sampleHref: "#",
+    sampleHref: "/sample-papers/BAL-VATIKA-2-MATHS.pdf",
     units: [
       { title: "1. Pre-Number Concepts", items: ["Big - Small", "Tall - Short", "Long - Short", "Heavy - Light", "Full - Empty", "Odd one out"] },
       { title: "2. Number Adventure", items: ["Counting 1 - 50", "Greater than, less than, equal to", "After, Before, Between", "Number names (1 - 20)"] },
