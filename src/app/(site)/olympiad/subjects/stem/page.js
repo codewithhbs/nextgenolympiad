@@ -398,7 +398,7 @@ export default function Page() {
           </span>
 
           <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-slate sm:text-6xl xl:text-7xl">
-            <span className="en-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">STEM</span>
+            <span className="en-shine bg-gradient-to-r from-red-600 via-amber-500 to-red-600 bg-clip-text text-transparent">STEM/EVS</span>
           </h1>
 
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate sm:text-xl sm:leading-9">
@@ -539,7 +539,7 @@ export default function Page() {
             renderBody={(c, tone) => (
               <div className="border-t border-black/5 px-5 py-6 sm:px-6">
                 <a
-                  href={SAMPLE_PAPERS[c]}
+                  href={SAMPLE_PAPERS[c.match(/^Class \d+/)?.[0]]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-3 rounded-full py-3 pl-6 pr-2 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 sm:text-base"

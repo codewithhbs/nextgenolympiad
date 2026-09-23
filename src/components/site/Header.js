@@ -19,7 +19,7 @@ const NAV = [
         children: [
           { label: "English", href: "/olympiad/subjects/english" },
           { label: "Maths", href: "/olympiad/subjects/maths" },
-          { label: "STEM", href: "/olympiad/subjects/stem" },
+          { label: "STEM/EVS", href: "/olympiad/subjects/stem" },
           { label: "Computational Thinking", href: "/olympiad/subjects/computational-thinking" },
         ]
       },
