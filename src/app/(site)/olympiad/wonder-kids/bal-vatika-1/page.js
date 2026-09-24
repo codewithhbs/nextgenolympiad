@@ -66,13 +66,40 @@ const SUBJECTS = [
     sampleHref: "/sample-papers/Final-BAL-VATIKA-1-DRAWING.pdf",
     units: [
       {
-        title: "Curriculum",
+        title: "Pre-Writing Strokes",
         items: [
-          "Standing line, sleeping line, left slanting line, right slanting line, left curve, right curve, up and down curves",
-          "Drawing shapes: triangle, square, rectangle, and circle",
-          "Colouring reference objects",
-          "Drawing and colouring objects",
-          "Draw Simple shapes",
+          "Standing",
+          "Sleeping",
+          "Left and Right Slanting Lines",
+          "Left and Right Curves",
+          "Upward and Downward Curves",
+        ],
+      },
+      {
+        title: "Basic Shape Drawing",
+        items: [
+          "Circle",
+          "Square",
+          "Rectangle",
+          "Triangle",
+        ],
+      },
+      {
+        title: "Shape-Based Drawing",
+        items: [
+          "Creating simple objects using basic shapes and lines",
+        ],
+      },
+      {
+        title: "Colouring Skills",
+        items: [
+          "Colouring objects by observing a given reference with neatness and appropriate colour selection",
+        ],
+      },
+      {
+        title: "Drawing & Colouring",
+        items: [
+          "Drawing familiar objects independently and colouring them creatively",
         ],
       },
     ],

@@ -72,7 +72,11 @@ const SUBJECTS = [
     subject: "Drawing",
     sampleHref: "/sample-papers/BAL-VATIKA-2-DRAWING.pdf",
     units: [
-      { title: "Curriculum", items: ["Curriculum to be added soon"] },
+      { title: "Basic Drawing & Picture Completion", items: ["Shapes","Symmetry","Missing Parts","Simple Object Drawing"] },
+      { title: "Patterns & Visual Skills", items: ["Shape/Colour Patterns","Sequencing","Tracing","Dot-to-Dot","Copy Drawing"] },
+      { title: "Colouring & Decoration", items: ["Colour Recognition","Neat Colouring","Creative Decoration"] },
+      { title: "Nature & Everyday Themes", items: ["Animals","Plants","Weather","Indian Flag","Common Objects"] },
+      { title: "Creative & Scene Drawing", items: ["Village","Playground","Other Simple Imaginative Compositions"] },
     ],
   },
 ];
