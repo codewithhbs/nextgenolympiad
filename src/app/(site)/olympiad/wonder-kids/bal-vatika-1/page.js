@@ -415,19 +415,19 @@ export default function Page() {
             open={openIndex}
             setOpen={setOpenIndex}
             renderBody={(s, st) => (
-              <div className="grid gap-5 border-t border-black/5 px-5 py-6 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+              <div className="grid gap-5 border-t border-black/5 px-5 py-6 sm:px-6">
                 {/* Subject */}
-                <div className={`rounded-2xl ${st.soft} p-5 ring-1 ring-black/5`}>
+                {/* <div className={`rounded-2xl ${st.soft} p-5 ring-1 ring-black/5`}>
                   <p className="text-xs font-extrabold uppercase tracking-wider text-slate sm:text-sm">Subject</p>
                   <p className={`mt-3 font-display text-2xl font-extrabold ${st.text}`}>{s.subject}</p>
                   <p className="mt-1 text-sm text-slate sm:text-base">
                     {s.units.length} unit{s.units.length !== 1 ? "s" : ""} in this subject
                   </p>
-                </div>
+                </div> */}
 
                 {/* Curriculum */}
-                <div className="rounded-2xl bg-white p-5 ring-1 ring-black/5">
-                  <p className="text-xs font-extrabold uppercase tracking-wider text-slate sm:text-sm">Curriculum</p>
+                <div className="rounded-2xl bg-white">
+                  {/* <p className="text-xs font-extrabold uppercase tracking-wider text-slate sm:text-sm">Curriculum</p> */}
                   <div className="mt-4 grid gap-4 sm:grid-cols-2">
                     {s.units.map((u, ui) => (
                       <div key={u.title} className="rounded-xl bg-slate p-4 ring-1 ring-black/5">
