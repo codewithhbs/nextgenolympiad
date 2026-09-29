@@ -85,7 +85,7 @@ const SYLLABUS = {
 // Sample paper links — replace "#" with actual file paths when ready
 const SAMPLE_PAPERS = {
   "Class 1": "/sample-papers/NEXTGEN-CT-CLASS-1.pdf",
-  "Class 2": "#",
+  "Class 2": "/sample-papers/NEXTGEN-CT-CLASS-2.pdf",
   "Class 3": "/sample-papers/NEXTGEN-CT-CLASS-3.pdf",
   "Class 4": "/sample-papers/NEXTGEN-CT-CLASS-4.pdf",
   "Class 5": "/sample-papers/NEXTGEN-CT-CLASS-5.pdf",
