@@ -69,6 +69,13 @@ const SYLLABUS = {
     "Health and Hygiene",
     "Healthy Food",
     "Unhealthy Food"
+  ],
+  "Thinking and Observational Skills": [
+    "Observation - based questions",
+    "Picture - based questions",
+    "Logical Reasoning",
+    "Classification and Grouping",
+    "Higher Order Thinking Skills (HOTS)"
   ]
 },
   "Class 2 EVS": {
