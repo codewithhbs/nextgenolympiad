@@ -30,7 +30,7 @@ const ANIM_CSS = `
 const SUBJECTS = [
   {
     subject: "English",
-    sampleHref: "#",
+    sampleHref: "/sample-papers/BAL-VATIKA-2-ENGLISH.pdf",
     units: [
       { title: "1. Vowels a, e, i, o, u (Alphabets)", items: ["Recognition and identification of vowels."] },
       { title: "2. Action Words", items: ["Identifying and using action words like dancing, running etc."] },
