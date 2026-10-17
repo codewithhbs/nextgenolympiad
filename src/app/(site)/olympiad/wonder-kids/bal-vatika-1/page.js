@@ -42,7 +42,7 @@ const SUBJECTS = [
   },
   {
     subject: "English",
-    sampleHref: "#",
+    sampleHref: "/sample-papers/BAL-VATIKA-1-ENGLISH.pdf",
     units: [
       { title: "Unit 1: Alphabet", items: ["Capital A to Z", "Small a to z"] },
       { title: "Unit 2: Action Words", items: ["Playing", "Dancing", "Clapping", "Eating etc."] },
