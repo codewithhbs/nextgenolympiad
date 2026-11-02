@@ -177,7 +177,7 @@ const SAMPLE_PAPERS = {
   "Class 2": "/sample-papers/NEXTGEN-MATHS-CLASS-2.pdf",
   "Class 3": "/sample-papers/NEXTGEN-MATHS-CLASS-3.pdf",
   "Class 4": "#",
-  "Class 5": "#",
+  "Class 5": "/sample-papers/NEXTGEN-MATHS-CLASS-5.pdf",
   "Class 6": "#",
   "Class 7": "#",
   "Class 8": "#",
