@@ -234,7 +234,7 @@ const SAMPLE_PAPERS = {
   "Class 1": "/sample-papers/NEXTGEN-STEM-CLASS-1.pdf",
   "Class 2": "/sample-papers/NEXTGEN-STEM-CLASS-2.pdf",
   "Class 3": "/sample-papers/NEXTGEN-STEM-CLASS-3.pdf",
-  "Class 4": "#",
+  "Class 4": "/sample-papers/NEXTGEN-STEM-CLASS-4.pdf",
   "Class 5": "/sample-papers/NEXTGEN-STEM-CLASS-5.pdf",
   "Class 6": "/sample-papers/NEXTGEN-STEM-CLASS-6.pdf",
   "Class 7": "/sample-papers/NEXTGEN-STEM-CLASS-7.pdf",

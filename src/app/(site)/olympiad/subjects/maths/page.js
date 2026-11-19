@@ -176,11 +176,11 @@ const SAMPLE_PAPERS = {
   "Class 1": "/sample-papers/NEXTGEN-MATHS-CLASS-1.pdf",
   "Class 2": "/sample-papers/NEXTGEN-MATHS-CLASS-2.pdf",
   "Class 3": "/sample-papers/NEXTGEN-MATHS-CLASS-3.pdf",
-  "Class 4": "#",
+  "Class 4": "/sample-papers/NEXTGEN-MATHS-CLASS-4.pdf",
   "Class 5": "/sample-papers/NEXTGEN-MATHS-CLASS-5.pdf",
-  "Class 6": "#",
-  "Class 7": "#",
-  "Class 8": "#",
+  "Class 6": "/sample-papers/NEXTGEN-MATHS-CLASS-6.pdf",
+  "Class 7": "/sample-papers/NEXTGEN-MATHS-CLASS-7.pdf",
+  "Class 8": "/sample-papers/NEXTGEN-MATHS-CLASS-8.pdf",
   "Class 9": "#",
 };
 
