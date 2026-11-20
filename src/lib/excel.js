@@ -60,3 +60,79 @@ export function parseResultsExcel(buffer) {
 
   return { parsed, errors };
 }
+
+// ---------------- Students bulk import ----------------
+// Demo format: SNAME | CLASS | SECTION | SUBJECT | SCHOOL | CITY | STATE | ENROLLMENT NO | BARCODE
+export const STUDENT_TEMPLATE_HEADERS = ["SNAME", "CLASS", "SECTION", "SUBJECT", "SCHOOL", "CITY", "STATE", "ENROLLMENT NO", "BARCODE"];
+
+const STUDENT_ALIASES = {
+  name: ["sname", "studentname", "name", "student"],
+  class: ["class", "std", "grade"],
+  section: ["section", "sec"],
+  subject: ["subject", "subjectname"],
+  schoolName: ["school", "schoolname"],
+  city: ["city"],
+  state: ["state"],
+  studentCode: ["enrollmentno", "enrolmentno", "enrollmentnumber", "enrollment", "studentcode", "rollno", "regno"],
+  barcode: ["barcode"],
+  parentName: ["parentname", "fathername", "parent"],
+  mobile: ["mobile", "phone", "mobileno"],
+};
+
+const normKey = (k) => String(k).toLowerCase().replace(/[^a-z0-9]/g, "");
+const clean = (v) => {
+  if (v === null || v === undefined) return "";
+  if (typeof v === "number") return Number.isInteger(v) ? String(v) : String(v);
+  return String(v).replace(/\s+/g, " ").trim();
+};
+
+export function parseStudentsExcel(buffer) {
+  const wb = XLSX.read(buffer, { type: "buffer" });
+  const sheet = wb.Sheets[wb.SheetNames[0]];
+  const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+  const errors = [];
+  const parsed = [];
+
+  rows.forEach((raw, i) => {
+    const line = i + 2;
+    const byKey = {};
+    Object.keys(raw).forEach((k) => (byKey[normKey(k)] = raw[k]));
+    const pick = (field) => {
+      for (const a of STUDENT_ALIASES[field]) if (byKey[a] !== undefined && clean(byKey[a]) !== "") return clean(byKey[a]);
+      return "";
+    };
+
+    const r = {
+      name: pick("name").toUpperCase(),
+      class: pick("class"),
+      section: pick("section").toUpperCase(),
+      subject: pick("subject").toUpperCase(),
+      schoolName: pick("schoolName"),
+      city: pick("city"),
+      state: pick("state"),
+      studentCode: pick("studentCode").toUpperCase(),
+      barcode: pick("barcode"),
+      parentName: pick("parentName"),
+      mobile: pick("mobile"),
+    };
+
+    // skip fully blank rows silently
+    if (!r.name && !r.studentCode && !r.class) return;
+    if (!r.name) return errors.push({ line, error: "Missing SNAME" });
+    if (!r.studentCode) return errors.push({ line, error: `Missing ENROLLMENT NO (${r.name})` });
+    if (!r.class) return errors.push({ line, error: `Missing CLASS (${r.name})` });
+
+    parsed.push({ ...r, line });
+  });
+
+  const seen = new Set();
+  const unique = [];
+  parsed.forEach((p) => {
+    const key = `${p.studentCode}|${p.subject}`;
+    if (seen.has(key)) return errors.push({ line: p.line, error: `Duplicate ENROLLMENT NO ${p.studentCode}${p.subject ? ` for ${p.subject}` : ""} in file` });
+    seen.add(key);
+    unique.push(p);
+  });
+
+  return { parsed: unique, errors, totalRows: rows.length };
+}

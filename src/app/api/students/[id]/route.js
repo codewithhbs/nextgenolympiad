@@ -22,7 +22,8 @@ export async function PATCH(req, { params }) {
     const { student, err } = await guard(user, id);
     if (err) return err;
     const body = sanitize(await req.json());
-    Object.assign(student, body);
+    const allowed = ["name", "studentCode", "class", "section", "subject", "city", "state", "barcode", "dob", "parentName", "mobile", "image"];
+    allowed.forEach((k) => { if (body[k] !== undefined) student[k] = k === "subject" ? String(body[k] || "").toUpperCase().trim() : body[k]; });
     await student.save();
     return ok({ student }, "Updated");
   } catch (err) { return handleError(err); }
