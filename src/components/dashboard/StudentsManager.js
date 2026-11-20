@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useCallback, useRef } from "react";
-import { Plus, Pencil, Trash2, Search, UserRound, FileSpreadsheet, Download, Upload, CheckCircle2, AlertTriangle, X } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, UserRound, FileSpreadsheet, Download, Upload, CheckCircle2, AlertTriangle, X, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { PageHeader, EmptyState, TableWrap, Th, Td } from "@/components/dashboard/ui";
 import { Button, Input, Spinner } from "@/components/ui";
 import Modal from "@/components/ui/Modal";
@@ -37,6 +37,10 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
   const [subjectFilter, setSubjectFilter] = useState("");
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(25);
+  const [total, setTotal] = useState(0);
+  const [pages, setPages] = useState(1);
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState(blank);
   const [editId, setEditId] = useState(null);
@@ -64,12 +68,20 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
       if (effectiveSchool) params.set("school", effectiveSchool);
       if (q) params.set("q", q);
       if (subjectFilter) params.set("subject", subjectFilter);
+      params.set("page", String(page));
+      params.set("limit", String(limit));
       const r = await api.get(`/api/students?${params}`);
-      setItems(r.data.items || []);
-      setSubjects(r.data.subjects || []);
+      const d = r.data;
+      if (d.page > 1 && (d.items || []).length === 0 && d.total > 0) { setPage(d.pages); return; }
+      setItems(d.items || []);
+      setSubjects(d.subjects || []);
+      setTotal(d.total || 0);
+      setPages(d.pages || 1);
     } catch (e) { toast.error(e.message); } finally { setLoading(false); }
-  }, [effectiveSchool, q, subjectFilter, schools, selSchool, toast]);
+  }, [effectiveSchool, q, subjectFilter, schools, selSchool, page, limit, toast]);
   useEffect(() => { const t = setTimeout(load, 250); return () => clearTimeout(t); }, [load]);
+  // reset to first page when filters change
+  useEffect(() => { setPage(1); }, [effectiveSchool, q, subjectFilter, limit]);
 
   const openNew = () => {
     if (schools && !selSchool) return toast.error("Select a school first");
@@ -178,7 +190,6 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
         </div>
       </div>
 
-      {!loading && items.length > 0 && <p className="mb-2 text-sm text-ink/60">{items.length} student(s)</p>}
 
       {loading ? <Spinner /> : items.length === 0 ? (
         <EmptyState title="No students" text={schools && !selSchool ? "Select a school to view students." : "Add a student or upload an Excel file."} />
@@ -210,6 +221,11 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
             ))}
           </tbody>
         </TableWrap>
+      )}
+
+      {!loading && total > 0 && (
+        <Pagination page={page} pages={pages} total={total} limit={limit} count={items.length}
+          onPage={setPage} onLimit={setLimit} />
       )}
 
       {/* ---------- Add / Edit ---------- */}
@@ -337,6 +353,39 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
           </div>
         </div>
       </Modal>
+    </div>
+  );
+}
+
+function Pagination({ page, pages, total, limit, count, onPage, onLimit }) {
+  const from = (page - 1) * limit + 1;
+  const to = from + count - 1;
+  const nums = [];
+  const start = Math.max(1, Math.min(page - 2, pages - 4));
+  const end = Math.min(pages, start + 4);
+  for (let i = start; i <= end; i++) nums.push(i);
+  const btn = "flex h-9 min-w-9 items-center justify-center rounded-lg border-2 border-ink/10 bg-white px-2 text-sm font-semibold text-ink hover:border-saffron disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-ink/10";
+  return (
+    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+      <div className="flex items-center gap-3 text-sm text-ink/60">
+        <span>Showing <b className="text-ink">{from}–{to}</b> of <b className="text-ink">{total}</b></span>
+        <select value={limit} onChange={(e) => onLimit(Number(e.target.value))}
+          className="rounded-lg border-2 border-ink/10 bg-white px-2 py-1.5 text-sm outline-none focus:border-saffron">
+          {[10, 25, 50, 100, 200].map((n) => <option key={n} value={n}>{n} / page</option>)}
+        </select>
+      </div>
+      <div className="flex items-center gap-1.5">
+        <button className={btn} disabled={page <= 1} onClick={() => onPage(1)} aria-label="First page"><ChevronsLeft className="h-4 w-4" /></button>
+        <button className={btn} disabled={page <= 1} onClick={() => onPage(page - 1)} aria-label="Previous page"><ChevronLeft className="h-4 w-4" /></button>
+        {nums.map((n) => (
+          <button key={n} onClick={() => onPage(n)}
+            className={n === page ? "flex h-9 min-w-9 items-center justify-center rounded-lg border-2 border-saffron bg-saffron px-2 text-sm font-bold text-white" : btn}>
+            {n}
+          </button>
+        ))}
+        <button className={btn} disabled={page >= pages} onClick={() => onPage(page + 1)} aria-label="Next page"><ChevronRight className="h-4 w-4" /></button>
+        <button className={btn} disabled={page >= pages} onClick={() => onPage(pages)} aria-label="Last page"><ChevronsRight className="h-4 w-4" /></button>
+      </div>
     </div>
   );
 }

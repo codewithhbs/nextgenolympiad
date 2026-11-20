@@ -28,9 +28,19 @@ export async function GET(req) {
       const safe = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       filter.$or = [{ name: new RegExp(safe, "i") }, { studentCode: new RegExp(safe, "i") }, { barcode: new RegExp(safe, "i") }];
     }
-    const items = await Student.find(filter).collation({ locale: "en", numericOrdering: true }).sort({ class: 1, section: 1, studentCode: 1 }).limit(2000).lean();
-    const subjects = school ? (await Student.distinct("subject", { school })).filter(Boolean).sort() : [];
-    return ok({ items, total: items.length, subjects });
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10) || 1);
+    const limit = Math.min(200, Math.max(1, parseInt(searchParams.get("limit") || "25", 10) || 25));
+    const [items, total, subjects] = await Promise.all([
+      Student.find(filter)
+        .collation({ locale: "en", numericOrdering: true })
+        .sort({ class: 1, section: 1, studentCode: 1 })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .lean(),
+      Student.countDocuments(filter),
+      school ? Student.distinct("subject", { school }).then((a) => a.filter(Boolean).sort()) : Promise.resolve([]),
+    ]);
+    return ok({ items, total, page, limit, pages: Math.max(1, Math.ceil(total / limit)), subjects });
   } catch (err) { return handleError(err); }
 }
 
