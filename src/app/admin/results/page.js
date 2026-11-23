@@ -25,7 +25,7 @@ export default function AdminResultsUpload() {
   const send = async (dryRun) => {
     if (!school) return toast.error("Select a school");
     if (!file) return toast.error("Choose an Excel file");
-    setLoading(true); setResult(null);
+    setLoading(true); setResult(null); setErrors([]);
     try {
       const fd = new FormData();
       fd.append("file", file);
@@ -33,7 +33,7 @@ export default function AdminResultsUpload() {
       fd.append("dryRun", String(dryRun));
       const res = await fetch("/api/results/upload", { method: "POST", body: fd, credentials: "include" });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Upload failed");
+      if (!res.ok) { setErrors(Array.isArray(data.errors) ? data.errors : []); setPreview(null); throw new Error(data.message || "Upload failed"); }
       if (dryRun) {
         setPreview(data.data.preview || []);
         setErrors(data.data.errors || []);
@@ -63,9 +63,9 @@ export default function AdminResultsUpload() {
           <label className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-ink/15 bg-cloud p-6 text-center hover:border-saffron">
             <UploadCloud className="h-8 w-8 text-saffron" />
             <span className="text-sm font-semibold text-ink">{file ? file.name : "Click to choose file"}</span>
-            <span className="text-xs text-ink-soft">StudentCode, Name, Class, subject columns, Total, Rank…</span>
+            <span className="text-xs text-ink-soft">CANDIDATE ID, CANDIDATE NAME, CLASS, SECTION, SUBJECT, Total, Percentage</span>
             <input type="file" accept=".xls,.xlsx" className="hidden"
-              onChange={(e) => { setFile(e.target.files?.[0] || null); setPreview(null); setResult(null); }} />
+              onChange={(e) => { setFile(e.target.files?.[0] || null); setPreview(null); setResult(null); setErrors([]); }} />
           </label>
 
           <div className="mt-5 flex gap-2">
@@ -89,7 +89,8 @@ export default function AdminResultsUpload() {
             <div className="mb-4 rounded-2xl bg-saffron-soft p-5">
               <div className="flex items-center gap-2 font-bold text-saffron"><AlertTriangle className="h-5 w-5" /> {errors.length} row warning(s)</div>
               <ul className="mt-2 list-disc pl-5 text-sm text-ink-soft">
-                {errors.slice(0, 8).map((er, i) => <li key={i}>{typeof er === "string" ? er : JSON.stringify(er)}</li>)}
+                {errors.slice(0, 20).map((er, i) => <li key={i}>{typeof er === "string" ? er : `Row ${er.line}: ${er.error}`}</li>)}
+                {errors.length > 20 && <li>+ {errors.length - 20} more…</li>}
               </ul>
             </div>
           )}
@@ -102,7 +103,7 @@ export default function AdminResultsUpload() {
               </div>
               <TableWrap>
                 <thead>
-                  <tr><Th>Code</Th><Th>Name</Th><Th>Class</Th><Th>Total</Th><Th>%</Th><Th>Rank</Th><Th>Medal</Th></tr>
+                  <tr><Th>Code</Th><Th>Name</Th><Th>Class</Th><Th>Subject</Th><Th>Total</Th><Th>%</Th><Th>Rank</Th><Th>Medal</Th></tr>
                 </thead>
                 <tbody>
                   {preview.slice(0, 50).map((r, i) => (
@@ -110,6 +111,7 @@ export default function AdminResultsUpload() {
                       <Td><span className="font-mono text-xs">{r.studentCode}</span></Td>
                       <Td>{r.studentName}</Td>
                       <Td>{r.class}{r.section ? `-${r.section}` : ""}</Td>
+                      <Td>{(r.subjects || []).map((x) => x.subject).join(", ") || "—"}</Td>
                       <Td>{r.totalMarks}/{r.maxMarks}</Td>
                       <Td>{r.percentage}%</Td>
                       <Td>{r.rank || "—"}</Td>

@@ -1,8 +1,44 @@
 import * as XLSX from "xlsx";
 
-// Expected columns (case-insensitive):
-// StudentCode, StudentName, Class, Section, Subject scores as "English","Maths"... , Total, Max, Rank
-const KNOWN = ["studentcode", "studentname", "class", "section", "total", "max", "maxmarks", "rank", "session"];
+// ---------------- Results import ----------------
+// Supports both formats:
+// 1) Per-subject sheet: CANDIDATE ID | CANDIDATE NAME | CLASS | SECTION | SUBJECT | SCHOOL | Total | Percentage
+// 2) Multi-subject sheet: StudentCode | StudentName | Class | Section | English | Maths | ... | Total | Max | Rank
+const R_ALIASES = {
+  studentCode: ["studentcode", "candidateid", "candidatecode", "enrollmentno", "enrolmentno", "enrollmentnumber", "rollno", "regno", "admitcardno", "id"],
+  studentName: ["studentname", "candidatename", "sname", "name", "student", "candidate"],
+  class: ["class", "std", "grade"],
+  section: ["section", "sec"],
+  subject: ["subject", "subjectname"],
+  total: ["total", "marks", "totalmarks", "score", "marksobtained", "obtained"],
+  max: ["max", "maxmarks", "outof", "fullmarks", "totalmax"],
+  percentage: ["percentage", "percent", "per"],
+  rank: ["rank", "schoolrank", "position"],
+  session: ["session", "year"],
+};
+// columns never treated as subject marks
+const R_IGNORE = new Set([
+  ...Object.values(R_ALIASES).flat(),
+  "school", "schoolname", "city", "state", "barcode", "medal", "grade", "remarks", "result", "srno", "sno", "slno", "sr", "dob", "gender", "mobile", "parentname", "fathername",
+]);
+
+const rNorm = (k) => String(k).toLowerCase().replace(/[^a-z0-9]/g, "");
+const rClean = (v) => (v === null || v === undefined ? "" : typeof v === "number" ? String(v) : String(v).replace(/\s+/g, " ").trim());
+const toNum = (v) => { const s = rClean(v); if (s === "") return null; const n = Number(s.replace(/%$/, "")); return Number.isNaN(n) ? null : n; };
+
+export function medalFor(percentage) {
+  if (percentage >= 85) return "gold";
+  if (percentage >= 80) return "silver";
+  if (percentage >= 75) return "bronze";
+  return "none";
+}
+
+export function summarize(subjects) {
+  const totalMarks = subjects.reduce((s, x) => s + (Number(x.marks) || 0), 0);
+  const maxMarks = subjects.reduce((s, x) => s + (Number(x.maxMarks) || 0), 0);
+  const percentage = maxMarks ? Math.round((totalMarks / maxMarks) * 10000) / 100 : 0;
+  return { totalMarks, maxMarks, percentage, medal: medalFor(percentage) };
+}
 
 export function parseResultsExcel(buffer) {
   const wb = XLSX.read(buffer, { type: "buffer" });
@@ -12,53 +48,76 @@ export function parseResultsExcel(buffer) {
   const parsed = [];
 
   rows.forEach((raw, i) => {
-    const row = {};
-    Object.keys(raw).forEach((k) => (row[k.toString().trim().toLowerCase()] = raw[k]));
     const line = i + 2;
+    const row = {};
+    Object.keys(raw).forEach((k) => (row[rNorm(k)] = raw[k]));
+    const pick = (f) => { for (const a of R_ALIASES[f]) if (row[a] !== undefined && rClean(row[a]) !== "") return row[a]; return ""; };
 
-    const studentCode = String(row.studentcode || row["student code"] || "").trim().toUpperCase();
-    const studentName = String(row.studentname || row["student name"] || "").trim();
-    if (!studentCode) return errors.push({ line, error: "Missing StudentCode" });
-    if (!studentName) return errors.push({ line, error: "Missing StudentName" });
+    const studentCode = rClean(pick("studentCode")).toUpperCase();
+    const studentName = rClean(pick("studentName")).toUpperCase();
+    if (!studentCode && !studentName) return; // blank row
+    if (!studentCode) return errors.push({ line, error: `Missing Candidate ID / StudentCode (${studentName})` });
+    if (!studentName) return errors.push({ line, error: `Missing Candidate Name (${studentCode})` });
 
-    const subjects = [];
-    Object.keys(row).forEach((key) => {
-      const norm = key.replace(/\s+/g, "");
-      if (KNOWN.includes(norm) || key.startsWith("student")) return;
-      const val = row[key];
-      if (val === "" || val == null) return;
-      const marks = Number(val);
-      if (!Number.isNaN(marks)) subjects.push({ subject: key, marks, maxMarks: Number(row.max || row.maxmarks || 100) });
-    });
+    const subjectName = rClean(pick("subject")).toUpperCase();
+    const total = toNum(pick("total"));
+    const maxGiven = toNum(pick("max"));
+    const pctGiven = toNum(pick("percentage"));
+    const rank = toNum(pick("rank")) || 0;
 
-    const total = Number(row.total || subjects.reduce((s, x) => s + x.marks, 0)) || 0;
-    const maxMarks = Number(row.max || row.maxmarks || subjects.reduce((s, x) => s + (x.maxMarks || 0), 0)) || 0;
-    const rank = Number(row.rank || 0) || 0;
-    if (maxMarks && total > maxMarks) errors.push({ line, error: `Total (${total}) exceeds Max (${maxMarks})` });
+    let subjects = [];
+    let mode = "multi";
+    if (subjectName) {
+      // per-subject format: Total = marks of that subject
+      mode = "single";
+      if (total === null) return errors.push({ line, error: `Missing Total for ${studentCode}` });
+      let maxMarks = maxGiven;
+      if (!maxMarks) maxMarks = pctGiven && total ? Math.round((total * 100) / pctGiven) : 100;
+      subjects = [{ subject: subjectName, marks: total, maxMarks }];
+    } else {
+      Object.keys(raw).forEach((orig) => {
+        const key = rNorm(orig);
+        if (!key || R_IGNORE.has(key) || key.startsWith("empty")) return;
+        const n = toNum(raw[orig]);
+        if (n === null) return;
+        subjects.push({ subject: String(orig).trim().toUpperCase(), marks: n, maxMarks: 100 });
+      });
+      if (maxGiven && subjects.length) {
+        const each = maxGiven / subjects.length;
+        subjects = subjects.map((s) => ({ ...s, maxMarks: each }));
+      }
+      if (!subjects.length && total !== null) subjects = [{ subject: "TOTAL", marks: total, maxMarks: maxGiven || 100 }];
+      if (!subjects.length) return errors.push({ line, error: `No marks found for ${studentCode}` });
+    }
 
-    const percentage = maxMarks ? Math.round((total / maxMarks) * 10000) / 100 : 0;
-    let medal = "none";
-    if (percentage >= 85) medal = "gold";
-    else if (percentage >= 80) medal = "silver";
-    else if (percentage >= 75) medal = "bronze";
+    const sum = summarize(subjects);
+    if (mode === "multi" && total !== null) sum.totalMarks = total;
+    if (mode === "multi" && maxGiven) sum.maxMarks = maxGiven;
+    if (mode === "multi") {
+      sum.percentage = sum.maxMarks ? Math.round((sum.totalMarks / sum.maxMarks) * 10000) / 100 : 0;
+      sum.medal = medalFor(sum.percentage);
+    }
+    if (sum.maxMarks && sum.totalMarks > sum.maxMarks) return errors.push({ line, error: `Total (${sum.totalMarks}) exceeds Max (${sum.maxMarks}) for ${studentCode}` });
 
     parsed.push({
-      studentCode, studentName,
-      class: String(row.class || "").trim(),
-      section: String(row.section || "").trim(),
-      subjects, totalMarks: total, maxMarks, percentage, rank, medal,
-      session: String(row.session || "2026-27"),
+      line, mode, studentCode, studentName,
+      class: rClean(pick("class")).toUpperCase(),
+      section: rClean(pick("section")).toUpperCase(),
+      subjects, ...sum, rank,
+      session: rClean(pick("session")) || "2026-27",
     });
   });
 
-  // duplicate detection within file
   const seen = new Set();
-  parsed.forEach((p, i) => {
-    if (seen.has(p.studentCode)) errors.push({ line: i + 2, error: `Duplicate StudentCode in file: ${p.studentCode}` });
-    seen.add(p.studentCode);
+  const unique = [];
+  parsed.forEach((p) => {
+    const key = `${p.studentCode}|${p.mode === "single" ? p.subjects[0].subject : "*"}`;
+    if (seen.has(key)) return errors.push({ line: p.line, error: `Duplicate ${p.studentCode} in file` });
+    seen.add(key);
+    unique.push(p);
   });
 
-  return { parsed, errors };
+  return { parsed: unique, errors };
 }
 
 // ---------------- Students bulk import ----------------

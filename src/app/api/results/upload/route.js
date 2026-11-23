@@ -5,7 +5,7 @@ import Student from "@/models/Student";
 import Notification from "@/models/Notification";
 import AuditLog from "@/models/AuditLog";
 import { requireAuth } from "@/lib/auth";
-import { parseResultsExcel } from "@/lib/excel";
+import { parseResultsExcel, summarize } from "@/lib/excel";
 import { ok, fail, handleError } from "@/lib/apiResponse";
 import { sendMail, mailTemplates } from "@/lib/mailer";
 
@@ -36,16 +36,31 @@ export async function POST(req) {
     const batch = `BATCH-${Date.now()}`;
     let inserted = 0, updated = 0;
     for (const r of parsed) {
-      const student = await Student.findOne({ school: schoolId, studentCode: r.studentCode }).select("_id");
+      const { line, mode, ...data } = r;
+      const filter = { school: schoolId, studentCode: data.studentCode, session: data.session };
+      const existing = await Result.findOne(filter).lean();
+
+      let subjects = data.subjects;
+      let summary = { totalMarks: data.totalMarks, maxMarks: data.maxMarks, percentage: data.percentage, medal: data.medal };
+      if (mode === "single" && existing?.subjects?.length) {
+        // merge: replace this subject, keep other subjects already uploaded
+        const incoming = data.subjects[0];
+        subjects = [...existing.subjects.filter((x) => String(x.subject).toUpperCase() !== incoming.subject), incoming];
+        summary = summarize(subjects);
+      }
+
+      const student =
+        (await Student.findOne({ school: schoolId, studentCode: data.studentCode, subject: data.subjects[0]?.subject || "" }).select("_id")) ||
+        (await Student.findOne({ school: schoolId, studentCode: data.studentCode }).select("_id"));
+
       const doc = {
-        ...r, school: schoolId, student: student?._id || null,
+        ...data, ...summary, subjects,
+        rank: data.rank || existing?.rank || 0,
+        school: schoolId, student: student?._id || existing?.student || null,
         uploadedBy: user.id, batch, olympiad: "NextGen Olympiad",
       };
-      const res = await Result.updateOne(
-        { school: schoolId, studentCode: r.studentCode, session: r.session },
-        { $set: doc }, { upsert: true }
-      );
-      if (res.upsertedCount) inserted++; else updated++;
+      await Result.updateOne(filter, { $set: doc }, { upsert: true });
+      if (existing) updated++; else inserted++;
     }
 
     await Notification.create({
