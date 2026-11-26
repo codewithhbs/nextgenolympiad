@@ -47,6 +47,7 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
   const [busy, setBusy] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [selSchool, setSelSchool] = useState(schoolId || "");
+  const [sel, setSel] = useState([]);
 
   // bulk upload state
   const [bulkOpen, setBulkOpen] = useState(false);
@@ -62,7 +63,7 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
 
   const load = useCallback(async () => {
     if (schools && !selSchool) { setItems([]); setSubjects([]); setLoading(false); return; }
-    setLoading(true);
+    setLoading(true); setSel([]);
     try {
       const params = new URLSearchParams();
       if (effectiveSchool) params.set("school", effectiveSchool);
@@ -111,6 +112,14 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
   const remove = async (id) => {
     if (!confirm("Delete this student?")) return;
     try { await api.del(`/api/students/${id}`); toast.success("Deleted"); load(); } catch (e) { toast.error(e.message); }
+  };
+
+  const isAdmin = !!schools;
+  const toggle = (id) => setSel((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  const allSel = items.length > 0 && sel.length === items.length;
+  const del = async (ids) => {
+    if (!confirm(`Delete ${ids.length} selected students?`)) return;
+    try { await api.post("/api/students/bulk-delete", { ids }); toast.success("Deleted"); load(); } catch (e) { toast.error(e.message); }
   };
 
   // ---------- Bulk Excel ----------
@@ -191,14 +200,22 @@ export default function StudentsManager({ schoolId = null, schools = null }) {
       </div>
 
 
+      {isAdmin && sel.length > 0 && (
+        <div className="mb-3 flex items-center gap-3 rounded-xl bg-cherry/10 px-4 py-2.5">
+          <span className="text-sm font-semibold text-ink">{sel.length} selected</span>
+          <Button variant="danger" size="sm" onClick={() => del(sel)}><Trash2 className="h-4 w-4" /> Delete selected</Button>
+          <button onClick={() => setSel([])} className="text-sm font-semibold text-ink-soft hover:underline">Clear</button>
+        </div>
+      )}
       {loading ? <Spinner /> : items.length === 0 ? (
         <EmptyState title="No students" text={schools && !selSchool ? "Select a school to view students." : "Add a student or upload an Excel file."} />
       ) : (
         <TableWrap>
-          <thead><tr><Th>Student</Th><Th>Enrollment No</Th><Th>Class</Th><Th>Subject</Th><Th>City / State</Th><Th>Barcode</Th><Th className="text-right">Actions</Th></tr></thead>
+          <thead><tr>{isAdmin && <Th><input type="checkbox" className="h-4 w-4 accent-saffron" checked={allSel} onChange={() => setSel(allSel ? [] : items.map((s) => s._id))} /></Th>}<Th>Student</Th><Th>Enrollment No</Th><Th>Class</Th><Th>Subject</Th><Th>City / State</Th><Th>Barcode</Th><Th className="text-right">Actions</Th></tr></thead>
           <tbody>
             {items.map((s) => (
               <tr key={s._id} className="hover:bg-cloud">
+                {isAdmin && <Td><input type="checkbox" className="h-4 w-4 accent-saffron" checked={sel.includes(s._id)} onChange={() => toggle(s._id)} /></Td>}
                 <Td>
                   <div className="flex items-center gap-2">
                     {s.image?.url ? <img src={s.image.url} alt="" className="h-9 w-9 rounded-full object-cover" />

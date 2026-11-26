@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import { Search, Check, X, Ban, Eye } from "lucide-react";
+import { Search, Check, X, Ban, Eye, Trash2 } from "lucide-react";
 import { PageHeader, TableWrap, Th, Td, EmptyState } from "@/components/dashboard/ui";
 import { Button, Input, Badge, Spinner } from "@/components/ui";
 import Modal from "@/components/ui/Modal";
@@ -21,9 +21,10 @@ export default function AdminSchoolsPage() {
   const [rejecting, setRejecting] = useState(null);
   const [reason, setReason] = useState("");
   const [busy, setBusy] = useState(false);
+  const [sel, setSel] = useState([]);
 
   const load = useCallback(async () => {
-    setLoading(true);
+    setLoading(true); setSel([]);
     try {
       const params = new URLSearchParams({ q, status, page: String(page), limit: "15" });
       const res = await api.get(`/api/schools?${params}`);
@@ -42,6 +43,13 @@ export default function AdminSchoolsPage() {
       load();
     } catch (e) { toast.error(e.message); } finally { setBusy(false); }
   };
+
+  const del = async (ids) => {
+    if (!confirm(ids.length === 1 ? "Delete this school?" : `Delete ${ids.length} selected schools?`)) return;
+    try { await api.post("/api/schools/bulk-delete", { ids }); toast.success("Deleted"); setView(null); load(); } catch (e) { toast.error(e.message); }
+  };
+  const toggle = (id) => setSel((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  const allSel = data.items.length > 0 && sel.length === data.items.length;
 
   return (
     <div>
@@ -63,6 +71,13 @@ export default function AdminSchoolsPage() {
         </div>
       </div>
 
+      {sel.length > 0 && (
+        <div className="mb-3 flex items-center gap-3 rounded-xl bg-cherry/10 px-4 py-2.5">
+          <span className="text-sm font-semibold text-ink">{sel.length} selected</span>
+          <Button variant="danger" size="sm" onClick={() => del(sel)}><Trash2 className="h-4 w-4" /> Delete selected</Button>
+          <button onClick={() => setSel([])} className="text-sm font-semibold text-ink-soft hover:underline">Clear</button>
+        </div>
+      )}
       {loading ? <Spinner /> : data.items.length === 0 ? (
         <EmptyState title="No schools found" text="Try a different search or filter." />
       ) : (
@@ -70,12 +85,13 @@ export default function AdminSchoolsPage() {
           <TableWrap>
             <thead>
               <tr>
-                <Th>School</Th><Th>Code</Th><Th>Contact</Th><Th>Status</Th><Th className="text-right">Actions</Th>
+                <Th><input type="checkbox" className="h-4 w-4 accent-saffron" checked={allSel} onChange={() => setSel(allSel ? [] : data.items.map((s) => s._id))} /></Th><Th>School</Th><Th>Code</Th><Th>Contact</Th><Th>Status</Th><Th className="text-right">Actions</Th>
               </tr>
             </thead>
             <tbody>
               {data.items.map((s) => (
                 <tr key={s._id} className="hover:bg-cloud">
+                  <Td><input type="checkbox" className="h-4 w-4 accent-saffron" checked={sel.includes(s._id)} onChange={() => toggle(s._id)} /></Td>
                   <Td>
                     <div className="font-bold text-ink">{s.name}</div>
                     <div className="text-xs text-ink-soft">{s.city || "—"}{s.state ? `, ${s.state}` : ""}</div>
@@ -98,6 +114,7 @@ export default function AdminSchoolsPage() {
                       {s.status === "approved" && (
                         <button onClick={() => act(s._id, "suspend")} disabled={busy} title="Suspend" className="rounded-lg p-2 text-ink-soft hover:bg-ink/5"><Ban className="h-4 w-4" /></button>
                       )}
+                      <button onClick={() => del([s._id])} title="Delete" className="rounded-lg p-2 text-cherry hover:bg-cherry/10"><Trash2 className="h-4 w-4" /></button>
                     </div>
                   </Td>
                 </tr>
